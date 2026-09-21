@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kapitel 17 – Abstandsprobleme | Übungsaufgaben</title>
+<meta name="description" content="20 Übungsaufgaben mit Sofortkorrektur, Tipps und ausführlichen Musterlösungen zu Kapitel 17 (Abstandsprobleme) der Vektorrechnung-Zusammenfassung.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+    svg: { fontCache: 'global' },
+    options: { enableMenu: false }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+  /* ============ Theme (an die Zusammenfassung angelehnt) ============ */
+  :root{
+    --bg:#f4f1ea;
+    --surface:#ffffff;
+    --paper:#faf8f3;
+    --ink:#22201c;
+    --ink-2:#34312b;
+    --muted:#6b665d;
+    --line:#e3ddd0;
+    --line-2:#d6cfc0;
+    --accent:#3a5a78;
+    --accent-soft:#e8eef4;
+    --ok:#1f6e43;
+    --ok-bg:#eef8f1;
+    --ok-line:#b9e0c8;
+    --bad:#a23227;
+    --bad-bg:#fbeeec;
+    --bad-line:#eecac4;
+    --warn:#8a5a12;
+    --warn-bg:#fdf6e8;
+    --warn-line:#f0dcb4;
+    --radius:14px;
+    --shadow:0 1px 3px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.05);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family:'Source Serif 4','Iowan Old Style','Palatino Linotype',Georgia,serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{ line-height:1.25; margin:0; }
+  a{ color:var(--accent); }
+  button,input,select,.ui-sans{ font-family:system-ui,-apple-system,"Segoe UI",sans-serif; }
+  :focus-visible{ outline:3px solid var(--accent); outline-offset:2px; border-radius:4px; }
+  ::selection{ background:rgba(58,90,120,.18); }
+
+  /* Formeln auf schmalen Displays scrollbar halten */
+  mjx-container{ max-width:100% !important; overflow-x:auto !important; overflow-y:hidden !important; }
+  mjx-container[display="true"]{ padding-bottom:.4rem; font-size:1.12rem !important; }
+  @media (max-width:860px){ mjx-container[display="true"]{ font-size:1.02rem !important; } }
+  mjx-container:not([display="true"]){ display:inline-block !important; vertical-align:middle; scrollbar-width:none; }
+  mjx-container:not([display="true"])::-webkit-scrollbar{ display:none; }
+
+  /* ============ Kopfbereich ============ */
+  .site-head{
+    background:linear-gradient(135deg,#33506e,#2b3f54);
+    color:#fff; position:relative; overflow:hidden;
+    padding:30px 26px 26px;
+  }
+  .site-head::after{
+    content:""; position:absolute; right:-60px; top:-70px; width:260px; height:260px;
+    background:radial-gradient(circle,rgba(255,255,255,.10),transparent 60%);
+  }
+  .head-inner{ position:relative; z-index:1; max-width:1180px; margin:0 auto; }
+  .crumb{
+    font-family:system-ui,sans-serif; font-size:.72rem; font-weight:700;
+    letter-spacing:.16em; text-transform:uppercase; color:#c3d3e4;
+  }
+  .site-head h1{ font-size:2.1rem; font-weight:600; margin:.15em 0 .3em; }
+  @media (max-width:860px){ .site-head h1{ font-size:1.6rem; } }
+  .site-head p.lead{ margin:0; color:#dbe5ef; max-width:62ch; }
+  .head-links{ margin-top:14px; display:flex; flex-wrap:wrap; gap:10px; font-family:system-ui,sans-serif; font-size:.85rem; }
+  .head-links a{
+    color:#fff; text-decoration:none; background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.28); padding:6px 12px; border-radius:999px;
+  }
+  .head-links a:hover{ background:rgba(255,255,255,.22); }
+
+  /* Fortschritt */
+  .progress-wrap{ margin-top:20px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); border-radius:12px; padding:12px 16px; }
+  .progress-top{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+    font-family:system-ui,sans-serif; font-size:.85rem; color:#eaf1f8; }
+  .progress-bar{ margin-top:9px; height:9px; background:rgba(255,255,255,.2); border-radius:999px; overflow:hidden; }
+  .progress-fill{ height:100%; width:0%; background:#8fd3ac; border-radius:999px; transition:width .35s ease; }
+  .btn-reset{
+    background:transparent; color:#dbe5ef; border:1px solid rgba(255,255,255,.35);
+    border-radius:8px; padding:4px 10px; font-size:.78rem; cursor:pointer;
+  }
+  .btn-reset:hover{ background:rgba(255,255,255,.14); color:#fff; }
+
+  /* ============ Layout ============ */
+  .layout{ max-width:1180px; margin:0 auto; padding:26px 22px 70px; display:flex; gap:30px; align-items:flex-start; }
+  @media (max-width:980px){ .layout{ display:block; padding:20px 16px 60px; } }
+
+  aside.toc{ width:250px; flex:none; position:sticky; top:20px; }
+  @media (max-width:980px){ aside.toc{ position:static; width:auto; margin-bottom:22px; } }
+  .toc-box{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:14px; }
+  .toc-title{ font-family:system-ui,sans-serif; font-size:.7rem; font-weight:700; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+  .toc a{
+    display:flex; align-items:center; gap:9px; text-decoration:none; color:var(--ink);
+    font-family:system-ui,sans-serif; font-size:.86rem; padding:7px 9px; border-radius:9px; border:1px solid transparent;
+  }
+  .toc a:hover{ background:#f0ece2; }
+  .toc a.active{ background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; }
+  .toc .num{ width:22px; height:22px; border-radius:50%; background:#ded7c8; color:var(--muted);
+    display:grid; place-items:center; font-size:.7rem; font-weight:700; flex:none; }
+  .toc a.active .num{ background:rgba(255,255,255,.24); color:#fff; }
+  .toc .count{ margin-left:auto; font-size:.72rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .toc a.active .count{ color:#dbe5ef; }
+
+  main{ flex:1; min-width:0; }
+
+  /* ============ Karten ============ */
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:22px 24px; margin-bottom:22px;
+  }
+  @media (max-width:640px){ .card{ padding:18px 16px; } }
+  .card h2{ font-size:1.45rem; font-weight:600; }
+  .card h3{ font-size:1.12rem; font-weight:600; margin-bottom:.4rem; }
+
+  .hinweis{ background:var(--warn-bg); border:1px solid var(--warn-line); border-radius:12px; padding:14px 16px; }
+  .hinweis strong{ color:var(--warn); }
+
+  /* Formelsammlung */
+  .fall-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(245px,1fr)); gap:14px; margin-top:6px; }
+  .fall{ background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .fall .tag{ font-family:system-ui,sans-serif; font-size:.68rem; font-weight:700; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); }
+  .fall h4{ font-size:1rem; margin:.15rem 0 .5rem; }
+  .fall p{ margin:.35rem 0; font-size:.93rem; color:var(--ink-2); }
+  .fall .weg{ font-family:system-ui,sans-serif; font-size:.78rem; color:var(--muted); margin-top:.5rem; }
+
+  table.entscheid{ width:100%; border-collapse:collapse; margin-top:10px; font-size:.93rem; }
+  table.entscheid th, table.entscheid td{ text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  table.entscheid th{ font-family:system-ui,sans-serif; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+  table.entscheid td.v{ font-weight:600; color:var(--accent); white-space:nowrap; }
+
+  /* ============ Blockkopf ============ */
+  .block-head{
+    background:linear-gradient(135deg,#33506e,#2b3f54); color:#fff; border-radius:16px;
+    padding:20px 24px; margin:34px 0 18px; position:relative; overflow:hidden; box-shadow:var(--shadow);
+  }
+  .block-head::after{ content:""; position:absolute; right:-40px; top:-40px; width:170px; height:170px;
+    background:radial-gradient(circle,rgba(255,255,255,.10),transparent 60%); }
+  .block-head .inner{ position:relative; z-index:1; }
+  .block-head h2{ font-size:1.5rem; font-weight:600; margin:.1em 0 .2em; }
+  .block-head p{ margin:0; color:#dbe5ef; font-size:.95rem; }
+
+  /* ============ Aufgabenkarte ============ */
+  .task{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:20px 22px; margin-bottom:16px; scroll-margin-top:16px;
+  }
+  @media (max-width:640px){ .task{ padding:16px 14px; } }
+  .task.solved{ border-color:var(--ok-line); box-shadow:0 0 0 1px var(--ok-line), var(--shadow); }
+  .task-top{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .task-id{
+    font-family:system-ui,sans-serif; font-weight:700; font-size:.82rem; letter-spacing:.04em;
+    background:var(--accent); color:#fff; border-radius:8px; padding:3px 9px;
+  }
+  .task.solved .task-id{ background:var(--ok); }
+  .badge{
+    font-family:system-ui,sans-serif; font-size:.72rem; font-weight:600; color:var(--accent);
+    background:var(--accent-soft); border:1px solid #cddced; border-radius:999px; padding:2px 10px;
+  }
+  .level{ display:inline-flex; gap:3px; margin-left:auto; align-items:center;
+    font-family:system-ui,sans-serif; font-size:.7rem; color:var(--muted); }
+  .level .dot{ width:7px; height:7px; border-radius:50%; background:#ded7c8; display:inline-block; }
+  .level .dot.on{ background:var(--accent); }
+  .solved-mark{ font-family:system-ui,sans-serif; font-size:.74rem; font-weight:700; color:var(--ok); display:none; }
+  .task.solved .solved-mark{ display:inline; }
+
+  .frage{ margin-bottom:14px; }
+  .frage p{ margin:.3rem 0; }
+
+  /* Eingaben */
+  .inputs{ display:flex; flex-direction:column; gap:12px; margin-bottom:6px; }
+  .in-row{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .in-label{ font-weight:600; color:var(--ink); }
+  .int-input{
+    background:#fff; border:1.5px solid var(--line); color:var(--ink); border-radius:9px;
+    padding:.5rem; text-align:center; font-weight:600; font-variant-numeric:tabular-nums;
+    transition:border-color .15s, box-shadow .15s; width:5rem;
+  }
+  .int-input:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(58,90,120,.18); }
+  .int-input::placeholder{ color:#a9a49a; font-weight:400; }
+  .int-input.wrong{ border-color:var(--bad-line); background:#fdf5f4; }
+  .int-input.right{ border-color:var(--ok-line); background:var(--ok-bg); }
+  .vec-input{ display:inline-flex; flex-direction:column; gap:.4rem; padding:.4rem .6rem;
+    border-left:2px solid var(--muted); border-right:2px solid var(--muted); border-radius:6px; }
+  .unit{ color:var(--muted); font-size:.9rem; }
+  .choice-list{ display:flex; flex-direction:column; gap:8px; max-width:640px; }
+  .choice-opt{ display:flex; align-items:center; gap:.75rem; width:100%; text-align:left; background:#fff;
+    border:1.5px solid var(--line); color:var(--ink); padding:.65rem 1rem; border-radius:10px; cursor:pointer;
+    transition:.12s; font-size:.95rem; }
+  .choice-opt:hover{ border-color:var(--accent); background:var(--paper); }
+  .choice-opt.selected{ background:var(--accent-soft); border-color:var(--accent); color:var(--accent); font-weight:600; }
+  .choice-opt .dot{ flex:none; width:1.05rem; height:1.05rem; border-radius:999px; border:2px solid var(--muted); transition:.15s; }
+  .choice-opt.selected .dot{ border-color:var(--accent); background:var(--accent); box-shadow:inset 0 0 0 3px #fff; }
+
+  .actions{ display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:14px; }
+  .btn-check{ background:var(--accent); color:#fff; font-weight:600; font-size:.9rem; padding:.55rem 1.15rem;
+    border-radius:10px; border:1.5px solid var(--accent); cursor:pointer; transition:.15s; }
+  .btn-check:hover{ filter:brightness(1.12); }
+  .btn-link{ background:none; border:none; color:var(--muted); font-size:.85rem; cursor:pointer;
+    text-decoration:underline; text-underline-offset:2px; padding:0; }
+  .btn-link:hover{ color:var(--ink); }
+
+  .feedback{ margin-top:12px; font-family:system-ui,sans-serif; font-weight:600; font-size:.9rem; }
+  .feedback:empty{ display:none; }
+  .feedback.ok{ color:var(--ok); background:var(--ok-bg); border:1px solid var(--ok-line); padding:8px 13px; border-radius:9px; }
+  .feedback.bad{ color:var(--bad); background:var(--bad-bg); border:1px solid var(--bad-line); padding:8px 13px; border-radius:9px; }
+  .feedback.info{ color:var(--warn); background:var(--warn-bg); border:1px solid var(--warn-line); padding:8px 13px; border-radius:9px; }
+
+  details{ margin-top:12px; }
+  details > summary{
+    list-style:none; cursor:pointer; user-select:none; display:flex; align-items:center; gap:8px;
+    font-family:system-ui,sans-serif; font-weight:600; font-size:.88rem; color:var(--accent);
+    background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:.6rem .8rem;
+  }
+  details > summary::-webkit-details-marker{ display:none; }
+  details > summary:hover{ background:#f2eee4; }
+  details > summary .chev{ transition:transform .2s; }
+  details[open] > summary .chev{ transform:rotate(180deg); }
+  .details-body{ padding:14px 4px 2px; }
+  .details-body p{ margin:.5rem 0; }
+  .details-body ol, .details-body ul{ margin:.5rem 0; padding-left:1.3rem; }
+  .details-body li{ margin:.3rem 0; }
+  .step{ font-family:system-ui,sans-serif; font-size:.74rem; font-weight:700; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--muted); margin-top:1rem; }
+  .erg{ color:var(--ok); font-weight:700; }
+  .warnung{ color:var(--bad); font-weight:600; }
+
+  /* Filterleiste */
+  .filterbar{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:6px; }
+  .chip{ font-family:system-ui,sans-serif; font-size:.82rem; background:#fff; border:1.5px solid var(--line);
+    color:var(--ink); border-radius:999px; padding:.35rem .9rem; cursor:pointer; transition:.12s; }
+  .chip:hover{ border-color:var(--accent); }
+  .chip.on{ background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
+
+  footer.site-foot{ border-top:1px solid var(--line); background:#efeae0; padding:26px 22px; }
+  .foot-inner{ max-width:1180px; margin:0 auto; font-family:system-ui,sans-serif; font-size:.85rem; color:var(--muted); }
+
+  @media print{
+    .site-head, aside.toc, .filterbar, .actions, .feedback, .progress-wrap, footer.site-foot{ display:none !important; }
+    .task, .card{ box-shadow:none; break-inside:avoid; }
+    .layout{ display:block; padding:0; }
+    body{ background:#fff; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="head-inner">
+    <div class="crumb">Vektorgeometrie &middot; Kapitel 17 von 17</div>
+    <h1>Abstandsprobleme &ndash; Übungsaufgaben</h1>
+    <p class="lead">20 Aufgaben zu allen vier Abstandsfällen: Punkt&ndash;Ebene, Punkt&ndash;Gerade, parallele Geraden und windschiefe Geraden.
+       Trage deine Lösung ein, lass sie sofort prüfen und vergleiche anschließend mit der ausführlichen Musterlösung.</p>
+    <div class="head-links">
+      <a href="https://erikdahlmann.github.io/Vektorrechnung-Zusammenfassung/" target="_blank" rel="noopener">&larr; Zur Zusammenfassung (Kapitel 17)</a>
+      <a href="#formeln">Formelsammlung</a>
+      <a href="#block-A">Direkt zu den Aufgaben</a>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-top">
+        <span id="progress-text">0 von 20 Aufgaben gelöst</span>
+        <button class="btn-reset" type="button" id="btn-reset-progress">Fortschritt zurücksetzen</button>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="toc">
+    <div class="toc-box">
+      <div class="toc-title">Inhalt</div>
+      <nav id="toc-nav"></nav>
+    </div>
+  </aside>
+
+  <main>
+    <section class="card" id="start">
+      <h2>So arbeitest du mit dieser Seite</h2>
+      <p>Jede Aufgabe hat drei Stufen: erst selbst rechnen und die Lösung eintragen, bei Bedarf den <strong>Tipp</strong> aufklappen,
+         und erst danach die <strong>Musterlösung</strong>. Die Eingabefelder akzeptieren Komma und Punkt als Dezimaltrennzeichen
+         sowie Brüche wie <code>9/2</code>. Gelöste Aufgaben werden lokal in deinem Browser gespeichert.</p>
+      <div class="hinweis" style="margin-top:14px">
+        <strong>Die eine Leitidee:</strong> Der Abstand ist immer der kürzeste Weg &ndash; und der steht immer <em>senkrecht</em>.
+        Die Verfahren unterscheiden sich nur darin, wie sie diese Senkrechte finden: über den Normalenvektor (Ebene),
+        über eine Orthogonalitätsbedingung (Gerade) oder über das Kreuzprodukt (zwei Richtungen gleichzeitig).
+      </div>
+    </section>
+
+    <section class="card" id="formeln">
+      <h2>Formelsammlung &ndash; die vier Fälle</h2>
+      <p style="color:var(--muted); margin-top:.3rem">Kurzfassung der Verfahren aus Kapitel 17. $\vec{n}$ ist der Normalenvektor, $\vec{u}, \vec{v}$ sind Richtungsvektoren, $A$ bzw. $B$ die Stützpunkte.</p>
+      <div class="fall-grid">
+        <div class="fall">
+          <div class="tag">Fall A</div>
+          <h4>Punkt &ndash; Ebene</h4>
+          <p>Hesse'sche Normalenform:</p>
+          <p>$$d = \frac{|n_1p_1 + n_2p_2 + n_3p_3 - c|}{\sqrt{n_1^2+n_2^2+n_3^2}}$$</p>
+          <p class="weg">Lotfußpunktverfahren: $h: \vec{x} = \vec{p} + t\,\vec{n}$ mit $E$ schneiden &rarr; liefert $F$ und den Spiegelpunkt $P' = \vec{p} + 2\vec{PF}$.</p>
+        </div>
+        <div class="fall">
+          <div class="tag">Fall B</div>
+          <h4>Punkt &ndash; Gerade</h4>
+          <p>Laufpunkt-Bedingung:</p>
+          <p>$$\left(\vec{f}(r) - \vec{p}\right) \cdot \vec{u} = 0$$</p>
+          <p>Flächenformel (ohne Fußpunkt):</p>
+          <p>$$d = \frac{|\vec{AP} \times \vec{u}|}{|\vec{u}|}$$</p>
+          <p class="weg">Alternative: Hilfsebene durch $P$ mit $\vec{n} = \vec{u}$, dann mit $g$ schneiden.</p>
+        </div>
+        <div class="fall">
+          <div class="tag">Fall C</div>
+          <h4>Parallele Geraden</h4>
+          <p>Erst prüfen: Richtungsvektoren kollinear? Punktprobe &rarr; identisch oder echt parallel?</p>
+          <p>Dann Stützpunkt $B$ von $h$ nehmen und Fall B rechnen:</p>
+          <p>$$d = \frac{|\vec{AB} \times \vec{u}|}{|\vec{u}|}$$</p>
+          <p class="weg">Identische Geraden haben Abstand $0$.</p>
+        </div>
+        <div class="fall">
+          <div class="tag">Fall D</div>
+          <h4>Windschiefe Geraden</h4>
+          <p>Spatprodukt-Formel:</p>
+          <p>$$d = \frac{|\vec{AB} \cdot (\vec{u} \times \vec{v})|}{|\vec{u} \times \vec{v}|}$$</p>
+          <p class="weg">Fußpunkte nur über den geschlossenen Vektorzug: $\vec{w} = \vec{AB} + s\vec{v} - r\vec{u}$ mit $\vec{w}\cdot\vec{u} = 0$ und $\vec{w}\cdot\vec{v} = 0$.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:22px">Welches Verfahren passt zu welcher Frage?</h3>
+      <table class="entscheid">
+        <thead><tr><th>Frage in der Aufgabe</th><th>Passendes Verfahren</th></tr></thead>
+        <tbody>
+          <tr><td>&bdquo;Berechne den Abstand von $P$ zu $E$.&ldquo;</td><td class="v">HNF</td></tr>
+          <tr><td>&bdquo;Bestimme den Lotfußpunkt / spiegle $P$ an $E$.&ldquo;</td><td class="v">Lotfußpunktverfahren</td></tr>
+          <tr><td>&bdquo;Liegen $P$ und $Q$ auf derselben Seite?&ldquo;</td><td class="v">HNF ohne Betrag</td></tr>
+          <tr><td>&bdquo;Abstand $P$ zu $g$&ldquo; &ndash; nur die Zahl</td><td class="v">Flächenformel</td></tr>
+          <tr><td>&bdquo;Abstand $P$ zu $g$&ldquo; &ndash; mit Fußpunkt</td><td class="v">Laufpunkt / Hilfsebene</td></tr>
+          <tr><td>&bdquo;Abstand zweier windschiefer Geraden&ldquo;</td><td class="v">Spatprodukt (oder Hilfsebene + HNF)</td></tr>
+          <tr><td>&bdquo;Wo kommen sich die Geraden am nächsten?&ldquo;</td><td class="v">Vektorzug + LGS</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="filterbar" id="filterbar"></div>
+    <div id="aufgaben"></div>
+  </main>
+</div>
+
+<footer class="site-foot">
+  <div class="foot-inner">
+    Übungsaufgaben zu Kapitel 17 &bdquo;Abstandsprobleme&ldquo; der
+    <a href="https://erikdahlmann.github.io/Vektorrechnung-Zusammenfassung/" target="_blank" rel="noopener">Vektorrechnung-Zusammenfassung</a>.
+    Formelsatz mit MathJax. Der Lernfortschritt wird ausschließlich lokal im Browser (localStorage) gespeichert.
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   Aufgabensammlung zu Kapitel 17 - Abstandsprobleme
+   Jede Aufgabe: id, block, level (1-3), tags, Frage, Eingabefelder,
+   Tipp und ausführliche Musterlösung.
+   ===================================================================== */
+
+const BLOCKS = [
+  { id:'A', titel:'Abstand Punkt &ndash; Ebene', kurz:'Punkt &ndash; Ebene', unter:'Hesse’sche Normalenform, Lotfußpunkt, Spiegelpunkt und die Frage nach der Seite.' },
+  { id:'B', titel:'Abstand Punkt &ndash; Gerade', kurz:'Punkt &ndash; Gerade', unter:'Laufpunkt-Bedingung, Hilfsebene und die Flächenformel mit dem Kreuzprodukt.' },
+  { id:'C', titel:'Abstand paralleler Geraden', kurz:'Parallele Geraden', unter:'Erst die Lage klären, dann auf Fall B zurückführen &ndash; inklusive der Falle &bdquo;identisch&ldquo;.' },
+  { id:'D', titel:'Abstand windschiefer Geraden', kurz:'Windschiefe Geraden', unter:'Spatprodukt, Hilfsebene + HNF und der geschlossene Vektorzug mit den beiden Lotfußpunkten.' },
+  { id:'E', titel:'Vermischtes &amp; Anwendungen', kurz:'Vermischtes &amp; Anwendungen', unter:'Sachaufgaben im Abi-Stil und zwei Fragen zur Verfahrenswahl.' }
+];
+
+const AUFGABEN = [
+
+/* ------------------------------- Block A ------------------------------- */
+{
+  id:'A1', block:'A', level:1, tags:['HNF'],
+  q:`Berechne den Abstand des Punktes $P(3|1|-2)$ von der Ebene
+     $$E: 2x_1 + x_2 - 2x_3 = 5$$`,
+  inputs:[{ kind:'num', label:'$d = $', answer:2 }],
+  hint:`Die Koordinatenform liefert den Normalenvektor direkt: $\\vec{n} = \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}$.
+        Setze Punkt und Ebene in $d = \\frac{|n_1p_1 + n_2p_2 + n_3p_3 - c|}{|\\vec{n}|}$ ein &ndash; und vergiss die Betragsstriche nicht.`,
+  sol:`<div class="step">Schritt 1: Länge des Normalenvektors</div>
+       $$\\vec{n} = \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}, \\qquad |\\vec{n}| = \\sqrt{4+1+4} = 3$$
+       <div class="step">Schritt 2: Hesse'sche Normalenform</div>
+       $$d = \\frac{|2 \\cdot 3 + 1 \\cdot 1 - 2 \\cdot (-2) - 5|}{3} = \\frac{|6 + 1 + 4 - 5|}{3} = \\frac{6}{3} = 2$$
+       <p>Der Abstand beträgt <span class="erg">$d = 2$</span>.</p>
+       <p><strong>Vorsicht:</strong> Das $-2$ im Punkt und das $-2$ im Normalenvektor ergeben zusammen $+4$. Ein Vorzeichenfehler an dieser Stelle ist der häufigste Fehler in diesem Aufgabentyp.</p>`
+},
+{
+  id:'A2', block:'A', level:2, tags:['Lotfußpunkt','Spiegelpunkt'],
+  q:`Gegeben sind $P(4|1|5)$ und die Ebene $E: 2x_1 - x_2 + 2x_3 = 8$.
+     Bestimme den Lotfußpunkt $F$, den Abstand $d$ und den Spiegelpunkt $P'$ von $P$ bezüglich $E$.`,
+  inputs:[
+    { kind:'vec', label:'$\\vec{f} = $', answer:[2,2,3] },
+    { kind:'num', label:'$d = $', answer:3 },
+    { kind:'vec', label:'$\\vec{p\\,}\' = $', answer:[0,3,1] }
+  ],
+  hint:`Stelle die Lotgerade $h: \\vec{x} = \\vec{p} + t\\,\\vec{n}$ auf, setze ihre Zeilen in die Koordinatenform ein
+        und löse nach $t$. Für den Spiegelpunkt gehst du von $P$ aus die <em>doppelte</em> Strecke: $\\vec{p\\,}' = \\vec{p} + 2\\vec{PF}$.`,
+  sol:`<div class="step">Schritt 1: Lotgerade aufstellen</div>
+       $$h: \\vec{x} = \\begin{pmatrix} 4 \\\\ 1 \\\\ 5 \\end{pmatrix} + t \\cdot \\begin{pmatrix} 2 \\\\ -1 \\\\ 2 \\end{pmatrix}$$
+       <div class="step">Schritt 2: Schnitt mit der Ebene</div>
+       <p>Die Zeilen $x_1 = 4+2t$, $x_2 = 1-t$, $x_3 = 5+2t$ in $E$ einsetzen:</p>
+       $$2(4+2t) - (1-t) + 2(5+2t) = 8$$
+       $$8 + 4t - 1 + t + 10 + 4t = 8 \\quad \\Rightarrow \\quad 17 + 9t = 8 \\quad \\Rightarrow \\quad t = -1$$
+       <div class="step">Schritt 3: Lotfußpunkt</div>
+       $$\\vec{f} = \\begin{pmatrix} 4 \\\\ 1 \\\\ 5 \\end{pmatrix} - \\begin{pmatrix} 2 \\\\ -1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 2 \\\\ 3 \\end{pmatrix} \\quad \\Rightarrow \\quad$$
+       <p><span class="erg">$F(2|2|3)$</span> &ndash; Probe: $2 \\cdot 2 - 2 + 2 \\cdot 3 = 8$ &#10003;</p>
+       <div class="step">Schritt 4: Abstand</div>
+       $$\\vec{PF} = \\begin{pmatrix} -2 \\\\ 1 \\\\ -2 \\end{pmatrix}, \\qquad d = \\sqrt{4+1+4} = \\sqrt{9} = 3$$
+       <div class="step">Schritt 5: Spiegelpunkt</div>
+       $$\\vec{p\\,}' = \\vec{p} + 2\\vec{PF} = \\begin{pmatrix} 4 \\\\ 1 \\\\ 5 \\end{pmatrix} + \\begin{pmatrix} -4 \\\\ 2 \\\\ -4 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 3 \\\\ 1 \\end{pmatrix} \\quad \\Rightarrow \\quad$$
+       <p><span class="erg">$P'(0|3|1)$</span></p>
+       <p><strong>Kontrolle mit der HNF:</strong> $d = \\frac{|8 - 1 + 10 - 8|}{3} = \\frac{9}{3} = 3$ &#10003; &ndash; schneller, aber ohne $F$ und ohne $P'$.</p>`
+},
+{
+  id:'A3', block:'A', level:2, tags:['HNF ohne Betrag'],
+  q:`Gegeben ist $E: x_1 + 2x_2 - 2x_3 = 4$ sowie die Punkte $P(4|3|0)$ und $Q(-1|0|2)$.
+     Berechne die <em>vorzeichenbehafteten</em> Abstände (HNF ohne Betragsstriche) und entscheide, ob die beiden Punkte
+     auf derselben Seite der Ebene liegen.`,
+  inputs:[
+    { kind:'num', label:'vorzeichenbehaftet für $P$:', answer:2 },
+    { kind:'num', label:'vorzeichenbehaftet für $Q$:', answer:-3 },
+    { kind:'choice', label:'Lage der beiden Punkte:', options:[
+        'Beide liegen auf derselben Seite von $E$.',
+        'Sie liegen auf verschiedenen Seiten von $E$.',
+        'Einer der beiden Punkte liegt in $E$.'
+      ], correct:1 }
+  ],
+  hint:`Rechne $\\frac{n_1p_1 + n_2p_2 + n_3p_3 - c}{|\\vec{n}|}$ &ndash; <em>ohne</em> Betrag. Das Vorzeichen ist hier die eigentliche Information:
+        gleiches Vorzeichen bedeutet gleiche Seite.`,
+  sol:`<p>Mit $\\vec{n} = \\begin{pmatrix} 1 \\\\ 2 \\\\ -2 \\end{pmatrix}$ ist $|\\vec{n}| = \\sqrt{1+4+4} = 3$.</p>
+       <div class="step">Punkt P</div>
+       $$d_P = \\frac{4 + 2 \\cdot 3 - 2 \\cdot 0 - 4}{3} = \\frac{4 + 6 - 4}{3} = \\frac{6}{3} = +2$$
+       <div class="step">Punkt Q</div>
+       $$d_Q = \\frac{-1 + 2 \\cdot 0 - 2 \\cdot 2 - 4}{3} = \\frac{-1 - 4 - 4}{3} = \\frac{-9}{3} = -3$$
+       <div class="step">Auswertung</div>
+       <p>Die Vorzeichen sind <strong>verschieden</strong> &rArr; <span class="erg">$P$ und $Q$ liegen auf verschiedenen Seiten der Ebene.</span>
+          Ihre Abstände betragen $2$ bzw. $3$; die Strecke $\\overline{PQ}$ durchstößt die Ebene.</p>
+       <p><strong>Merke:</strong> Ist nur der Abstand gefragt, gehören die Betragsstriche zwingend dazu. Nur bei der Frage nach der Seite
+          lässt man sie bewusst weg.</p>`
+},
+{
+  id:'A4', block:'A', level:3, tags:['HNF','Parameter'],
+  q:`Auf der $x_3$-Achse liegen genau zwei Punkte, die von der Ebene $E: 2x_1 - 2x_2 + x_3 = 3$ den Abstand $4$ haben.
+     Bestimme ihre $x_3$-Koordinaten.`,
+  inputs:[{ kind:'multi', label:'$x_3 = $', fields:['größerer Wert','kleinerer Wert'], answer:[15,-9] }],
+  hint:`Ein Punkt auf der $x_3$-Achse hat die Form $P(0|0|z)$. Setze ihn in die HNF ein, setze das Ergebnis gleich $4$ &ndash;
+        und denke daran, dass der Betrag <em>zwei</em> Fälle liefert.`,
+  sol:`<div class="step">Schritt 1: Allgemeiner Punkt der Achse</div>
+       <p>Jeder Punkt der $x_3$-Achse hat die Form $P(0|0|z)$.</p>
+       <div class="step">Schritt 2: HNF ansetzen</div>
+       <p>Mit $\\vec{n} = \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix}$ und $|\\vec{n}| = 3$:</p>
+       $$d = \\frac{|2 \\cdot 0 - 2 \\cdot 0 + z - 3|}{3} = \\frac{|z-3|}{3} \\stackrel{!}{=} 4$$
+       <div class="step">Schritt 3: Betragsgleichung lösen</div>
+       $$|z - 3| = 12 \\quad \\Rightarrow \\quad z - 3 = 12 \\ \\text{ oder } \\ z - 3 = -12$$
+       $$z_1 = 15, \\qquad z_2 = -9$$
+       <p>Die gesuchten Punkte sind <span class="erg">$P_1(0|0|15)$</span> und <span class="erg">$P_2(0|0|-9)$</span>.</p>
+       <p><strong>Warum zwei Lösungen?</strong> Die Punkte mit Abstand $4$ von $E$ bilden zwei zu $E$ parallele Ebenen &ndash;
+          eine auf jeder Seite. Die $x_3$-Achse durchstößt jede davon genau einmal.</p>`
+},
+{
+  id:'A5', block:'A', level:2, tags:['Normalenform','HNF'],
+  q:`Die Ebene ist in Normalenform gegeben:
+     $$E: \\left[ \\vec{x} - \\begin{pmatrix} 1 \\\\ 2 \\\\ 0 \\end{pmatrix} \\right] \\cdot \\begin{pmatrix} 2 \\\\ -1 \\\\ 2 \\end{pmatrix} = 0$$
+     Berechne den Abstand des Punktes $P(3|4|2)$ von $E$ und gib zusätzlich die rechte Seite $c$ der Koordinatenform
+     $2x_1 - x_2 + 2x_3 = c$ an.`,
+  inputs:[
+    { kind:'num', label:'$d = $', answer:2 },
+    { kind:'num', label:'$c = $', answer:0 }
+  ],
+  hint:`Du musst die Normalenform gar nicht umformen: $d = |(\\vec{p} - \\vec{a}) \\cdot \\vec{n}_0|$ mit
+        $\\vec{n}_0 = \\frac{\\vec{n}}{|\\vec{n}|}$. Für $c$ setzt du den Aufpunkt $A(1|2|0)$ in $2x_1 - x_2 + 2x_3$ ein.`,
+  sol:`<div class="step">Weg 1: direkt aus der Normalenform</div>
+       $$\\vec{AP} = \\vec{p} - \\vec{a} = \\begin{pmatrix} 3 \\\\ 4 \\\\ 2 \\end{pmatrix} - \\begin{pmatrix} 1 \\\\ 2 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 2 \\\\ 2 \\end{pmatrix}$$
+       $$|\\vec{n}| = \\sqrt{4+1+4} = 3 \\quad \\Rightarrow \\quad d = \\frac{|\\vec{AP} \\cdot \\vec{n}|}{|\\vec{n}|} = \\frac{|4 - 2 + 4|}{3} = \\frac{6}{3} = 2$$
+       <div class="step">Weg 2: über die Koordinatenform</div>
+       <p>Ausmultiplizieren heißt: den Aufpunkt einsetzen.</p>
+       $$c = 2 \\cdot 1 - 2 + 2 \\cdot 0 = 0 \\quad \\Rightarrow \\quad E: 2x_1 - x_2 + 2x_3 = 0$$
+       $$d = \\frac{|2 \\cdot 3 - 4 + 2 \\cdot 2 - 0|}{3} = \\frac{|6 - 4 + 4|}{3} = \\frac{6}{3} = 2 \\quad \\checkmark$$
+       <p>Ergebnis: <span class="erg">$d = 2$</span> und <span class="erg">$c = 0$</span>.</p>
+       <p><strong>Beobachtung:</strong> $c = 0$ bedeutet, dass die Ebene durch den Ursprung verläuft. Die Formel funktioniert trotzdem
+          unverändert &ndash; die Null fällt einfach weg.</p>`
+},
+
+/* ------------------------------- Block B ------------------------------- */
+{
+  id:'B1', block:'B', level:1, tags:['Laufpunkt'],
+  q:`Berechne den Lotfußpunkt $F$ und den Abstand des Punktes $P(5|1|3)$ von der Geraden
+     $$g: \\vec{x} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 2 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ -1 \\\\ 2 \\end{pmatrix}$$
+     Verwende die Laufpunkt-Bedingung.`,
+  inputs:[
+    { kind:'num', label:'$r = $', answer:1 },
+    { kind:'vec', label:'$\\vec{f} = $', answer:[3,-1,4] },
+    { kind:'num', label:'$d = $', answer:3 }
+  ],
+  hint:`Schreibe den allgemeinen Punkt $\\vec{f}(r)$ der Geraden hin, bilde $\\vec{f}(r) - \\vec{p}$ und fordere,
+        dass dieser Vektor senkrecht auf $\\vec{u}$ steht: $(\\vec{f}(r) - \\vec{p}) \\cdot \\vec{u} = 0$.
+        Das ist eine Gleichung mit einer Unbekannten.`,
+  sol:`<div class="step">Schritt 1: Verbindungsvektor zum Laufpunkt</div>
+       $$\\vec{f}(r) = \\begin{pmatrix} 1+2r \\\\ -r \\\\ 2+2r \\end{pmatrix}, \\qquad
+         \\vec{f}(r) - \\vec{p} = \\begin{pmatrix} 2r-4 \\\\ -r-1 \\\\ 2r-1 \\end{pmatrix}$$
+       <div class="step">Schritt 2: Orthogonalitätsbedingung</div>
+       $$2(2r-4) + (-1)(-r-1) + 2(2r-1) = 0$$
+       $$4r - 8 + r + 1 + 4r - 2 = 0 \\quad \\Rightarrow \\quad 9r - 9 = 0 \\quad \\Rightarrow \\quad r = 1$$
+       <div class="step">Schritt 3: Lotfußpunkt</div>
+       $$\\vec{f} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 2 \\end{pmatrix} + 1 \\cdot \\begin{pmatrix} 2 \\\\ -1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\ -1 \\\\ 4 \\end{pmatrix} \\quad \\Rightarrow \\quad$$
+       <p><span class="erg">$F(3|-1|4)$</span></p>
+       <div class="step">Schritt 4: Abstand</div>
+       $$\\vec{PF} = \\begin{pmatrix} -2 \\\\ -2 \\\\ 1 \\end{pmatrix} \\quad \\Rightarrow \\quad d = \\sqrt{4+4+1} = 3$$
+       <p>Kontrolle: $\\vec{PF} \\cdot \\vec{u} = -4 + 2 + 2 = 0$ &#10003; &ndash; das Lot steht tatsächlich senkrecht auf $g$.</p>`
+},
+{
+  id:'B2', block:'B', level:2, tags:['Flächenformel','Kreuzprodukt'],
+  q:`Berechne den Abstand des Punktes $P(6|7|2)$ von der Geraden
+     $$g: \\vec{x} = \\begin{pmatrix} 0 \\\\ 1 \\\\ 2 \\end{pmatrix} + r \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}$$
+     mit der Flächenformel. Gib zuerst das Kreuzprodukt $\\vec{AP} \\times \\vec{u}$ an.`,
+  inputs:[
+    { kind:'vec', label:'$\\vec{AP} \\times \\vec{u} = $', answer:[12,-12,6] },
+    { kind:'num', label:'$d = $', answer:6 }
+  ],
+  hint:`$A(0|1|2)$ ist der Stützpunkt. Rechne $\\vec{AP} = \\vec{p} - \\vec{a}$, dann
+        $d = \\frac{|\\vec{AP} \\times \\vec{u}|}{|\\vec{u}|}$. Die Reihenfolge im Kreuzprodukt ist hier $\\vec{AP}$ zuerst.`,
+  sol:`<div class="step">Schritt 1: Verbindungsvektor</div>
+       $$\\vec{AP} = \\begin{pmatrix} 6 \\\\ 7 \\\\ 2 \\end{pmatrix} - \\begin{pmatrix} 0 \\\\ 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 6 \\\\ 6 \\\\ 0 \\end{pmatrix}$$
+       <div class="step">Schritt 2: Kreuzprodukt</div>
+       $$\\vec{AP} \\times \\vec{u} = \\begin{pmatrix} 6 \\\\ 6 \\\\ 0 \\end{pmatrix} \\times \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}
+         = \\begin{pmatrix} 6 \\cdot 2 - 0 \\cdot 2 \\\\ 0 \\cdot 1 - 6 \\cdot 2 \\\\ 6 \\cdot 2 - 6 \\cdot 1 \\end{pmatrix}
+         = \\begin{pmatrix} 12 \\\\ -12 \\\\ 6 \\end{pmatrix}$$
+       <div class="step">Schritt 3: Beträge und Abstand</div>
+       $$|\\vec{AP} \\times \\vec{u}| = \\sqrt{144 + 144 + 36} = \\sqrt{324} = 18, \\qquad |\\vec{u}| = \\sqrt{1+4+4} = 3$$
+       $$d = \\frac{18}{3} = 6$$
+       <p>Der Abstand beträgt <span class="erg">$d = 6$</span>.</p>
+       <p><strong>Kontrolle über den Laufpunkt:</strong> $(\\vec{f}(r)-\\vec{p}) \\cdot \\vec{u} = 0$ liefert $9r - 18 = 0$, also $r = 2$
+          und $F(2|5|6)$ mit $\\vec{PF} = \\begin{pmatrix} -4 \\\\ -2 \\\\ 4 \\end{pmatrix}$, $|\\vec{PF}| = 6$ &#10003;
+          Die Flächenformel ist schneller, liefert aber keinen Fußpunkt.</p>`
+},
+{
+  id:'B3', block:'B', level:3, tags:['Hilfsebene','Spiegelung'],
+  q:`Spiegle den Punkt $P(6|7|2)$ an der Geraden
+     $$g: \\vec{x} = \\begin{pmatrix} 0 \\\\ 1 \\\\ 2 \\end{pmatrix} + r \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}$$
+     Bestimme den Lotfußpunkt über eine <em>Hilfsebene</em> und anschließend den Spiegelpunkt $P'$.`,
+  inputs:[
+    { kind:'num', label:'rechte Seite der Hilfsebene $x_1 + 2x_2 + 2x_3 = $', answer:24 },
+    { kind:'vec', label:'$\\vec{f} = $', answer:[2,5,6] },
+    { kind:'vec', label:'$\\vec{p\\,}\' = $', answer:[-2,3,10] }
+  ],
+  hint:`Die Hilfsebene $E_H$ geht durch $P$ und hat als Normalenvektor den Richtungsvektor $\\vec{u}$ der Geraden.
+        Damit steht sie senkrecht auf $g$ und fängt das Lot auf. Danach wie beim Spiegeln an einer Ebene:
+        $\\vec{p\\,}' = \\vec{p} + 2\\vec{PF}$.`,
+  sol:`<div class="step">Schritt 1: Hilfsebene aufstellen</div>
+       <p>Normalenvektor $= \\vec{u} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}$, Aufpunkt $= P(6|7|2)$:</p>
+       $$E_H: x_1 + 2x_2 + 2x_3 = 6 + 14 + 4 = 24$$
+       <div class="step">Schritt 2: g mit der Hilfsebene schneiden</div>
+       $$(0 + r) + 2(1 + 2r) + 2(2 + 2r) = 24$$
+       $$r + 2 + 4r + 4 + 4r = 24 \\quad \\Rightarrow \\quad 9r + 6 = 24 \\quad \\Rightarrow \\quad r = 2$$
+       <div class="step">Schritt 3: Lotfußpunkt</div>
+       $$\\vec{f} = \\begin{pmatrix} 0 \\\\ 1 \\\\ 2 \\end{pmatrix} + 2 \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 5 \\\\ 6 \\end{pmatrix} \\quad \\Rightarrow \\quad$$
+       <p><span class="erg">$F(2|5|6)$</span>, und $\\vec{PF} = \\begin{pmatrix} -4 \\\\ -2 \\\\ 4 \\end{pmatrix}$ mit $|\\vec{PF}| = 6$.</p>
+       <div class="step">Schritt 4: Spiegelpunkt</div>
+       $$\\vec{p\\,}' = \\vec{p} + 2\\vec{PF} = \\begin{pmatrix} 6 \\\\ 7 \\\\ 2 \\end{pmatrix} + \\begin{pmatrix} -8 \\\\ -4 \\\\ 8 \\end{pmatrix} = \\begin{pmatrix} -2 \\\\ 3 \\\\ 10 \\end{pmatrix} \\quad \\Rightarrow \\quad$$
+       <p><span class="erg">$P'(-2|3|10)$</span></p>
+       <p><strong>Probe:</strong> $F$ muss der Mittelpunkt von $\\overline{PP'}$ sein:
+          $\\frac{1}{2}\\left[\\begin{pmatrix} 6 \\\\ 7 \\\\ 2 \\end{pmatrix} + \\begin{pmatrix} -2 \\\\ 3 \\\\ 10 \\end{pmatrix}\\right] = \\begin{pmatrix} 2 \\\\ 5 \\\\ 6 \\end{pmatrix}$ &#10003;</p>`
+},
+{
+  id:'B4', block:'B', level:3, tags:['Anwendung','Dreieck'],
+  q:`Gegeben ist das Dreieck $A(1|0|2)$, $B(3|-1|4)$, $C(5|1|3)$.
+     Berechne die Länge der Grundseite $\\overline{AB}$, die zugehörige Höhe $h_c$ (also den Abstand von $C$ zur Geraden $AB$)
+     und daraus den Flächeninhalt des Dreiecks.`,
+  inputs:[
+    { kind:'num', label:'$|\\vec{AB}| = $', answer:3 },
+    { kind:'num', label:'$h_c = $', answer:3 },
+    { kind:'num', label:'$A_{\\triangle} = $', answer:4.5 }
+  ],
+  hint:`Die Gerade durch $A$ und $B$ hat den Richtungsvektor $\\vec{u} = \\vec{AB}$. Der Abstand von $C$ zu dieser Geraden
+        ist genau die Höhe. Flächenformel: $A_{\\triangle} = \\frac{1}{2} \\cdot g \\cdot h$. Brüche wie <code>9/2</code> sind als Eingabe erlaubt.`,
+  sol:`<div class="step">Schritt 1: Grundseite</div>
+       $$\\vec{AB} = \\begin{pmatrix} 2 \\\\ -1 \\\\ 2 \\end{pmatrix}, \\qquad |\\vec{AB}| = \\sqrt{4+1+4} = 3$$
+       <div class="step">Schritt 2: Höhe = Abstand von C zur Geraden AB</div>
+       $$\\vec{AC} = \\begin{pmatrix} 4 \\\\ 1 \\\\ 1 \\end{pmatrix}, \\qquad
+         \\vec{AC} \\times \\vec{AB} = \\begin{pmatrix} 1 \\cdot 2 - 1 \\cdot (-1) \\\\ 1 \\cdot 2 - 4 \\cdot 2 \\\\ 4 \\cdot (-1) - 1 \\cdot 2 \\end{pmatrix}
+         = \\begin{pmatrix} 3 \\\\ -6 \\\\ -6 \\end{pmatrix}$$
+       $$|\\vec{AC} \\times \\vec{AB}| = \\sqrt{9 + 36 + 36} = 9 \\quad \\Rightarrow \\quad h_c = \\frac{9}{|\\vec{AB}|} = \\frac{9}{3} = 3$$
+       <div class="step">Schritt 3: Flächeninhalt</div>
+       $$A_{\\triangle} = \\frac{1}{2} \\cdot |\\vec{AB}| \\cdot h_c = \\frac{1}{2} \\cdot 3 \\cdot 3 = \\frac{9}{2} = 4{,}5 \\ \\text{FE}$$
+       <p>Ergebnis: <span class="erg">$A_{\\triangle} = 4{,}5$ FE</span>.</p>
+       <p><strong>Abkürzung:</strong> Die Dreiecksfläche ist immer $\\frac{1}{2}|\\vec{AC} \\times \\vec{AB}| = \\frac{9}{2}$ &ndash;
+          das Kreuzprodukt liefert die Parallelogrammfläche, das Dreieck ist die Hälfte davon. Der Umweg über die Höhe
+          lohnt sich nur, wenn die Höhe selbst gefragt ist.</p>`
+},
+
+/* ------------------------------- Block C ------------------------------- */
+{
+  id:'C1', block:'C', level:1, tags:['Parallelität','Flächenformel'],
+  q:`Zeige, dass die Geraden
+     $$g: \\vec{x} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 2 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ -1 \\\\ 2 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 5 \\\\ 1 \\\\ 3 \\end{pmatrix} + s \\begin{pmatrix} -4 \\\\ 2 \\\\ -4 \\end{pmatrix}$$
+     echt parallel sind, und berechne ihren Abstand.`,
+  inputs:[
+    { kind:'choice', label:'Lagebeziehung:', options:[
+        'identisch',
+        'echt parallel',
+        'windschief',
+        'sie schneiden sich'
+      ], correct:1 },
+    { kind:'num', label:'$d = $', answer:3 }
+  ],
+  hint:`Zuerst: Ist $\\vec{v}$ ein Vielfaches von $\\vec{u}$? Dann Punktprobe mit dem Stützpunkt $B(5|1|3)$ auf $g$ &ndash;
+        geht sie <em>nicht</em> auf, sind die Geraden echt parallel. Der Abstand ist dann einfach der Abstand von $B$ zu $g$.`,
+  sol:`<div class="step">Schritt 1: Kollinearität der Richtungsvektoren</div>
+       $$\\begin{pmatrix} -4 \\\\ 2 \\\\ -4 \\end{pmatrix} = -2 \\cdot \\begin{pmatrix} 2 \\\\ -1 \\\\ 2 \\end{pmatrix}$$
+       <p>Die Richtungsvektoren sind kollinear &ndash; die Geraden sind also parallel oder identisch.</p>
+       <div class="step">Schritt 2: Punktprobe (echt parallel oder identisch?)</div>
+       <p>Liegt $B(5|1|3)$ auf $g$?</p>
+       <p>Zeile I: $1 + 2r = 5 \\Rightarrow r = 2$ &nbsp;&nbsp; Zeile II: $-r = 1 \\Rightarrow r = -1$</p>
+       <p>Widerspruch &rArr; <span class="erg">die Geraden sind echt parallel.</span></p>
+       <div class="step">Schritt 3: Abstand (Punkt B zur Geraden g)</div>
+       $$\\vec{AB} = \\begin{pmatrix} 4 \\\\ 1 \\\\ 1 \\end{pmatrix}, \\qquad
+         \\vec{AB} \\times \\vec{u} = \\begin{pmatrix} 1 \\cdot 2 - 1 \\cdot (-1) \\\\ 1 \\cdot 2 - 4 \\cdot 2 \\\\ 4 \\cdot (-1) - 1 \\cdot 2 \\end{pmatrix}
+         = \\begin{pmatrix} 3 \\\\ -6 \\\\ -6 \\end{pmatrix}$$
+       $$d = \\frac{|\\vec{AB} \\times \\vec{u}|}{|\\vec{u}|} = \\frac{9}{3} = 3$$
+       <p>Der Abstand beträgt <span class="erg">$d = 3$</span>.</p>
+       <p><strong>Wichtig:</strong> Im Nenner steht die Länge <em>desselben</em> Richtungsvektors, der auch im Kreuzprodukt benutzt wurde.
+          Mit $\\vec{v}$ statt $\\vec{u}$ gerechnet, kommt dasselbe heraus &ndash; aber nur, wenn man konsequent bei einem bleibt.</p>`
+},
+{
+  id:'C2', block:'C', level:2, tags:['Falle','Punktprobe'],
+  q:`Bestimme den Abstand der Geraden
+     $$g: \\vec{x} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 3 \\end{pmatrix} + r \\begin{pmatrix} 1 \\\\ 2 \\\\ -1 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 4 \\\\ 5 \\\\ 1 \\end{pmatrix} + s \\begin{pmatrix} 2 \\\\ 4 \\\\ -2 \\end{pmatrix}$$`,
+  inputs:[
+    { kind:'choice', label:'Lagebeziehung:', options:[
+        'echt parallel',
+        'identisch',
+        'windschief',
+        'sie schneiden sich in genau einem Punkt'
+      ], correct:1 },
+    { kind:'num', label:'$d = $', answer:0 }
+  ],
+  hint:`Nicht sofort losrechnen! Prüfe zuerst mit der Punktprobe, ob der Stützpunkt von $h$ auf $g$ liegt.
+        Wenn <em>alle drei</em> Zeilen denselben Parameter liefern, ist die Antwort besonders kurz.`,
+  sol:`<div class="step">Schritt 1: Richtungsvektoren</div>
+       $$\\begin{pmatrix} 2 \\\\ 4 \\\\ -2 \\end{pmatrix} = 2 \\cdot \\begin{pmatrix} 1 \\\\ 2 \\\\ -1 \\end{pmatrix} \\quad \\Rightarrow \\quad \\text{kollinear}$$
+       <div class="step">Schritt 2: Punktprobe mit B(4|5|1)</div>
+       <p>I: $2 + r = 4 \\Rightarrow r = 2$</p>
+       <p>II: $1 + 2r = 5 \\Rightarrow r = 2$ &#10003;</p>
+       <p>III: $3 - r = 1 \\Rightarrow r = 2$ &#10003;</p>
+       <p>Alle drei Zeilen liefern dasselbe $r$ &rArr; <span class="erg">$B$ liegt auf $g$, die Geraden sind identisch.</span></p>
+       <div class="step">Schritt 3: Abstand</div>
+       <p>Identische Geraden haben den Abstand <span class="erg">$d = 0$</span>.</p>
+       <p><strong>Die Falle:</strong> Wer direkt die Formel $d = \\frac{|\\vec{AB} \\times \\vec{u}|}{|\\vec{u}|}$ benutzt, bekommt hier
+          $\\vec{AB} \\times \\vec{u} = \\vec{0}$ und damit ebenfalls $0$ &ndash; aber ohne zu merken, <em>warum</em>.
+          Bei der Lagebeziehung wäre die Antwort &bdquo;echt parallel&ldquo; dann falsch. Deshalb: erst Lage klären, dann rechnen.</p>`
+},
+{
+  id:'C3', block:'C', level:2, tags:['Flächenformel'],
+  q:`Berechne den Abstand der parallelen Geraden
+     $$g: \\vec{x} = \\begin{pmatrix} 0 \\\\ 1 \\\\ 2 \\end{pmatrix} + r \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 6 \\\\ 7 \\\\ 2 \\end{pmatrix} + s \\begin{pmatrix} 3 \\\\ 6 \\\\ 6 \\end{pmatrix}$$`,
+  inputs:[{ kind:'num', label:'$d = $', answer:6 }],
+  hint:`Nimm den Stützpunkt $B(6|7|2)$ von $h$ und berechne seinen Abstand zu $g$. Achtung beim Nenner:
+        Benutze im Kreuzprodukt und im Betrag denselben Richtungsvektor &ndash; am besten das kurze $\\vec{u} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}$.`,
+  sol:`<div class="step">Schritt 1: Lage klären</div>
+       <p>$\\begin{pmatrix} 3 \\\\ 6 \\\\ 6 \\end{pmatrix} = 3 \\cdot \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}$ &ndash; kollinear.
+          Punktprobe mit $B(6|7|2)$: Zeile I liefert $r = 6$, Zeile II aber $1 + 2r = 7 \\Rightarrow r = 3$.
+          Widerspruch &rArr; echt parallel.</p>
+       <div class="step">Schritt 2: Abstand über die Flächenformel</div>
+       $$\\vec{AB} = \\begin{pmatrix} 6 \\\\ 6 \\\\ 0 \\end{pmatrix}, \\qquad
+         \\vec{AB} \\times \\vec{u} = \\begin{pmatrix} 12 \\\\ -12 \\\\ 6 \\end{pmatrix}, \\qquad |\\vec{AB} \\times \\vec{u}| = 18$$
+       $$d = \\frac{18}{|\\vec{u}|} = \\frac{18}{3} = 6$$
+       <p>Der Abstand beträgt <span class="erg">$d = 6$</span>.</p>
+       <p><strong>Häufiger Fehler:</strong> Wer mit $\\vec{v} = \\begin{pmatrix} 3 \\\\ 6 \\\\ 6 \\end{pmatrix}$ im Zähler
+          und $|\\vec{u}| = 3$ im Nenner mischt, erhält den dreifachen Wert. Zähler und Nenner müssen zum selben Vektor gehören.</p>`
+},
+
+/* ------------------------------- Block D ------------------------------- */
+{
+  id:'D1', block:'D', level:2, tags:['Spatprodukt'],
+  q:`Zeige mit dem Spatprodukt, dass die Geraden
+     $$g: \\vec{x} = r \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 3 \\\\ 0 \\\\ 3 \\end{pmatrix} + s \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}$$
+     windschief sind, und berechne ihren Abstand.`,
+  inputs:[
+    { kind:'vec', label:'$\\vec{u} \\times \\vec{v} = $', answer:[6,-6,3] },
+    { kind:'num', label:'Spatprodukt $\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v}) = $', answer:27 },
+    { kind:'num', label:'$d = $', answer:3 }
+  ],
+  hint:`$g$ geht durch den Ursprung, also ist $\\vec{AB} = \\begin{pmatrix} 3 \\\\ 0 \\\\ 3 \\end{pmatrix}$.
+        Ist das Spatprodukt $\\neq 0$, liegen die drei Vektoren nicht in einer Ebene &ndash; die Geraden sind windschief.
+        Dann $d = \\frac{|\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v})|}{|\\vec{u} \\times \\vec{v}|}$.`,
+  sol:`<div class="step">Schritt 1: Kreuzprodukt der Richtungsvektoren</div>
+       $$\\vec{u} \\times \\vec{v} = \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix} \\times \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}
+         = \\begin{pmatrix} 1 \\cdot 2 - (-2) \\cdot 2 \\\\ (-2) \\cdot 1 - 2 \\cdot 2 \\\\ 2 \\cdot 2 - 1 \\cdot 1 \\end{pmatrix}
+         = \\begin{pmatrix} 6 \\\\ -6 \\\\ 3 \\end{pmatrix}$$
+       $$|\\vec{u} \\times \\vec{v}| = \\sqrt{36 + 36 + 9} = \\sqrt{81} = 9$$
+       <p>Das Kreuzprodukt ist nicht der Nullvektor &rArr; die Richtungen sind nicht kollinear, die Geraden also nicht parallel.</p>
+       <div class="step">Schritt 2: Spatprodukt (Windschief-Test)</div>
+       $$\\vec{AB} = \\begin{pmatrix} 3 \\\\ 0 \\\\ 3 \\end{pmatrix} \\quad \\Rightarrow \\quad
+         \\vec{AB} \\cdot (\\vec{u} \\times \\vec{v}) = 3 \\cdot 6 + 0 \\cdot (-6) + 3 \\cdot 3 = 27 \\neq 0$$
+       <p>&rArr; <span class="erg">Die Geraden sind windschief.</span></p>
+       <div class="step">Schritt 3: Abstand</div>
+       $$d = \\frac{|27|}{9} = 3$$
+       <p>Der Abstand beträgt <span class="erg">$d = 3$</span>.</p>
+       <p><strong>Zwei Fliegen mit einer Klappe:</strong> Dieselbe Rechnung beweist die Windschiefheit <em>und</em> liefert den Abstand.
+          Wäre das Spatprodukt $0$, würden sich die Geraden schneiden (bei nicht kollinearen Richtungen).</p>`
+},
+{
+  id:'D2', block:'D', level:3, tags:['Vektorzug','LGS','Lotfußpunkte'],
+  q:`Bestimme für die windschiefen Geraden
+     $$g: \\vec{x} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 4 \\\\ -1 \\\\ 0 \\end{pmatrix} + s \\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\end{pmatrix}$$
+     die beiden Punkte, an denen sich die Geraden am nächsten kommen, sowie den Abstand.`,
+  inputs:[
+    { kind:'multi', label:'Parameter:', fields:['r','s'], answer:[1,1] },
+    { kind:'vec', label:'$\\vec{f_g} = $', answer:[3,2,-1] },
+    { kind:'vec', label:'$\\vec{f_h} = $', answer:[5,0,0] },
+    { kind:'num', label:'$d = $', answer:3 }
+  ],
+  hint:`Stelle $\\vec{w} = \\vec{AB} + s\\,\\vec{v} - r\\,\\vec{u}$ allgemein auf und fordere
+        $\\vec{w} \\cdot \\vec{u} = 0$ <em>und</em> $\\vec{w} \\cdot \\vec{v} = 0$. Das ergibt ein $2 \\times 2$-LGS für $r$ und $s$.
+        Hier ist $\\vec{u} \\cdot \\vec{v} \\neq 0$, die beiden Unbekannten bleiben also in beiden Gleichungen stehen.`,
+  sol:`<div class="step">Schritt 1: Verbindungsvektor der Laufpunkte</div>
+       $$\\vec{AB} = \\begin{pmatrix} 4 \\\\ -1 \\\\ 0 \\end{pmatrix} - \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\ -2 \\\\ -1 \\end{pmatrix}$$
+       $$\\vec{w} = \\vec{AB} + s\\,\\vec{v} - r\\,\\vec{u}
+         = \\begin{pmatrix} 3 + s - 2r \\\\ -2 + s - r \\\\ -1 + 2r \\end{pmatrix}$$
+       <div class="step">Schritt 2: Die beiden Bedingungen</div>
+       <p><strong>I:</strong> $\\vec{w} \\cdot \\vec{u} = 0$</p>
+       $$2(3+s-2r) + 1(-2+s-r) - 2(-1+2r) = 0$$
+       $$6 + 2s - 4r - 2 + s - r + 2 - 4r = 0 \\quad \\Rightarrow \\quad 6 + 3s - 9r = 0 \\quad \\Rightarrow \\quad 3r - s = 2$$
+       <p><strong>II:</strong> $\\vec{w} \\cdot \\vec{v} = 0$</p>
+       $$1(3+s-2r) + 1(-2+s-r) + 0 = 0 \\quad \\Rightarrow \\quad 1 + 2s - 3r = 0 \\quad \\Rightarrow \\quad 3r - 2s = 1$$
+       <div class="step">Schritt 3: LGS lösen</div>
+       <p>I $-$ II: $\\ (3r - s) - (3r - 2s) = 2 - 1 \\Rightarrow s = 1$. Einsetzen in I: $3r - 1 = 2 \\Rightarrow r = 1$.</p>
+       <div class="step">Schritt 4: Die Lotfußpunkte</div>
+       $$\\vec{f_g} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} + 1 \\cdot \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\ 2 \\\\ -1 \\end{pmatrix}, \\qquad
+         \\vec{f_h} = \\begin{pmatrix} 4 \\\\ -1 \\\\ 0 \\end{pmatrix} + 1 \\cdot \\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 0 \\\\ 0 \\end{pmatrix}$$
+       <p><span class="erg">$F_g(3|2|-1)$</span> und <span class="erg">$F_h(5|0|0)$</span></p>
+       <div class="step">Schritt 5: Abstand</div>
+       $$\\vec{w} = \\vec{f_h} - \\vec{f_g} = \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix} \\quad \\Rightarrow \\quad d = \\sqrt{4+4+1} = 3$$
+       <p><strong>Kontrolle:</strong> $\\vec{u} \\times \\vec{v} = \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix}$ &ndash;
+          $\\vec{w}$ zeigt genau in Richtung des gemeinsamen Lots &#10003;
+          Mit der Spatprodukt-Formel: $\\frac{|\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v})|}{|\\vec{u} \\times \\vec{v}|} = \\frac{|6+4-1|}{3} = \\frac{9}{3} = 3$ &#10003;</p>`
+},
+{
+  id:'D3', block:'D', level:2, tags:['Hilfsebene','HNF'],
+  q:`Berechne den Abstand der windschiefen Geraden
+     $$g: \\vec{x} = \\begin{pmatrix} 2 \\\\ 0 \\\\ 1 \\end{pmatrix} + r \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 5 \\\\ 2 \\\\ -1 \\end{pmatrix} + s \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix}$$
+     über eine Hilfsebene und die Hesse'sche Normalenform. Kürze den Normalenvektor so weit wie möglich.`,
+  inputs:[
+    { kind:'vec', label:'gekürzter Normalenvektor $\\vec{n} = $', answer:[2,1,-2] },
+    { kind:'num', label:'Hilfsebene $2x_1 + x_2 - 2x_3 = $', answer:2 },
+    { kind:'num', label:'$d = $', answer:4 }
+  ],
+  hint:`Die Hilfsebene $E_H$ enthält $g$ und ist parallel zu $h$: Stützvektor von $g$, Spannvektoren $\\vec{u}$ und $\\vec{v}$,
+        also $\\vec{n} = \\vec{u} \\times \\vec{v}$. Danach nur noch den Abstand des Stützpunkts $B(5|2|-1)$ von $E_H$ bestimmen.`,
+  sol:`<div class="step">Schritt 1: Normalenvektor der Hilfsebene</div>
+       $$\\vec{u} \\times \\vec{v} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix} \\times \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix}
+         = \\begin{pmatrix} 2 \\cdot 1 - 2 \\cdot (-2) \\\\ 2 \\cdot 2 - 1 \\cdot 1 \\\\ 1 \\cdot (-2) - 2 \\cdot 2 \\end{pmatrix}
+         = \\begin{pmatrix} 6 \\\\ 3 \\\\ -6 \\end{pmatrix}$$
+       <p>Mit $3$ kürzen: $\\vec{n} = \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}$, also $|\\vec{n}| = 3$.
+          (Das Kürzen ändert die Ebene nicht, macht aber die HNF deutlich bequemer.)</p>
+       <div class="step">Schritt 2: Koordinatenform von E<sub>H</sub></div>
+       <p>Stützpunkt $A(2|0|1)$ einsetzen:</p>
+       $$2 \\cdot 2 + 0 - 2 \\cdot 1 = 2 \\quad \\Rightarrow \\quad E_H: 2x_1 + x_2 - 2x_3 = 2$$
+       <p>Probe, dass $h$ wirklich parallel zu $E_H$ verläuft: $\\vec{v} \\cdot \\vec{n} = 4 - 2 - 2 = 0$ &#10003;</p>
+       <div class="step">Schritt 3: Abstand des Stützpunkts B von E<sub>H</sub></div>
+       $$d = \\frac{|2 \\cdot 5 + 2 - 2 \\cdot (-1) - 2|}{3} = \\frac{|10 + 2 + 2 - 2|}{3} = \\frac{12}{3} = 4$$
+       <p>Der Abstand beträgt <span class="erg">$d = 4$</span>.</p>
+       <p><strong>Warum das funktioniert:</strong> Weil $h$ parallel zu $E_H$ liegt, hat <em>jeder</em> Punkt von $h$ denselben Abstand
+          zu $E_H$ &ndash; und $g$ liegt in $E_H$. Damit ist der Ebenenabstand genau der Geradenabstand.</p>`
+},
+{
+  id:'D4', block:'D', level:3, tags:['Parameter','Spatprodukt'],
+  q:`Gegeben ist die Geradenschar
+     $$g: \\vec{x} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}
+       \\qquad h_a: \\vec{x} = \\begin{pmatrix} 4 \\\\ -1 \\\\ a \\end{pmatrix} + s \\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\end{pmatrix}, \\quad a \\in \\mathbb{R}$$
+     Für welchen Wert von $a$ schneiden sich die beiden Geraden? Wie groß ist der Abstand für $a = 6$?`,
+  inputs:[
+    { kind:'num', label:'Schnitt für $a = $', answer:-9 },
+    { kind:'num', label:'$d$ für $a = 6$:', answer:5 }
+  ],
+  hint:`Das Spatprodukt ist der Windschief-Test: $\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v}) = 0$ bedeutet, dass die drei Vektoren
+        in einer Ebene liegen. Da $\\vec{u}$ und $\\vec{v}$ nicht kollinear sind, schneiden sich die Geraden dann.
+        Stelle das Spatprodukt in Abhängigkeit von $a$ auf.`,
+  sol:`<div class="step">Schritt 1: Kreuzprodukt und Verbindungsvektor</div>
+       $$\\vec{u} \\times \\vec{v} = \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix} \\times \\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\end{pmatrix}
+         = \\begin{pmatrix} 1 \\cdot 0 - (-2) \\cdot 1 \\\\ (-2) \\cdot 1 - 2 \\cdot 0 \\\\ 2 \\cdot 1 - 1 \\cdot 1 \\end{pmatrix}
+         = \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix}, \\qquad |\\vec{u} \\times \\vec{v}| = 3$$
+       $$\\vec{AB} = \\begin{pmatrix} 4 \\\\ -1 \\\\ a \\end{pmatrix} - \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\ -2 \\\\ a-1 \\end{pmatrix}$$
+       <div class="step">Schritt 2: Spatprodukt in Abhängigkeit von a</div>
+       $$\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v}) = 3 \\cdot 2 + (-2)(-2) + (a-1) \\cdot 1 = 6 + 4 + a - 1 = a + 9$$
+       <div class="step">Schritt 3: Schnittfall</div>
+       <p>Die Richtungsvektoren sind nicht kollinear, die Geraden können also nur windschief sein oder sich schneiden.
+          Sie schneiden sich genau dann, wenn das Spatprodukt verschwindet:</p>
+       $$a + 9 = 0 \\quad \\Rightarrow \\quad \\textbf{a = -9}$$
+       <p>Für alle anderen $a$ sind die Geraden <span class="erg">windschief</span>.</p>
+       <div class="step">Schritt 4: Abstand als Funktion von a</div>
+       $$d(a) = \\frac{|a+9|}{3} \\quad \\Rightarrow \\quad d(6) = \\frac{15}{3} = 5$$
+       <p>Für $a = 6$ beträgt der Abstand <span class="erg">$d = 5$</span>.</p>
+       <p><strong>Querverbindung:</strong> Für $a = 0$ liefert die Formel $d = 3$ &ndash; genau das Ergebnis von Aufgabe D2.</p>`
+},
+
+/* ------------------------------- Block E ------------------------------- */
+{
+  id:'E1', block:'E', level:3, tags:['Anwendung','Vektorzug'],
+  q:`Zwei Flugzeuge fliegen geradlinig; die Koordinaten sind in Kilometern angegeben, $x_3$ ist die Höhe.
+     $$f: \\vec{x} = \\begin{pmatrix} 0 \\\\ 0 \\\\ 2 \\end{pmatrix} + r \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 1 \\\\ 5 \\\\ 1 \\end{pmatrix} + s \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix}$$
+     An welchen Punkten kommen sich die beiden <em>Flugbahnen</em> am nächsten, und wie groß ist dieser kleinste Abstand?`,
+  inputs:[
+    { kind:'vec', label:'$\\vec{f_f} = $', answer:[1,2,4] },
+    { kind:'vec', label:'$\\vec{f_h} = $', answer:[3,3,2] },
+    { kind:'num', label:'$d = $', unit:'km', answer:3 }
+  ],
+  hint:`Nach den Fußpunkten gefragt &rArr; geschlossener Vektorzug (Verfahren D2).
+        Rechne $\\vec{w} = \\vec{AB} + s\\,\\vec{v} - r\\,\\vec{u}$ und setze $\\vec{w} \\cdot \\vec{u} = 0$, $\\vec{w} \\cdot \\vec{v} = 0$.
+        Ein Blick auf $\\vec{u} \\cdot \\vec{v}$ lohnt sich: Er entkoppelt das LGS.`,
+  sol:`<div class="step">Schritt 1: Vorüberlegung</div>
+       <p>$\\vec{u} \\cdot \\vec{v} = 2 - 4 + 2 = 0$ &ndash; die Richtungen stehen senkrecht aufeinander.
+          Dadurch enthält jede der beiden Gleichungen nur eine Unbekannte.</p>
+       $$\\vec{AB} = \\begin{pmatrix} 1 \\\\ 5 \\\\ 1 \\end{pmatrix} - \\begin{pmatrix} 0 \\\\ 0 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 5 \\\\ -1 \\end{pmatrix}, \\qquad
+         \\vec{w} = \\begin{pmatrix} 1 + 2s - r \\\\ 5 - 2s - 2r \\\\ -1 + s - 2r \\end{pmatrix}$$
+       <div class="step">Schritt 2: Die beiden Bedingungen</div>
+       <p><strong>I:</strong> $\\vec{w} \\cdot \\vec{u} = (1+2s-r) + 2(5-2s-2r) + 2(-1+s-2r) = 9 - 9r = 0 \\Rightarrow r = 1$</p>
+       <p><strong>II:</strong> $\\vec{w} \\cdot \\vec{v} = 2(1+2s-r) - 2(5-2s-2r) + (-1+s-2r) = -9 + 9s = 0 \\Rightarrow s = 1$</p>
+       <div class="step">Schritt 3: Die Punkte der größten Annäherung</div>
+       $$\\vec{f_f} = \\begin{pmatrix} 0 \\\\ 0 \\\\ 2 \\end{pmatrix} + \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 4 \\end{pmatrix}, \\qquad
+         \\vec{f_h} = \\begin{pmatrix} 1 \\\\ 5 \\\\ 1 \\end{pmatrix} + \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\ 3 \\\\ 2 \\end{pmatrix}$$
+       <p><span class="erg">$F_f(1|2|4)$</span> und <span class="erg">$F_h(3|3|2)$</span></p>
+       <div class="step">Schritt 4: Abstand</div>
+       $$\\vec{w} = \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix} \\quad \\Rightarrow \\quad d = \\sqrt{4+1+4} = 3 \\ \\text{km}$$
+       <p><strong>Kontrolle mit dem Spatprodukt:</strong> $\\vec{u} \\times \\vec{v} = \\begin{pmatrix} 6 \\\\ 3 \\\\ -6 \\end{pmatrix}$,
+          $|\\vec{u} \\times \\vec{v}| = 9$, $\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v}) = 6 + 15 + 6 = 27$, also $d = \\frac{27}{9} = 3$ &#10003;</p>
+       <p><strong>Achtung bei der Interpretation:</strong> Das ist der Abstand der <em>Bahnen</em>, nicht der Flugzeuge.
+          Ob sich die Maschinen tatsächlich so nahe kommen, hängt davon ab, ob sie die Punkte $F_f$ und $F_h$ zur selben Zeit erreichen.</p>`
+},
+{
+  id:'E2', block:'E', level:2, tags:['Anwendung','Lotfußpunkt'],
+  q:`Eine Drohne schwebt im Punkt $P(4|4|12)$ (Angaben in Metern). Eine ebene Dachfläche liegt in der Ebene
+     $$E: x_1 + 2x_2 + 2x_3 = 18$$
+     Wie weit ist die Drohne von der Dachebene entfernt, und in welchem Punkt würde sie das Dach treffen,
+     wenn sie senkrecht zur Dachfläche absinkt?`,
+  inputs:[
+    { kind:'num', label:'$d = $', unit:'m', answer:6 },
+    { kind:'vec', label:'Auftreffpunkt $\\vec{f} = $', answer:[2,0,8] }
+  ],
+  hint:`&bdquo;Senkrecht zur Dachfläche&ldquo; heißt: in Richtung des Normalenvektors $\\vec{n} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}$.
+        Also Lotgerade aufstellen und mit $E$ schneiden. Den Abstand bekommst du daneben in einer Zeile mit der HNF.`,
+  sol:`<div class="step">Schritt 1: Abstand mit der HNF</div>
+       $$|\\vec{n}| = \\sqrt{1+4+4} = 3 \\quad \\Rightarrow \\quad
+         d = \\frac{|4 + 2 \\cdot 4 + 2 \\cdot 12 - 18|}{3} = \\frac{|4 + 8 + 24 - 18|}{3} = \\frac{18}{3} = 6 \\ \\text{m}$$
+       <div class="step">Schritt 2: Lotgerade</div>
+       $$h: \\vec{x} = \\begin{pmatrix} 4 \\\\ 4 \\\\ 12 \\end{pmatrix} + t \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}$$
+       <div class="step">Schritt 3: Schnitt mit der Dachebene</div>
+       $$(4+t) + 2(4+2t) + 2(12+2t) = 18$$
+       $$4 + t + 8 + 4t + 24 + 4t = 18 \\quad \\Rightarrow \\quad 36 + 9t = 18 \\quad \\Rightarrow \\quad t = -2$$
+       $$\\vec{f} = \\begin{pmatrix} 4 \\\\ 4 \\\\ 12 \\end{pmatrix} - 2 \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 0 \\\\ 8 \\end{pmatrix}$$
+       <p>Die Drohne trifft in <span class="erg">$F(2|0|8)$</span> auf und ist <span class="erg">$6\\ \\text{m}$</span> von der Dachebene entfernt.</p>
+       <p>Probe: $2 + 0 + 16 = 18$ &#10003; &ndash; $F$ liegt in $E$. Und $|\\vec{PF}| = \\left| \\begin{pmatrix} -2 \\\\ -4 \\\\ -4 \\end{pmatrix} \\right| = \\sqrt{4+16+16} = 6$ &#10003;</p>
+       <p><strong>Negatives $t$:</strong> Das Vorzeichen sagt nur, dass man entgegen der Richtung von $\\vec{n}$ läuft &ndash;
+          die Drohne befindet sich also auf der Seite, in die $\\vec{n}$ zeigt.</p>`
+},
+{
+  id:'E3', block:'E', level:1, tags:['Verfahrenswahl'],
+  q:`In einer Abituraufgabe sollst du bestimmen, <em>an welcher Stelle</em> zwei windschiefe Flugbahnen einander am nächsten kommen.
+     Welches Verfahren führt zum Ziel?`,
+  inputs:[{ kind:'choice', label:'', options:[
+      'Die Spatprodukt-Formel $d = \\frac{|\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v})|}{|\\vec{u} \\times \\vec{v}|}$',
+      'Hilfsebene + Hesse\u2019sche Normalenform',
+      'Der geschlossene Vektorzug mit $\\vec{w} \\cdot \\vec{u} = 0$ und $\\vec{w} \\cdot \\vec{v} = 0$',
+      'Die Flächenformel mit dem Kreuzprodukt'
+    ], correct:2 }],
+  hint:`Frage dich: Welches der drei Verfahren für windschiefe Geraden liefert nicht nur eine Zahl, sondern auch Punkte?`,
+  sol:`<p>Richtig ist der <span class="erg">geschlossene Vektorzug (Verfahren D2)</span>.</p>
+       <p>Nur er bestimmt die Parameter $r$ und $s$ und damit die beiden Lotfußpunkte $F_g$ und $F_h$ &ndash;
+          also die konkreten Stellen der größten Annäherung.</p>
+       <ul>
+         <li><strong>Spatprodukt:</strong> liefert in einer Zeile den Abstand, aber keine Fußpunkte.</li>
+         <li><strong>Hilfsebene + HNF:</strong> liefert ebenfalls nur den Abstand.</li>
+         <li><strong>Flächenformel:</strong> gehört zu Punkt&ndash;Gerade bzw. parallelen Geraden, nicht zu windschiefen.</li>
+       </ul>
+       <p><strong>Faustregel:</strong> Wird nach einer Zahl gefragt, nimm D1 oder D3. Wird nach einer Stelle, einem Ort oder einem
+          Zeitpunkt gefragt, brauchst du D2.</p>`
+},
+{
+  id:'E4', block:'E', level:2, tags:['Verständnis','Spatprodukt'],
+  q:`Für zwei Geraden $g$ und $h$ mit <em>nicht kollinearen</em> Richtungsvektoren $\\vec{u}$ und $\\vec{v}$ gilt
+     $$\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v}) = 0$$
+     Was folgt daraus?`,
+  inputs:[{ kind:'choice', label:'', options:[
+      'Die Geraden sind windschief und haben den Abstand $0$.',
+      'Die Geraden schneiden sich in genau einem Punkt.',
+      'Die Geraden sind echt parallel.',
+      'Die Geraden sind identisch.'
+    ], correct:1 }],
+  hint:`Das Spatprodukt ist das Volumen des von $\\vec{AB}$, $\\vec{u}$ und $\\vec{v}$ aufgespannten Spats.
+        Volumen $0$ heißt: Die drei Vektoren liegen in einer gemeinsamen Ebene. Und die Richtungsvektoren sind laut Aufgabe nicht kollinear.`,
+  sol:`<p>Richtig: <span class="erg">Die Geraden schneiden sich in genau einem Punkt.</span></p>
+       <p>Ein verschwindendes Spatprodukt bedeutet, dass $\\vec{AB}$, $\\vec{u}$ und $\\vec{v}$ <strong>komplanar</strong> sind,
+          also in einer gemeinsamen Ebene liegen. Damit liegen auch beide Geraden in dieser Ebene. Zwei Geraden in einer Ebene
+          sind entweder parallel oder schneiden sich &ndash; und parallel sind sie hier nicht, weil die Richtungsvektoren
+          laut Voraussetzung nicht kollinear sind.</p>
+       <p class="warnung">Die erste Antwort ist ein beliebter Denkfehler: Windschiefe Geraden haben <em>nie</em> den Abstand $0$.
+          Abstand $0$ hieße gemeinsamer Punkt &ndash; und genau das schließt der Begriff &bdquo;windschief&ldquo; aus.</p>
+       <p><strong>Als Test formuliert:</strong> Richtungen kollinear? &rarr; parallel oder identisch (Punktprobe entscheidet).
+          Sonst Spatprodukt: $= 0$ &rarr; Schnittpunkt, $\\neq 0$ &rarr; windschief.</p>`
+}
+];
+
+/* =====================================================================
+   Aufbau der Seite, Auto-Korrektur und Fortschritt
+   ===================================================================== */
+
+const STORE_KEY = 'k17-abstandsprobleme-fortschritt';
+const CHEVRON = '<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"/></svg>';
+
+const state = { filter:'alle', nurOffene:false, auswahl:{} };
+
+/* ---------- Fortschritt (localStorage, defensiv) ---------- */
+function ladeGeloest(){
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    return new Set(raw ? JSON.parse(raw) : []);
+  } catch(e){ return new Set(); }
+}
+function speichereGeloest(){
+  try { localStorage.setItem(STORE_KEY, JSON.stringify([...geloest])); } catch(e){ /* z.B. privater Modus */ }
+}
+let geloest = ladeGeloest();
+
+/* ---------- Eingaben lesen ---------- */
+function parseZahl(roh){
+  if (roh == null) return NaN;
+  let s = String(roh).trim().replace(/\s+/g,'').replace(/,/g,'.');
+  if (s === '') return NaN;
+  const bruch = s.match(/^(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)$/);
+  if (bruch){
+    const n = parseFloat(bruch[1]), d = parseFloat(bruch[2]);
+    return d === 0 ? NaN : n/d;
+  }
+  return /^-?\d+(\.\d+)?$/.test(s) ? parseFloat(s) : NaN;
+}
+
+/* ---------- Rendern ---------- */
+function feldId(aid, i, j){ return `f_${aid}_${i}_${j}`; }
+
+function renderEingabe(a, inp, i){
+  const lab = inp.label ? `<span class="in-label">${inp.label}</span>` : '';
+  if (inp.kind === 'vec'){
+    const platz = ['x₁','x₂','x₃'];
+    let zellen = '';
+    for (let j=0; j<3; j++){
+      zellen += `<input type="text" inputmode="text" class="int-input" id="${feldId(a.id,i,j)}"
+                  placeholder="${platz[j]}" aria-label="Komponente ${j+1}"
+                  onkeydown="if(event.key==='Enter')pruefe('${a.id}')">`;
+    }
+    return `<div class="in-row">${lab}<div class="vec-input">${zellen}</div></div>`;
+  }
+  if (inp.kind === 'num'){
+    return `<div class="in-row">${lab}
+      <input type="text" inputmode="text" class="int-input" id="${feldId(a.id,i,0)}" placeholder="?"
+             aria-label="Ergebnis" onkeydown="if(event.key==='Enter')pruefe('${a.id}')">
+      ${inp.unit ? `<span class="unit">${inp.unit}</span>` : ''}</div>`;
+  }
+  if (inp.kind === 'multi'){
+    let zellen = '';
+    inp.fields.forEach((f, j) => {
+      zellen += `<span class="in-label" style="font-weight:600">${f} =</span>
+        <input type="text" inputmode="text" class="int-input" id="${feldId(a.id,i,j)}" placeholder="?"
+               aria-label="${f}" onkeydown="if(event.key==='Enter')pruefe('${a.id}')">`;
+    });
+    return `<div class="in-row">${lab}${zellen}</div>`;
+  }
+  if (inp.kind === 'choice'){
+    const opts = inp.options.map((o,j) =>
+      `<button type="button" class="choice-opt" id="${feldId(a.id,i,j)}" onclick="waehle('${a.id}',${i},${j})">
+         <span class="dot"></span><span>${o}</span></button>`).join('');
+    return `<div>${lab ? `<div style="margin-bottom:8px">${lab}</div>` : ''}<div class="choice-list">${opts}</div></div>`;
+  }
+  return '';
+}
+
+function renderAufgabe(a){
+  const punkte = [1,2,3].map(n => `<span class="dot${n <= a.level ? ' on' : ''}"></span>`).join('');
+  const niveau = ['leicht','mittel','schwer'][a.level-1];
+  const tags = (a.tags || []).map(t => `<span class="badge">${t}</span>`).join('');
+  const eingaben = a.inputs.map((inp,i) => renderEingabe(a, inp, i)).join('');
+  return `
+  <article class="task" id="aufgabe-${a.id}" data-block="${a.block}" data-id="${a.id}">
+    <div class="task-top">
+      <span class="task-id">Aufgabe ${a.id}</span>
+      ${tags}
+      <span class="solved-mark">&#10003; gelöst</span>
+      <span class="level" title="Schwierigkeit: ${niveau}">${punkte}<span style="margin-left:5px">${niveau}</span></span>
+    </div>
+    <div class="frage">${a.q}</div>
+    <div class="inputs">${eingaben}</div>
+    <div class="actions">
+      <button type="button" class="btn-check" onclick="pruefe('${a.id}')">Prüfen</button>
+      <button type="button" class="btn-link" onclick="zuruecksetzen('${a.id}')">Zurücksetzen</button>
+    </div>
+    <div class="feedback" id="fb_${a.id}" role="status" aria-live="polite"></div>
+    <details>
+      <summary>${CHEVRON} Tipp anzeigen</summary>
+      <div class="details-body">${a.hint}</div>
+    </details>
+    <details>
+      <summary>${CHEVRON} Musterlösung anzeigen</summary>
+      <div class="details-body">${a.sol}</div>
+    </details>
+  </article>`;
+}
+
+function renderAlles(){
+  /* Filterleiste */
+  const chips = [{id:'alle', t:'Alle Aufgaben'}]
+    .concat(BLOCKS.map(b => ({ id:b.id, t:`${b.id} &middot; ${b.kurz}` })));
+  document.getElementById('filterbar').innerHTML =
+    chips.map(c => `<button type="button" class="chip${state.filter===c.id?' on':''}" data-chip="${c.id}"
+                     onclick="setzeFilter('${c.id}')">${c.t}</button>`).join('') +
+    `<button type="button" class="chip" id="chip-offen" onclick="toggleOffene()">Nur ungelöste</button>`;
+
+  /* Aufgabenblöcke */
+  let html = '';
+  BLOCKS.forEach(b => {
+    const liste = AUFGABEN.filter(a => a.block === b.id);
+    html += `<section class="block" id="block-${b.id}" data-block="${b.id}">
+      <div class="block-head"><div class="inner">
+        <div class="crumb">Block ${b.id} &middot; ${liste.length} Aufgaben</div>
+        <h2>${b.titel}</h2>
+        <p>${b.unter}</p>
+      </div></div>
+      ${liste.map(renderAufgabe).join('')}
+    </section>`;
+  });
+  document.getElementById('aufgaben').innerHTML = html;
+
+  /* Inhaltsverzeichnis */
+  document.getElementById('toc-nav').innerHTML =
+    `<a href="#formeln"><span class="num">&sum;</span><span>Formelsammlung</span></a>` +
+    BLOCKS.map(b => {
+      const n = AUFGABEN.filter(a => a.block === b.id).length;
+      return `<a href="#block-${b.id}" data-toc="${b.id}">
+                <span class="num">${b.id}</span>
+                <span>${b.kurz}</span>
+                <span class="count" id="count-${b.id}">0/${n}</span>
+              </a>`;
+    }).join('');
+
+  AUFGABEN.forEach(a => { if (geloest.has(a.id)) markiereGeloest(a.id); });
+  aktualisiereFortschritt();
+  typeset();
+}
+
+function typeset(el){
+  if (window.MathJax && MathJax.typesetPromise){
+    MathJax.typesetPromise(el ? [el] : undefined).catch(() => {});
+  }
+}
+
+/* ---------- Auswahl bei Multiple Choice ---------- */
+function waehle(aid, i, j){
+  const a = AUFGABEN.find(x => x.id === aid);
+  state.auswahl[`${aid}_${i}`] = j;
+  a.inputs[i].options.forEach((_, k) => {
+    const el = document.getElementById(feldId(aid, i, k));
+    if (el) el.classList.toggle('selected', k === j);
+  });
+}
+
+/* ---------- Prüfen ---------- */
+function setzeFeedback(aid, klasse, text){
+  const fb = document.getElementById(`fb_${aid}`);
+  if (!fb) return;
+  fb.className = 'feedback' + (klasse ? ' ' + klasse : '');
+  fb.innerHTML = text;
+  typeset(fb);
+}
+
+function pruefe(aid){
+  const a = AUFGABEN.find(x => x.id === aid);
+  const tol = 1e-6;
+  const falsch = [];
+  let leer = false, keineZahl = false;
+
+  a.inputs.forEach((inp, i) => {
+    if (inp.kind === 'choice'){
+      const sel = state.auswahl[`${aid}_${i}`];
+      if (sel == null){ leer = true; return; }
+      if (sel !== inp.correct) falsch.push(i+1);
+      return;
+    }
+    const n = inp.kind === 'vec' ? 3 : (inp.kind === 'multi' ? inp.fields.length : 1);
+    const soll = Array.isArray(inp.answer) ? inp.answer : [inp.answer];
+    let teilFalsch = false;
+    for (let j=0; j<n; j++){
+      const el = document.getElementById(feldId(aid,i,j));
+      if (!el) continue;
+      const roh = el.value.trim();
+      if (roh === ''){ leer = true; el.classList.remove('right','wrong'); continue; }
+      const wert = parseZahl(roh);
+      if (isNaN(wert)){ keineZahl = true; el.classList.add('wrong'); el.classList.remove('right'); teilFalsch = true; continue; }
+      const ok = Math.abs(wert - soll[j]) <= tol;
+      el.classList.toggle('right', ok);
+      el.classList.toggle('wrong', !ok);
+      if (!ok) teilFalsch = true;
+    }
+    if (teilFalsch) falsch.push(i+1);
+  });
+
+  if (leer){ setzeFeedback(aid, 'info', 'Bitte zuerst alle Felder ausfüllen.'); return; }
+  if (keineZahl){ setzeFeedback(aid, 'info', 'Bitte nur Zahlen eingeben – erlaubt sind auch Komma (z.&nbsp;B. <code>4,5</code>) und Brüche (z.&nbsp;B. <code>9/2</code>).'); return; }
+
+  if (falsch.length === 0){
+    setzeFeedback(aid, 'ok', 'Richtig! &#10003; Vergleiche gern noch den Rechenweg mit der Musterlösung.');
+    markiereGeloest(aid);
+    geloest.add(aid);
+    speichereGeloest();
+    aktualisiereFortschritt();
+  } else {
+    const wo = a.inputs.length > 1
+      ? ` Noch nicht stimmt: Teil ${falsch.join(' und ')}.`
+      : '';
+    setzeFeedback(aid, 'bad', `Das passt noch nicht.${wo} Rechne noch einmal nach – oder klapp den Tipp auf.`);
+  }
+}
+
+function markiereGeloest(aid){
+  const el = document.getElementById(`aufgabe-${aid}`);
+  if (el) el.classList.add('solved');
+}
+
+function zuruecksetzen(aid){
+  const a = AUFGABEN.find(x => x.id === aid);
+  a.inputs.forEach((inp, i) => {
+    if (inp.kind === 'choice'){
+      delete state.auswahl[`${aid}_${i}`];
+      inp.options.forEach((_, k) => {
+        const el = document.getElementById(feldId(aid,i,k));
+        if (el) el.classList.remove('selected');
+      });
+      return;
+    }
+    const n = inp.kind === 'vec' ? 3 : (inp.kind === 'multi' ? inp.fields.length : 1);
+    for (let j=0; j<n; j++){
+      const el = document.getElementById(feldId(aid,i,j));
+      if (el){ el.value = ''; el.classList.remove('right','wrong'); }
+    }
+  });
+  setzeFeedback(aid, '', '');
+}
+
+/* ---------- Fortschritt ---------- */
+function aktualisiereFortschritt(){
+  const gesamt = AUFGABEN.length;
+  const n = AUFGABEN.filter(a => geloest.has(a.id)).length;
+  const text = document.getElementById('progress-text');
+  if (text) text.textContent = `${n} von ${gesamt} Aufgaben gelöst`;
+  const fill = document.getElementById('progress-fill');
+  if (fill) fill.style.width = (gesamt ? (100*n/gesamt) : 0) + '%';
+  BLOCKS.forEach(b => {
+    const liste = AUFGABEN.filter(a => a.block === b.id);
+    const el = document.getElementById(`count-${b.id}`);
+    if (el) el.textContent = `${liste.filter(a => geloest.has(a.id)).length}/${liste.length}`;
+  });
+  if (state.nurOffene) wendeFilterAn();
+}
+
+function fortschrittZuruecksetzen(){
+  geloest = new Set();
+  speichereGeloest();
+  AUFGABEN.forEach(a => {
+    const el = document.getElementById(`aufgabe-${a.id}`);
+    if (el) el.classList.remove('solved');
+    zuruecksetzen(a.id);
+  });
+  aktualisiereFortschritt();
+}
+
+/* ---------- Filter ---------- */
+function setzeFilter(id){
+  state.filter = id;
+  document.querySelectorAll('[data-chip]').forEach(c => c.classList.toggle('on', c.dataset.chip === id));
+  wendeFilterAn();
+  const ziel = id === 'alle' ? null : document.getElementById(`block-${id}`);
+  if (ziel) ziel.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function toggleOffene(){
+  state.nurOffene = !state.nurOffene;
+  const chip = document.getElementById('chip-offen');
+  if (chip) chip.classList.toggle('on', state.nurOffene);
+  wendeFilterAn();
+}
+
+function wendeFilterAn(){
+  AUFGABEN.forEach(a => {
+    const el = document.getElementById(`aufgabe-${a.id}`);
+    if (!el) return;
+    const passtBlock = state.filter === 'alle' || state.filter === a.block;
+    const passtOffen = !state.nurOffene || !geloest.has(a.id);
+    el.style.display = (passtBlock && passtOffen) ? '' : 'none';
+  });
+  BLOCKS.forEach(b => {
+    const sec = document.getElementById(`block-${b.id}`);
+    if (!sec) return;
+    const sichtbar = AUFGABEN.some(a => a.block === b.id &&
+      document.getElementById(`aufgabe-${a.id}`) &&
+      document.getElementById(`aufgabe-${a.id}`).style.display !== 'none');
+    sec.style.display = sichtbar ? '' : 'none';
+  });
+}
+
+/* ---------- Aktiver Eintrag im Inhaltsverzeichnis ---------- */
+function beobachteBloecke(){
+  if (!('IntersectionObserver' in window)) return;
+  const obs = new IntersectionObserver(eintraege => {
+    eintraege.forEach(e => {
+      if (!e.isIntersecting) return;
+      const id = e.target.dataset.block;
+      document.querySelectorAll('[data-toc]').forEach(a => a.classList.toggle('active', a.dataset.toc === id));
+    });
+  }, { rootMargin:'-20% 0px -70% 0px' });
+  document.querySelectorAll('section.block').forEach(s => obs.observe(s));
+}
+
+/* ---------- Start ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  renderAlles();
+  beobachteBloecke();
+  const btn = document.getElementById('btn-reset-progress');
+  if (btn) btn.addEventListener('click', () => {
+    if (confirm('Wirklich den gesamten Lernfortschritt löschen?')) fortschrittZuruecksetzen();
+  });
+});
+</script>
+</body>
+</html>
