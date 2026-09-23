@@ -2,7 +2,7 @@
 
 Interaktive Übungswebsite zu **Kapitel 17 (Abstandsprobleme)** der
 [Vektorrechnung-Zusammenfassung](https://erikdahlmann.github.io/Vektorrechnung-Zusammenfassung/).
-Die Seite greift Stoff, Notation und Gestaltung der Zusammenfassung auf und ergänzt sie um 20 Aufgaben
+Die Seite greift Stoff, Notation und Gestaltung der Zusammenfassung auf und ergänzt sie um 38 Aufgaben
 mit Sofortkorrektur, Tipps und ausführlichen Musterlösungen.
 
 ## Inhalt
@@ -20,14 +20,15 @@ Eine kompakte Formelsammlung zu allen vier Abstandsfällen samt Entscheidungstab
 
 Die Aufgaben sind nach Schwierigkeit gekennzeichnet (leicht / mittel / schwer) und decken bewusst auch
 die typischen Stolperstellen ab: Vorzeichenfehler in der HNF, identische statt echt paralleler Geraden,
-das Mischen von Zähler- und Nennervektor in der Flächenformel und die Fehlvorstellung,
-windschiefe Geraden könnten den Abstand 0 haben.
+das Mischen von Zähler- und Nennervektor in der Flächenformel, die Verwechslung von Pyramidenhöhe und
+Punktabstand sowie die Fehlvorstellung, windschiefe Geraden könnten den Abstand 0 haben.
 
 ## Funktionen
 
 - **Sofortkorrektur** für Zahlen-, Vektor-, Mehrfeld- und Multiple-Choice-Eingaben; bei mehrteiligen
   Aufgaben wird benannt, welcher Teil noch nicht stimmt
-- **Eingabekomfort:** Komma- und Punktschreibweise sowie Brüche wie `9/2` werden akzeptiert
+- **Eingabekomfort:** Komma- und Punktschreibweise sowie Brüche wie `9/2` werden akzeptiert; bei Aufgaben mit
+  irrationalem Ergebnis genügt eine auf zwei Nachkommastellen gerundete Eingabe
 - **Dreistufiges Lernen:** erst selbst rechnen, dann Tipp, dann ausführliche Musterlösung mit allen Zwischenschritten
 - **Fortschrittsanzeige** gesamt und pro Block, lokal im Browser gespeichert (localStorage)
 - **Filter** nach Block und nach ungelösten Aufgaben

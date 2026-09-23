@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kapitel 17 – Abstandsprobleme | Übungsaufgaben</title>
-<meta name="description" content="20 Übungsaufgaben mit Sofortkorrektur, Tipps und ausführlichen Musterlösungen zu Kapitel 17 (Abstandsprobleme) der Vektorrechnung-Zusammenfassung.">
+<meta name="description" content="38 Übungsaufgaben mit Sofortkorrektur, Tipps und ausführlichen Musterlösungen zu Kapitel 17 (Abstandsprobleme) der Vektorrechnung-Zusammenfassung.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -274,7 +274,8 @@
   <div class="head-inner">
     <div class="crumb">Vektorgeometrie &middot; Kapitel 17 von 17</div>
     <h1>Abstandsprobleme &ndash; Übungsaufgaben</h1>
-    <p class="lead">20 Aufgaben zu allen vier Abstandsfällen: Punkt&ndash;Ebene, Punkt&ndash;Gerade, parallele Geraden und windschiefe Geraden.
+    <p class="lead">38 Aufgaben zu allen vier Abstandsfällen &ndash; Punkt&ndash;Ebene, Punkt&ndash;Gerade, parallele und windschiefe Geraden &ndash;
+       dazu Anwendungen und mehrschrittige Prüfungsaufgaben.
        Trage deine Lösung ein, lass sie sofort prüfen und vergleiche anschließend mit der ausführlichen Musterlösung.</p>
     <div class="head-links">
       <a href="https://erikdahlmann.github.io/Vektorrechnung-Zusammenfassung/" target="_blank" rel="noopener">&larr; Zur Zusammenfassung (Kapitel 17)</a>
@@ -283,7 +284,7 @@
     </div>
     <div class="progress-wrap">
       <div class="progress-top">
-        <span id="progress-text">0 von 20 Aufgaben gelöst</span>
+        <span id="progress-text">0 von 38 Aufgaben gelöst</span>
         <button class="btn-reset" type="button" id="btn-reset-progress">Fortschritt zurücksetzen</button>
       </div>
       <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
@@ -304,7 +305,8 @@
       <h2>So arbeitest du mit dieser Seite</h2>
       <p>Jede Aufgabe hat drei Stufen: erst selbst rechnen und die Lösung eintragen, bei Bedarf den <strong>Tipp</strong> aufklappen,
          und erst danach die <strong>Musterlösung</strong>. Die Eingabefelder akzeptieren Komma und Punkt als Dezimaltrennzeichen
-         sowie Brüche wie <code>9/2</code>. Gelöste Aufgaben werden lokal in deinem Browser gespeichert.</p>
+         sowie Brüche wie <code>9/2</code>. Gelöste Aufgaben werden lokal in deinem Browser gespeichert.
+         Nur bei Aufgaben mit Wurzeln im Ergebnis (gekennzeichnet) genügt eine auf zwei Nachkommastellen gerundete Eingabe.</p>
       <div class="hinweis" style="margin-top:14px">
         <strong>Die eine Leitidee:</strong> Der Abstand ist immer der kürzeste Weg &ndash; und der steht immer <em>senkrecht</em>.
         Die Verfahren unterscheiden sich nur darin, wie sie diese Senkrechte finden: über den Normalenvektor (Ebene),
@@ -389,7 +391,8 @@ const BLOCKS = [
   { id:'B', titel:'Abstand Punkt &ndash; Gerade', kurz:'Punkt &ndash; Gerade', unter:'Laufpunkt-Bedingung, Hilfsebene und die Flächenformel mit dem Kreuzprodukt.' },
   { id:'C', titel:'Abstand paralleler Geraden', kurz:'Parallele Geraden', unter:'Erst die Lage klären, dann auf Fall B zurückführen &ndash; inklusive der Falle &bdquo;identisch&ldquo;.' },
   { id:'D', titel:'Abstand windschiefer Geraden', kurz:'Windschiefe Geraden', unter:'Spatprodukt, Hilfsebene + HNF und der geschlossene Vektorzug mit den beiden Lotfußpunkten.' },
-  { id:'E', titel:'Vermischtes &amp; Anwendungen', kurz:'Vermischtes &amp; Anwendungen', unter:'Sachaufgaben im Abi-Stil und zwei Fragen zur Verfahrenswahl.' }
+  { id:'E', titel:'Vermischtes &amp; Anwendungen', kurz:'Vermischtes &amp; Anwendungen', unter:'Sachaufgaben, die Spat-Deutung des Abstands und Fragen zur Verfahrenswahl.' },
+  { id:'F', titel:'Prüfungsaufgaben', kurz:'Prüfungsaufgaben', unter:'Mehrschrittige Aufgaben im Abi-Stil: Ebene aufstellen, Abstand bestimmen, Volumen berechnen &ndash; alles in einer Aufgabe.' }
 ];
 
 const AUFGABEN = [
@@ -930,6 +933,569 @@ const AUFGABEN = [
        <p><strong>Als Test formuliert:</strong> Richtungen kollinear? &rarr; parallel oder identisch (Punktprobe entscheidet).
           Sonst Spatprodukt: $= 0$ &rarr; Schnittpunkt, $\\neq 0$ &rarr; windschief.</p>`
 }
+,
+
+/* --------------------------- Block A (Nachschlag) --------------------------- */
+{
+  id:'A6', block:'A', level:2, tags:['Parallele Ebenen','HNF'],
+  q:`Zeige, dass die Ebenen
+     $$E_1: 2x_1 + 3x_2 - 6x_3 = 14 \\qquad E_2: 2x_1 + 3x_2 - 6x_3 = -7$$
+     zueinander parallel sind, und berechne ihren Abstand.`,
+  inputs:[
+    { kind:'choice', label:'Lagebeziehung:', options:[
+        'Die Ebenen sind identisch.',
+        'Die Ebenen sind echt parallel.',
+        'Die Ebenen schneiden sich in einer Geraden.'
+      ], correct:1 },
+    { kind:'num', label:'$d = $', answer:3 }
+  ],
+  hint:`Beide Ebenen haben denselben Normalenvektor &ndash; das allein macht sie schon parallel.
+        Für den Abstand suchst du dir einen bequemen Punkt in $E_1$ (z.&nbsp;B. einen Spurpunkt) und berechnest
+        dessen Abstand zu $E_2$ mit der HNF.`,
+  sol:`<div class="step">Schritt 1: Parallelität</div>
+       <p>Beide Ebenen haben den Normalenvektor $\\vec{n} = \\begin{pmatrix} 2 \\\\ 3 \\\\ -6 \\end{pmatrix}$, stehen also
+          in dieselbe Richtung senkrecht &rArr; parallel. Weil die rechten Seiten verschieden sind ($14 \\neq -7$),
+          sind sie <span class="erg">echt parallel</span> und nicht identisch.</p>
+       <div class="step">Schritt 2: Einen Punkt in E<sub>1</sub> wählen</div>
+       <p>Am bequemsten ist ein Spurpunkt: $x_2 = x_3 = 0$ liefert $2x_1 = 14$, also $P(7|0|0)$.</p>
+       <div class="step">Schritt 3: Abstand dieses Punktes zu E<sub>2</sub></div>
+       $$|\\vec{n}| = \\sqrt{4 + 9 + 36} = \\sqrt{49} = 7$$
+       $$d = \\frac{|2 \\cdot 7 + 3 \\cdot 0 - 6 \\cdot 0 - (-7)|}{7} = \\frac{|14 + 7|}{7} = \\frac{21}{7} = 3$$
+       <p>Der Abstand der Ebenen beträgt <span class="erg">$d = 3$</span>.</p>
+       <p><strong>Warum ein beliebiger Punkt genügt:</strong> Parallele Ebenen haben überall denselben Abstand.
+          Damit ist der Ebenenabstand auf Fall A zurückgeführt &ndash; genau wie parallele Geraden auf Fall B.</p>
+       <p><strong>Abkürzung für Profis:</strong> Bei <em>gleichem</em> Normalenvektor gilt direkt
+          $d = \\frac{|c_1 - c_2|}{|\\vec{n}|} = \\frac{|14 - (-7)|}{7} = 3$. Das funktioniert aber nur, wenn beide
+          Gleichungen wirklich denselben Normalenvektor haben &ndash; sonst vorher erweitern oder kürzen.</p>`
+},
+{
+  id:'A7', block:'A', level:2, tags:['Kugel','Lotfußpunkt'],
+  q:`Eine Kugel mit dem Mittelpunkt $M(3|-2|4)$ berührt die Ebene $E: 2x_1 - 2x_2 + x_3 = 5$.
+     Bestimme den Radius $r$ der Kugel und den Berührpunkt $B$.`,
+  inputs:[
+    { kind:'num', label:'$r = $', answer:3 },
+    { kind:'vec', label:'$\\vec{b} = $', answer:[1,0,3] }
+  ],
+  hint:`&bdquo;Berührt&ldquo; heißt: Der Abstand des Mittelpunkts von der Ebene ist genau der Radius.
+        Und der Berührpunkt ist nichts anderes als der Lotfußpunkt von $M$ auf $E$.`,
+  sol:`<div class="step">Schritt 1: Radius über die HNF</div>
+       $$|\\vec{n}| = \\sqrt{4+4+1} = 3 \\quad \\Rightarrow \\quad
+         d = \\frac{|2 \\cdot 3 - 2 \\cdot (-2) + 4 - 5|}{3} = \\frac{|6 + 4 + 4 - 5|}{3} = \\frac{9}{3} = 3$$
+       <p>Bei Berührung gilt $r = d$, also <span class="erg">$r = 3$</span>.</p>
+       <div class="step">Schritt 2: Berührpunkt = Lotfußpunkt</div>
+       $$h: \\vec{x} = \\begin{pmatrix} 3 \\\\ -2 \\\\ 4 \\end{pmatrix} + t \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix}$$
+       $$2(3+2t) - 2(-2-2t) + (4+t) = 5$$
+       $$6 + 4t + 4 + 4t + 4 + t = 5 \\quad \\Rightarrow \\quad 14 + 9t = 5 \\quad \\Rightarrow \\quad t = -1$$
+       $$\\vec{b} = \\begin{pmatrix} 3 \\\\ -2 \\\\ 4 \\end{pmatrix} - \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 3 \\end{pmatrix}$$
+       <p>Der Berührpunkt ist <span class="erg">$B(1|0|3)$</span>. Probe: $2 \\cdot 1 - 0 + 3 = 5$ &#10003;</p>
+       <p><strong>Die drei Fälle:</strong> $d > r$ &rarr; kein Schnitt, $d = r$ &rarr; Berührung (ein Punkt),
+          $d &lt; r$ &rarr; Schnittkreis. Der Abstand Punkt&ndash;Ebene entscheidet also über die gesamte Lagebeziehung.</p>`
+},
+{
+  id:'A8', block:'A', level:3, tags:['HNF','Gerade & Ebene'],
+  q:`Auf der Geraden $g: \\vec{x} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix}$
+     liegen genau zwei Punkte, die von der Ebene $E: 2x_1 - 2x_2 + x_3 = 3$ den Abstand $2$ haben.
+     Bestimme die Parameter und den Punkt mit dem größeren Parameter.`,
+  inputs:[
+    { kind:'multi', label:'Parameter:', fields:['t₁ (größer)','t₂'], answer:[7,-5] },
+    { kind:'vec', label:'Punkt zu $t_1$:', answer:[8,7,7] }
+  ],
+  hint:`Setze den allgemeinen Punkt $P(t)$ der Geraden in die HNF ein. Du erhältst einen Ausdruck mit Betrag,
+        den du gleich $2$ setzt &ndash; das gibt wieder zwei Fälle.`,
+  sol:`<div class="step">Schritt 1: Allgemeiner Geradenpunkt</div>
+       $$P(t) = (1+t \\,|\\, t \\,|\\, t)$$
+       <div class="step">Schritt 2: In die HNF einsetzen</div>
+       $$2(1+t) - 2t + t = 2 + 2t - 2t + t = 2 + t$$
+       $$d(t) = \\frac{|2 + t - 3|}{3} = \\frac{|t-1|}{3} \\stackrel{!}{=} 2$$
+       <div class="step">Schritt 3: Betragsgleichung</div>
+       $$|t - 1| = 6 \\quad \\Rightarrow \\quad t_1 = 7 \\ \\text{ oder } \\ t_2 = -5$$
+       <div class="step">Schritt 4: Die Punkte</div>
+       <p>$t_1 = 7$: <span class="erg">$P_1(8|7|7)$</span> &nbsp;&nbsp;&nbsp; $t_2 = -5$: <span class="erg">$P_2(-4|-5|-5)$</span></p>
+       <p>Probe für $P_1$: $\\frac{|16 - 14 + 7 - 3|}{3} = \\frac{6}{3} = 2$ &#10003;</p>
+       <p><strong>Beobachtung:</strong> Die beiden Punkte liegen auf verschiedenen Seiten der Ebene &ndash; zwischen ihnen
+          durchstößt $g$ die Ebene (bei $t = 1$). Wäre $g$ parallel zu $E$ gewesen ($\\vec{u} \\cdot \\vec{n} = 0$),
+          hätte die Gleichung <em>keine</em> oder <em>unendlich viele</em> Lösungen gehabt.</p>`
+},
+
+/* --------------------------- Block B (Nachschlag) --------------------------- */
+{
+  id:'B5', block:'B', level:1, tags:['Koordinatenachse'],
+  q:`Berechne den Abstand des Punktes $P(3|4|12)$ von der $x_3$-Achse und gib den Lotfußpunkt an.`,
+  inputs:[
+    { kind:'num', label:'$d = $', answer:5 },
+    { kind:'vec', label:'$\\vec{f} = $', answer:[0,0,12] }
+  ],
+  hint:`Die $x_3$-Achse ist die Gerade $\\vec{x} = r \\begin{pmatrix} 0 \\\\ 0 \\\\ 1 \\end{pmatrix}$ durch den Ursprung.
+        Überlege dir, welche Koordinate von $P$ beim Lotfußpunkt erhalten bleibt.`,
+  sol:`<div class="step">Schritt 1: Die Achse als Gerade</div>
+       $$x_3\\text{-Achse}: \\vec{x} = r \\begin{pmatrix} 0 \\\\ 0 \\\\ 1 \\end{pmatrix}, \\qquad A(0|0|0)$$
+       <div class="step">Schritt 2: Laufpunkt-Bedingung</div>
+       $$\\vec{f}(r) - \\vec{p} = \\begin{pmatrix} -3 \\\\ -4 \\\\ r-12 \\end{pmatrix}, \\qquad
+         \\left(\\vec{f}(r) - \\vec{p}\\right) \\cdot \\vec{u} = r - 12 = 0 \\quad \\Rightarrow \\quad r = 12$$
+       <p>Der Lotfußpunkt ist <span class="erg">$F(0|0|12)$</span> &ndash; die Höhe bleibt also erhalten.</p>
+       <div class="step">Schritt 3: Abstand</div>
+       $$d = \\left| \\begin{pmatrix} -3 \\\\ -4 \\\\ 0 \\end{pmatrix} \\right| = \\sqrt{9 + 16} = 5$$
+       <p><strong>Die Merkregel:</strong> Der Abstand eines Punktes von der $x_3$-Achse ist $\\sqrt{p_1^2 + p_2^2}$ &ndash;
+          man lässt einfach die Koordinate der Achsenrichtung weg. Analog für die anderen beiden Achsen.
+          Das ist der Satz des Pythagoras in der Ebene senkrecht zur Achse.</p>`
+},
+{
+  id:'B6', block:'B', level:3, tags:['Laufpunkt','quadratische Gleichung'],
+  q:`Auf der Geraden $g: \\vec{x} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 2 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ -1 \\\\ 2 \\end{pmatrix}$
+     liegen genau zwei Punkte, die vom Punkt $P(5|1|3)$ den Abstand $3\\sqrt{2}$ haben.
+     Bestimme ihre Parameter und die beiden Punkte.`,
+  inputs:[
+    { kind:'multi', label:'Parameter:', fields:['r₁ (kleiner)','r₂'], answer:[0,2] },
+    { kind:'vec', label:'Punkt zu $r_2$:', answer:[5,-2,6] }
+  ],
+  hint:`Nicht das Lot suchen, sondern die Abstandsfunktion: Berechne $|\\vec{f}(r) - \\vec{p}|^2$ als Term in $r$
+        und setze ihn gleich $(3\\sqrt{2})^2 = 18$. Das ergibt eine quadratische Gleichung.`,
+  sol:`<div class="step">Schritt 1: Abstandsquadrat als Funktion von r</div>
+       $$\\vec{f}(r) - \\vec{p} = \\begin{pmatrix} 2r-4 \\\\ -r-1 \\\\ 2r-1 \\end{pmatrix}$$
+       $$|\\vec{f}(r) - \\vec{p}|^2 = (2r-4)^2 + (r+1)^2 + (2r-1)^2$$
+       $$= 4r^2 - 16r + 16 \;+\; r^2 + 2r + 1 \;+\; 4r^2 - 4r + 1 = 9r^2 - 18r + 18$$
+       <div class="step">Schritt 2: Gleichsetzen</div>
+       $$9r^2 - 18r + 18 = \\left(3\\sqrt{2}\\right)^2 = 18 \\quad \\Rightarrow \\quad 9r^2 - 18r = 0 \\quad \\Rightarrow \\quad 9r(r-2) = 0$$
+       $$r_1 = 0, \\qquad r_2 = 2$$
+       <div class="step">Schritt 3: Die beiden Punkte</div>
+       <p>$r_1 = 0$: <span class="erg">$Q_1(1|0|2)$</span> (der Stützpunkt selbst) &nbsp;&nbsp;
+          $r_2 = 2$: <span class="erg">$Q_2(5|-2|6)$</span></p>
+       <div class="step">Die Struktur dahinter</div>
+       <p>Zerlegt man $\\vec{PF}(r)$ in das Lot und den Anteil längs der Geraden, liefert der Satz des Pythagoras</p>
+       $$|\\vec{PF}(r)|^2 = d_{\\min}^2 + |\\vec{u}|^2 (r - r_F)^2 = 9 + 9(r-1)^2$$
+       <p>mit dem Minimum $d_{\\min} = 3$ bei $r_F = 1$ (Aufgabe B1). Aus $9 + 9(r-1)^2 = 18$ folgt $(r-1)^2 = 1$,
+          also $r = 0$ oder $r = 2$ &ndash; die beiden Punkte liegen symmetrisch um den Lotfußpunkt.
+          Für einen Abstand <em>kleiner</em> als $3$ gäbe es gar keine Lösung.</p>`
+},
+{
+  id:'B7', block:'B', level:2, tags:['Anwendung','Laufpunkt'],
+  q:`Ein Laserstrahl verläuft entlang der Geraden
+     $$g: \\vec{x} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ 2 \\\\ 1 \\end{pmatrix}$$
+     (Angaben in Metern). Ein Sensor befindet sich im Punkt $P(10|3|7)$.
+     Wie nah kommt der Strahl dem Sensor, und an welcher Stelle?`,
+  inputs:[
+    { kind:'num', label:'$r = $', answer:3 },
+    { kind:'vec', label:'nächster Punkt $\\vec{f} = $', answer:[8,7,3] },
+    { kind:'num', label:'$d = $', unit:'m', answer:6 }
+  ],
+  hint:`Gefragt ist nach einer Stelle, also brauchst du den Lotfußpunkt: Laufpunkt-Bedingung
+        $(\\vec{f}(r) - \\vec{p}) \\cdot \\vec{u} = 0$. Die Flächenformel taugt danach als Kontrolle des Abstands.`,
+  sol:`<div class="step">Schritt 1: Laufpunkt-Bedingung</div>
+       $$\\vec{f}(r) - \\vec{p} = \\begin{pmatrix} 2 + 2r - 10 \\\\ 1 + 2r - 3 \\\\ r - 7 \\end{pmatrix}
+         = \\begin{pmatrix} 2r-8 \\\\ 2r-2 \\\\ r-7 \\end{pmatrix}$$
+       $$2(2r-8) + 2(2r-2) + (r-7) = 0$$
+       $$4r - 16 + 4r - 4 + r - 7 = 0 \\quad \\Rightarrow \\quad 9r - 27 = 0 \\quad \\Rightarrow \\quad r = 3$$
+       <div class="step">Schritt 2: Der nächstgelegene Punkt</div>
+       $$\\vec{f} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\end{pmatrix} + 3 \\begin{pmatrix} 2 \\\\ 2 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 8 \\\\ 7 \\\\ 3 \\end{pmatrix}
+         \\quad \\Rightarrow \\quad F(8|7|3)$$
+       <div class="step">Schritt 3: Abstand</div>
+       $$\\vec{PF} = \\begin{pmatrix} -2 \\\\ 4 \\\\ -4 \\end{pmatrix} \\quad \\Rightarrow \\quad d = \\sqrt{4 + 16 + 16} = 6 \\ \\text{m}$$
+       <p><strong>Kontrolle mit der Flächenformel:</strong> $\\vec{AP} = \\begin{pmatrix} 8 \\\\ 2 \\\\ 7 \\end{pmatrix}$,
+          $\\vec{AP} \\times \\vec{u} = \\begin{pmatrix} -12 \\\\ 6 \\\\ 12 \\end{pmatrix}$ mit $|\\vec{AP} \\times \\vec{u}| = 18$,
+          also $d = \\frac{18}{3} = 6$ &#10003;</p>
+       <p><strong>Zur Interpretation:</strong> $r = 3$ liegt in Richtung des Strahls (positives $r$) &ndash; der Strahl kommt
+          dem Sensor also tatsächlich unterwegs am nächsten und nicht erst hinter seiner Quelle.</p>`
+},
+
+/* --------------------------- Block C (Nachschlag) --------------------------- */
+{
+  id:'C4', block:'C', level:2, tags:['Skalarprodukt','Lotfußpunkt'],
+  q:`Gegeben sind
+     $$g: \\vec{x} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 0 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ 1 \\\\ 2 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 5 \\\\ 1 \\\\ 1 \\end{pmatrix} + s \\begin{pmatrix} 4 \\\\ 2 \\\\ 4 \\end{pmatrix}$$
+     Kläre die Lagebeziehung und bestimme den Abstand sowie den Lotfußpunkt auf $g$ zum Stützpunkt $B(5|1|1)$.`,
+  inputs:[
+    { kind:'choice', label:'Lagebeziehung:', options:[
+        'identisch','echt parallel','windschief','sie schneiden sich'
+      ], correct:1 },
+    { kind:'num', label:'$r = $', answer:1 },
+    { kind:'vec', label:'$\\vec{f} = $', answer:[3,3,2] },
+    { kind:'num', label:'$d = $', answer:3 }
+  ],
+  hint:`Nach dem Lotfußpunkt gefragt &rArr; Weg C1 über das Skalarprodukt:
+        $\\left(\\vec{f}(r) - \\vec{b}\\right) \\cdot \\vec{u} = 0$. Vorher aber die Punktprobe nicht vergessen.`,
+  sol:`<div class="step">Schritt 1: Lage klären</div>
+       <p>$\\begin{pmatrix} 4 \\\\ 2 \\\\ 4 \\end{pmatrix} = 2 \\cdot \\begin{pmatrix} 2 \\\\ 1 \\\\ 2 \\end{pmatrix}$ &ndash; kollinear.
+          Punktprobe mit $B(5|1|1)$ auf $g$: Zeile I liefert $1 + 2r = 5 \\Rightarrow r = 2$, Zeile II aber
+          $2 + r = 1 \\Rightarrow r = -1$. Widerspruch &rArr; <span class="erg">echt parallel</span>.</p>
+       <div class="step">Schritt 2: Lotfußpunkt auf g bestimmen</div>
+       $$\\vec{f}(r) - \\vec{b} = \\begin{pmatrix} 1 + 2r - 5 \\\\ 2 + r - 1 \\\\ 2r - 1 \\end{pmatrix}
+         = \\begin{pmatrix} 2r-4 \\\\ r+1 \\\\ 2r-1 \\end{pmatrix}$$
+       $$2(2r-4) + (r+1) + 2(2r-1) = 0 \\quad \\Rightarrow \\quad 9r - 9 = 0 \\quad \\Rightarrow \\quad r = 1$$
+       $$\\vec{f} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 0 \\end{pmatrix} + \\begin{pmatrix} 2 \\\\ 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\ 3 \\\\ 2 \\end{pmatrix}
+         \\quad \\Rightarrow \\quad F(3|3|2)$$
+       <div class="step">Schritt 3: Abstand</div>
+       $$\\vec{BF} = \\begin{pmatrix} -2 \\\\ 2 \\\\ 1 \\end{pmatrix} \\quad \\Rightarrow \\quad d = \\sqrt{4+4+1} = 3$$
+       <p><strong>Kontrolle mit der Flächenformel:</strong> $\\vec{AB} = \\begin{pmatrix} 4 \\\\ -1 \\\\ 1 \\end{pmatrix}$,
+          $\\vec{AB} \\times \\vec{u} = \\begin{pmatrix} -3 \\\\ -6 \\\\ 6 \\end{pmatrix}$, $|\\vec{AB} \\times \\vec{u}| = 9$,
+          also $d = \\frac{9}{3} = 3$ &#10003; &ndash; dieser Weg wäre kürzer gewesen, liefert aber den Fußpunkt nicht.</p>`
+},
+{
+  id:'C5', block:'C', level:3, tags:['Parameter','Kollinearität'],
+  q:`Für welchen Wert von $a$ ist die Gerade
+     $$h_a: \\vec{x} = \\begin{pmatrix} 5 \\\\ 1 \\\\ 1 \\end{pmatrix} + s \\begin{pmatrix} a \\\\ 1 \\\\ 2 \\end{pmatrix}$$
+     parallel zu $g: \\vec{x} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 0 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ 1 \\\\ 2 \\end{pmatrix}$,
+     und wie groß ist dann ihr Abstand?`,
+  inputs:[
+    { kind:'num', label:'$a = $', answer:2 },
+    { kind:'num', label:'$d = $', answer:3 }
+  ],
+  hint:`Parallel heißt: Die Richtungsvektoren sind Vielfache voneinander, $\\begin{pmatrix} a \\\\ 1 \\\\ 2 \\end{pmatrix} = k \\cdot \\begin{pmatrix} 2 \\\\ 1 \\\\ 2 \\end{pmatrix}$.
+        Die zweite und dritte Zeile legen $k$ schon fest &ndash; ganz ohne $a$.`,
+  sol:`<div class="step">Schritt 1: Kollinearität erzwingen</div>
+       $$\\begin{pmatrix} a \\\\ 1 \\\\ 2 \\end{pmatrix} = k \\cdot \\begin{pmatrix} 2 \\\\ 1 \\\\ 2 \\end{pmatrix}$$
+       <p>Zeile II: $1 = k$. Zeile III: $2 = 2k \\Rightarrow k = 1$ &#10003; (konsistent).
+          Zeile I: $a = 2k = 2$.</p>
+       <p>Also <span class="erg">$a = 2$</span> &ndash; und nur für diesen Wert sind die Geraden parallel.</p>
+       <div class="step">Schritt 2: Echt parallel oder identisch?</div>
+       <p>Punktprobe mit $B(5|1|1)$ auf $g$: $1 + 2r = 5 \\Rightarrow r = 2$, aber $2 + r = 1 \\Rightarrow r = -1$.
+          Widerspruch &rArr; echt parallel, der Abstand ist also nicht $0$.</p>
+       <div class="step">Schritt 3: Abstand</div>
+       $$\\vec{AB} = \\begin{pmatrix} 4 \\\\ -1 \\\\ 1 \\end{pmatrix}, \\qquad
+         \\vec{AB} \\times \\vec{u} = \\begin{pmatrix} (-1) \\cdot 2 - 1 \\cdot 1 \\\\ 1 \\cdot 2 - 4 \\cdot 2 \\\\ 4 \\cdot 1 - (-1) \\cdot 2 \\end{pmatrix}
+         = \\begin{pmatrix} -3 \\\\ -6 \\\\ 6 \\end{pmatrix}$$
+       $$d = \\frac{|\\vec{AB} \\times \\vec{u}|}{|\\vec{u}|} = \\frac{9}{3} = 3$$
+       <p>Für $a = 2$ beträgt der Abstand <span class="erg">$d = 3$</span> (vgl. Aufgabe C4).</p>
+       <p><strong>Und für andere $a$?</strong> Dann sind die Richtungen nicht kollinear. Die Geraden schneiden sich
+          entweder oder sind windschief &ndash; das entscheidet dann das Spatprodukt (Block D).</p>`
+}
+,
+
+/* --------------------------- Block D (Nachschlag) --------------------------- */
+{
+  id:'D5', block:'D', level:2, tags:['Hilfsebene','HNF'],
+  q:`Berechne den Abstand der windschiefen Geraden
+     $$g: \\vec{x} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ 2 \\\\ 1 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 5 \\\\ -2 \\\\ -1 \\end{pmatrix} + s \\begin{pmatrix} 1 \\\\ -2 \\\\ 2 \\end{pmatrix}$$
+     über die Hilfsebene. Kürze den Normalenvektor so weit wie möglich.`,
+  inputs:[
+    { kind:'vec', label:'gekürzter Normalenvektor $\\vec{n} = $', answer:[2,-1,-2] },
+    { kind:'num', label:'Hilfsebene $2x_1 - x_2 - 2x_3 = $', answer:-1 },
+    { kind:'num', label:'$d = $', answer:5 }
+  ],
+  hint:`Die Hilfsebene enthält $g$ und ist parallel zu $h$: Aufpunkt von $g$, Normalenvektor $\\vec{u} \\times \\vec{v}$.
+        Achte beim Einsetzen des Stützpunkts von $h$ auf die Vorzeichen &ndash; hier sind gleich mehrere negativ.`,
+  sol:`<div class="step">Schritt 1: Normalenvektor</div>
+       $$\\vec{u} \\times \\vec{v} = \\begin{pmatrix} 2 \\\\ 2 \\\\ 1 \\end{pmatrix} \\times \\begin{pmatrix} 1 \\\\ -2 \\\\ 2 \\end{pmatrix}
+         = \\begin{pmatrix} 2 \\cdot 2 - 1 \\cdot (-2) \\\\ 1 \\cdot 1 - 2 \\cdot 2 \\\\ 2 \\cdot (-2) - 2 \\cdot 1 \\end{pmatrix}
+         = \\begin{pmatrix} 6 \\\\ -3 \\\\ -6 \\end{pmatrix}$$
+       <p>Mit $3$ kürzen: $\\vec{n} = \\begin{pmatrix} 2 \\\\ -1 \\\\ -2 \\end{pmatrix}$, also $|\\vec{n}| = 3$.</p>
+       <div class="step">Schritt 2: Hilfsebene durch A(1|1|1)</div>
+       $$2 \\cdot 1 - 1 - 2 \\cdot 1 = -1 \\quad \\Rightarrow \\quad E_H: 2x_1 - x_2 - 2x_3 = -1$$
+       <p>Probe auf Parallelität: $\\vec{v} \\cdot \\vec{n} = 2 + 2 - 4 = 0$ &#10003; &ndash; $h$ verläuft wirklich parallel zu $E_H$.</p>
+       <div class="step">Schritt 3: Abstand des Stützpunkts B(5|-2|-1)</div>
+       $$d = \\frac{|2 \\cdot 5 - (-2) - 2 \\cdot (-1) - (-1)|}{3} = \\frac{|10 + 2 + 2 + 1|}{3} = \\frac{15}{3} = 5$$
+       <p>Der Abstand beträgt <span class="erg">$d = 5$</span>.</p>
+       <p><strong>Kontrolle mit dem Spatprodukt:</strong> $\\vec{AB} = \\begin{pmatrix} 4 \\\\ -3 \\\\ -2 \\end{pmatrix}$ und
+          $\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v}) = 24 + 9 + 12 = 45$, also $d = \\frac{45}{9} = 5$ &#10003;
+          &ndash; und weil das Spatprodukt nicht $0$ ist, sind die Geraden tatsächlich windschief.</p>`
+},
+{
+  id:'D6', block:'D', level:3, tags:['Vektorzug','LGS','Lotfußpunkte'],
+  q:`Bestimme für
+     $$g: \\vec{x} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 2 \\end{pmatrix} + r \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 0 \\\\ 5 \\\\ 5 \\end{pmatrix} + s \\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\end{pmatrix}$$
+     die beiden Lotfußpunkte des gemeinsamen Lots und den Abstand.`,
+  inputs:[
+    { kind:'multi', label:'Parameter:', fields:['r','s'], answer:[2,1] },
+    { kind:'vec', label:'$\\vec{f_g} = $', answer:[3,4,6] },
+    { kind:'vec', label:'$\\vec{f_h} = $', answer:[1,6,5] },
+    { kind:'num', label:'$d = $', answer:3 }
+  ],
+  hint:`$\\vec{w} = \\vec{AB} + s\\,\\vec{v} - r\\,\\vec{u}$ aufstellen, dann $\\vec{w} \\cdot \\vec{u} = 0$ und
+        $\\vec{w} \\cdot \\vec{v} = 0$. Hier ist $\\vec{u} \\cdot \\vec{v} = 3 \\neq 0$, du bekommst also ein echtes
+        $2 \\times 2$-System, das du mit dem Additionsverfahren löst.`,
+  sol:`<div class="step">Schritt 1: Allgemeiner Verbindungsvektor</div>
+       $$\\vec{AB} = \\begin{pmatrix} 0 \\\\ 5 \\\\ 5 \\end{pmatrix} - \\begin{pmatrix} 1 \\\\ 0 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} -1 \\\\ 5 \\\\ 3 \\end{pmatrix}$$
+       $$\\vec{w} = \\vec{AB} + s\\,\\vec{v} - r\\,\\vec{u} = \\begin{pmatrix} -1 + s - r \\\\ 5 + s - 2r \\\\ 3 - 2r \\end{pmatrix}$$
+       <div class="step">Schritt 2: Die beiden Bedingungen</div>
+       <p><strong>I:</strong> $\\vec{w} \\cdot \\vec{u} = 0$</p>
+       $$(-1+s-r) + 2(5+s-2r) + 2(3-2r) = 0$$
+       $$-1 + s - r + 10 + 2s - 4r + 6 - 4r = 0 \\quad \\Rightarrow \\quad 15 + 3s - 9r = 0 \\quad \\Rightarrow \\quad 3r - s = 5$$
+       <p><strong>II:</strong> $\\vec{w} \\cdot \\vec{v} = 0$</p>
+       $$(-1+s-r) + (5+s-2r) + 0 = 0 \\quad \\Rightarrow \\quad 4 + 2s - 3r = 0 \\quad \\Rightarrow \\quad 3r - 2s = 4$$
+       <div class="step">Schritt 3: LGS lösen</div>
+       <p>I $-$ II: $(3r - s) - (3r - 2s) = 5 - 4 \\Rightarrow s = 1$. Einsetzen in I: $3r - 1 = 5 \\Rightarrow r = 2$.</p>
+       <div class="step">Schritt 4: Fußpunkte und Abstand</div>
+       $$\\vec{f_g} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 2 \\end{pmatrix} + 2 \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\ 4 \\\\ 6 \\end{pmatrix}, \\qquad
+         \\vec{f_h} = \\begin{pmatrix} 0 \\\\ 5 \\\\ 5 \\end{pmatrix} + \\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 6 \\\\ 5 \\end{pmatrix}$$
+       <p><span class="erg">$F_g(3|4|6)$</span> und <span class="erg">$F_h(1|6|5)$</span></p>
+       $$\\vec{w} = \\vec{f_h} - \\vec{f_g} = \\begin{pmatrix} -2 \\\\ 2 \\\\ -1 \\end{pmatrix} \\quad \\Rightarrow \\quad d = \\sqrt{4+4+1} = 3$$
+       <p><strong>Kontrolle:</strong> $\\vec{u} \\times \\vec{v} = \\begin{pmatrix} -2 \\\\ 2 \\\\ -1 \\end{pmatrix}$ &ndash;
+          $\\vec{w}$ ist genau das gemeinsame Lot &#10003;</p>`
+},
+{
+  id:'D7', block:'D', level:2, tags:['Spatprodukt','Schnittpunkt'],
+  q:`Untersuche die gegenseitige Lage von
+     $$g: \\vec{x} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 4 \\\\ -1 \\\\ -9 \\end{pmatrix} + s \\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\end{pmatrix}$$
+     und gib gegebenenfalls den Schnittpunkt an.`,
+  inputs:[
+    { kind:'choice', label:'Lagebeziehung:', options:[
+        'windschief','sie schneiden sich','echt parallel','identisch'
+      ], correct:1 },
+    { kind:'vec', label:'Schnittpunkt $\\vec{s} = $', answer:[11,6,-9] }
+  ],
+  hint:`Erst das Spatprodukt als Test: Ist es $0$ und sind die Richtungen nicht kollinear, schneiden sich die Geraden.
+        Dann die Geraden gleichsetzen &ndash; die dritte Zeile ist hier besonders bequem, weil $\\vec{v}$ dort eine $0$ hat.`,
+  sol:`<div class="step">Schritt 1: Richtungen vergleichen</div>
+       <p>$\\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}$ und $\\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\end{pmatrix}$ sind nicht kollinear
+          &rArr; parallel oder identisch scheidet aus.</p>
+       <div class="step">Schritt 2: Spatprodukt als Test</div>
+       $$\\vec{u} \\times \\vec{v} = \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix}, \\qquad
+         \\vec{AB} = \\begin{pmatrix} 3 \\\\ -2 \\\\ -10 \\end{pmatrix}$$
+       $$\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v}) = 6 + 4 - 10 = 0$$
+       <p>&rArr; Die drei Vektoren sind komplanar, die Geraden liegen in einer gemeinsamen Ebene und
+          <span class="erg">schneiden sich</span>. Der Abstand ist damit $0$.</p>
+       <div class="step">Schritt 3: Schnittpunkt berechnen</div>
+       <p>Gleichsetzen der Zeilen:</p>
+       <p>III: $1 - 2r = -9 \\Rightarrow r = 5$</p>
+       <p>I: $1 + 2 \\cdot 5 = 4 + s \\Rightarrow 11 = 4 + s \\Rightarrow s = 7$</p>
+       <p>Probe in II: $1 + 5 = 6$ und $-1 + 7 = 6$ &#10003;</p>
+       $$\\vec{s} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} + 5 \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix} = \\begin{pmatrix} 11 \\\\ 6 \\\\ -9 \\end{pmatrix}$$
+       <p>Der Schnittpunkt ist <span class="erg">$S(11|6|-9)$</span>.</p>
+       <p><strong>Zusammenhang mit D4:</strong> Das ist genau die Schar aus Aufgabe D4 für $a = -9$ &ndash; der Wert,
+          bei dem das Spatprodukt $a + 9$ verschwindet. Die Probe in Zeile II ist Pflicht: Ohne sie hätte man
+          bei windschiefen Geraden gar nicht gemerkt, dass es keine Lösung gibt.</p>`
+},
+
+/* --------------------------- Block E (Nachschlag) --------------------------- */
+{
+  id:'E5', block:'E', level:2, tags:['Spat','Volumen'],
+  q:`Die Vektoren $\\vec{AB}$, $\\vec{u}$ und $\\vec{v}$ aus Aufgabe D5
+     ($\\vec{AB} = \\begin{pmatrix} 4 \\\\ -3 \\\\ -2 \\end{pmatrix}$, $\\vec{u} = \\begin{pmatrix} 2 \\\\ 2 \\\\ 1 \\end{pmatrix}$,
+     $\\vec{v} = \\begin{pmatrix} 1 \\\\ -2 \\\\ 2 \\end{pmatrix}$) spannen einen Spat auf.
+     Berechne sein Volumen, seine Grundfläche und daraus seine Höhe.`,
+  inputs:[
+    { kind:'num', label:'$V = $', unit:'VE', answer:45 },
+    { kind:'num', label:'Grundfläche $G = $', unit:'FE', answer:9 },
+    { kind:'num', label:'Höhe $h = $', answer:5 },
+    { kind:'choice', label:'Was bedeutet diese Höhe geometrisch?', options:[
+        'Die Länge des Vektors $\\vec{AB}$',
+        'Den Abstand der beiden windschiefen Geraden',
+        'Den Abstand der Stützpunkte $A$ und $B$',
+        'Die Länge des Kreuzprodukts $\\vec{u} \\times \\vec{v}$'
+      ], correct:1 }
+  ],
+  hint:`Das Volumen eines Spats ist der Betrag des Spatprodukts, die Grundfläche der Betrag des Kreuzprodukts.
+        Höhe $=$ Volumen geteilt durch Grundfläche &ndash; vergleiche das Ergebnis mit der Spatprodukt-Formel.`,
+  sol:`<div class="step">Schritt 1: Grundfläche</div>
+       $$\\vec{u} \\times \\vec{v} = \\begin{pmatrix} 6 \\\\ -3 \\\\ -6 \\end{pmatrix}, \\qquad
+         G = |\\vec{u} \\times \\vec{v}| = \\sqrt{36 + 9 + 36} = 9 \\ \\text{FE}$$
+       <div class="step">Schritt 2: Volumen</div>
+       $$V = |\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v})| = |4 \\cdot 6 + (-3)(-3) + (-2)(-6)| = |24 + 9 + 12| = 45 \\ \\text{VE}$$
+       <div class="step">Schritt 3: Höhe</div>
+       $$h = \\frac{V}{G} = \\frac{45}{9} = 5$$
+       <div class="step">Die Deutung</div>
+       <p>Die Höhe des Spats ist genau <span class="erg">der Abstand der beiden windschiefen Geraden</span> &ndash;
+          dasselbe Ergebnis wie in Aufgabe D5.</p>
+       <p>Und damit ist die Spatprodukt-Formel eigentlich keine neue Formel, sondern nur die nach $h$ umgestellte
+          Volumenformel des Spats:</p>
+       $$V = G \\cdot h \\quad \\Longleftrightarrow \\quad
+         d = h = \\frac{V}{G} = \\frac{|\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v})|}{|\\vec{u} \\times \\vec{v}|}$$
+       <p>Genau dieselbe Idee steckt schon in der Flächenformel aus Fall B &ndash; dort mit dem Parallelogramm
+          (Fläche $=$ Grundseite $\\cdot$ Höhe) statt mit dem Spat.</p>`
+},
+{
+  id:'E6', block:'E', level:3, tags:['Anwendung','Pyramide'],
+  q:`Die Punkte $A(0|0|0)$, $B(2|2|0)$ und $C(0|2|4)$ liegen alle in der Ebene $E: 2x_1 - 2x_2 + x_3 = 0$
+     und bilden die Grundfläche einer Pyramide mit der Spitze $S(3|0|3)$.
+     Berechne Grundfläche, Höhe und Volumen.`,
+  inputs:[
+    { kind:'num', label:'$G = $', unit:'FE', answer:6 },
+    { kind:'num', label:'$h = $', answer:3 },
+    { kind:'num', label:'$V = $', unit:'VE', answer:6 }
+  ],
+  hint:`Die Höhe der Pyramide ist der Abstand der Spitze von der Grundebene &ndash; also HNF.
+        Die Grundfläche ist das halbe Kreuzprodukt: $G = \\frac{1}{2}|\\vec{AB} \\times \\vec{AC}|$.
+        Pyramidenvolumen: $V = \\frac{1}{3} G h$.`,
+  sol:`<div class="step">Schritt 1: Grundfläche</div>
+       $$\\vec{AB} = \\begin{pmatrix} 2 \\\\ 2 \\\\ 0 \\end{pmatrix}, \\qquad \\vec{AC} = \\begin{pmatrix} 0 \\\\ 2 \\\\ 4 \\end{pmatrix}$$
+       $$\\vec{AB} \\times \\vec{AC} = \\begin{pmatrix} 2 \\cdot 4 - 0 \\cdot 2 \\\\ 0 \\cdot 0 - 2 \\cdot 4 \\\\ 2 \\cdot 2 - 2 \\cdot 0 \\end{pmatrix}
+         = \\begin{pmatrix} 8 \\\\ -8 \\\\ 4 \\end{pmatrix}, \\qquad |\\vec{AB} \\times \\vec{AC}| = \\sqrt{64+64+16} = 12$$
+       $$G = \\frac{1}{2} \\cdot 12 = 6 \\ \\text{FE}$$
+       <p>Nebenbei: $\\begin{pmatrix} 8 \\\\ -8 \\\\ 4 \\end{pmatrix} = 4 \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix}$ &ndash;
+          das Kreuzprodukt ist erwartungsgemäß ein Vielfaches des Normalenvektors von $E$.</p>
+       <div class="step">Schritt 2: Höhe = Abstand der Spitze von E</div>
+       $$h = \\frac{|2 \\cdot 3 - 2 \\cdot 0 + 3 - 0|}{\\sqrt{4+4+1}} = \\frac{9}{3} = 3$$
+       <div class="step">Schritt 3: Volumen</div>
+       $$V = \\frac{1}{3} \\cdot G \\cdot h = \\frac{1}{3} \\cdot 6 \\cdot 3 = 6 \\ \\text{VE}$$
+       <p>Ergebnis: <span class="erg">$G = 6$ FE, $h = 3$, $V = 6$ VE</span>.</p>
+       <p><strong>Typische Falle:</strong> Die Höhe ist <em>nicht</em> die $x_3$-Koordinate der Spitze und auch nicht
+          der Abstand $|\\vec{AS}|$ &ndash; nur der senkrechte Abstand zur Grundebene zählt. Weil die Grundfläche hier
+          schräg im Raum liegt, führt daran kein Weg vorbei.</p>`
+},
+{
+  id:'E7', block:'E', level:2, tags:['Verständnis','Anwendung'],
+  q:`Zwei Flugzeuge fliegen auf geradlinigen, zueinander windschiefen Bahnen. Der Abstand der beiden <em>Bahnen</em>
+     beträgt $3$ km. Welche Aussage ist richtig?`,
+  inputs:[{ kind:'choice', label:'', options:[
+      'Die Flugzeuge kollidieren, sobald beide ihre Lotfußpunkte erreichen.',
+      'Eine Kollision ist ausgeschlossen; der tatsächliche Abstand der Flugzeuge ist meist sogar größer als 3 km.',
+      'Der Abstand der beiden Flugzeuge beträgt zu jedem Zeitpunkt genau 3 km.',
+      'Die Bahnen schneiden sich in einem Punkt, der 3 km vom Start entfernt liegt.'
+    ], correct:1 }],
+  hint:`Der Geradenabstand ist das Minimum über <em>alle</em> Punktepaare der beiden Bahnen.
+        Überlege, was das für zwei Flugzeuge bedeutet, die zu einem bestimmten Zeitpunkt jeweils irgendwo auf ihrer Bahn sind.`,
+  sol:`<p>Richtig ist: <span class="erg">Eine Kollision ist ausgeschlossen; der tatsächliche Abstand ist meist größer als 3 km.</span></p>
+       <p>Der Abstand zweier windschiefer Geraden ist das <strong>Minimum</strong> über alle Punktepaare $P \\in g$, $Q \\in h$.
+          Kein Punkt der einen Bahn kommt einem Punkt der anderen näher als $3$ km &ndash; also können sich die Flugzeuge
+          nie näher als $3$ km kommen, egal wann sie wo sind.</p>
+       <ul>
+         <li><strong>Warum nicht Antwort 1:</strong> Die Lotfußpunkte sind $3$ km voneinander entfernt &ndash;
+             selbst dort, im ungünstigsten Fall, berühren sich die Bahnen nicht.</li>
+         <li><strong>Warum nicht Antwort 3:</strong> $3$ km ist eine <em>untere Schranke</em>. Sind die Flugzeuge gerade
+             weit von ihren Lotfußpunkten entfernt, liegen sie viele Kilometer auseinander.</li>
+       </ul>
+       <p><strong>Der wichtige Unterschied:</strong> Abstand der Bahnen $\\neq$ Abstand der Flugzeuge zu einer festen Zeit.
+          Für Letzteres bräuchte man beide Bewegungen mit <em>demselben</em> Zeitparameter $t$ und müsste
+          $|\\vec{q}(t) - \\vec{p}(t)|$ minimieren &ndash; eine andere Aufgabe mit einer anderen Antwort.</p>`
+},
+
+/* ------------------------------- Block F ------------------------------- */
+{
+  id:'F1', block:'F', level:2, tags:['Würfel','Ebene aufstellen','HNF'], tol:0.01,
+  q:`Ein Würfel mit der Kantenlänge $4$ hat die Grundfläche $A(0|0|0)$, $B(4|0|0)$, $C(4|4|0)$, $D(0|4|0)$
+     und die Deckfläche $E(0|0|4)$, $F(4|0|4)$, $G(4|4|4)$, $H(0|4|4)$.
+     Die Ebene durch $B$, $D$ und $E$ schneidet eine Ecke des Würfels ab.
+     <br><br>Bestimme die Koordinatenform dieser Ebene in der Gestalt $x_1 + x_2 + x_3 = c$,
+     die Abstände der Punkte $A$ und $G$ von ihr (auf zwei Nachkommastellen) und entscheide, wie die beiden Punkte liegen.`,
+  inputs:[
+    { kind:'num', label:'$c = $', answer:4, tol:1e-6 },
+    { kind:'num', label:'Abstand von $A$:', answer:2.3094010767585034 },
+    { kind:'num', label:'Abstand von $G$:', answer:4.618802153517007 },
+    { kind:'choice', label:'Lage von $A$ und $G$:', options:[
+        'Beide liegen auf derselben Seite der Ebene.',
+        'Sie liegen auf verschiedenen Seiten der Ebene.',
+        'Einer der beiden Punkte liegt in der Ebene.'
+      ], correct:1 }
+  ],
+  hint:`Den Normalenvektor bekommst du aus $\\vec{BD} \\times \\vec{BE}$ &ndash; er lässt sich zu
+        $\\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix}$ kürzen. Für die Seitenfrage rechnest du die HNF ohne Betrag.
+        Runde Ergebnisse auf zwei Nachkommastellen (Brüche und Wurzeln als Dezimalzahl sind ebenfalls erlaubt).`,
+  sol:`<div class="step">Schritt 1: Ebene aufstellen</div>
+       $$\\vec{BD} = \\begin{pmatrix} -4 \\\\ 4 \\\\ 0 \\end{pmatrix}, \\qquad \\vec{BE} = \\begin{pmatrix} -4 \\\\ 0 \\\\ 4 \\end{pmatrix}$$
+       $$\\vec{n} = \\vec{BD} \\times \\vec{BE} = \\begin{pmatrix} 4 \\cdot 4 - 0 \\cdot 0 \\\\ 0 \\cdot (-4) - (-4) \\cdot 4 \\\\ 0 - (-16) \\end{pmatrix}
+         = \\begin{pmatrix} 16 \\\\ 16 \\\\ 16 \\end{pmatrix} \\quad \\Rightarrow \\quad \\vec{n} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix}$$
+       <p>Mit $B(4|0|0)$: $4 + 0 + 0 = 4$, also <span class="erg">$E_{BDE}: x_1 + x_2 + x_3 = 4$</span>.
+          Probe: $D(0|4|0)$ und $E(0|0|4)$ liefern ebenfalls $4$ &#10003;</p>
+       <div class="step">Schritt 2: Die beiden Abstände</div>
+       <p>$|\\vec{n}| = \\sqrt{3}$, also:</p>
+       $$d(A) = \\frac{|0 - 4|}{\\sqrt{3}} = \\frac{4}{\\sqrt{3}} = \\frac{4\\sqrt{3}}{3} \\approx 2{,}31$$
+       $$d(G) = \\frac{|4+4+4 - 4|}{\\sqrt{3}} = \\frac{8}{\\sqrt{3}} = \\frac{8\\sqrt{3}}{3} \\approx 4{,}62$$
+       <p>$G$ ist also genau doppelt so weit entfernt wie $A$.</p>
+       <div class="step">Schritt 3: Auf welcher Seite?</div>
+       <p>Dieselbe Rechnung ohne Betrag:</p>
+       $$\\tilde{d}(A) = \\frac{0-4}{\\sqrt{3}} &lt; 0, \\qquad \\tilde{d}(G) = \\frac{12-4}{\\sqrt{3}} &gt; 0$$
+       <p>Verschiedene Vorzeichen &rArr; <span class="erg">$A$ und $G$ liegen auf verschiedenen Seiten.</span>
+          Das passt zur Anschauung: Die Schnittebene trennt die Ecke $A$ (mit dem Tetraeder $ABDE$) vom Rest des Würfels,
+          in dem $G$ liegt.</p>
+       <p><strong>Warum hier Wurzeln auftauchen:</strong> $|\\vec{n}| = \\sqrt{1+1+1}$ ist keine ganze Zahl.
+          In der Prüfung lässt man das Ergebnis meist exakt als $\\frac{4}{3}\\sqrt{3}$ stehen und rundet erst zum Schluss.</p>`
+},
+{
+  id:'F2', block:'F', level:3, tags:['Spurdreieck','HNF','Volumen'],
+  q:`Eine Ebene $E$ schneidet die Koordinatenachsen in $A(6|0|0)$, $B(0|4|0)$ und $C(0|0|2)$.
+     <br><br>Bestimme einen möglichst einfachen Normalenvektor mit ganzzahligen Koordinaten und die Koordinatenform,
+     den Abstand des Punktes $S(3|3|3)$ von $E$ und das Volumen der Pyramide $ABCS$.`,
+  inputs:[
+    { kind:'vec', label:'$\\vec{n} = $', answer:[2,3,6] },
+    { kind:'num', label:'$c = $', answer:12 },
+    { kind:'num', label:'$d(S) = $', answer:3 },
+    { kind:'num', label:'$V = $', unit:'VE', answer:14 }
+  ],
+  hint:`$\\vec{n} = \\vec{AB} \\times \\vec{AC}$, danach kürzen. Die Grundfläche des Dreiecks ist
+        $\\frac{1}{2}|\\vec{AB} \\times \\vec{AC}|$ &ndash; das Kreuzprodukt brauchst du also ohnehin nur einmal.
+        Die Höhe der Pyramide ist der Abstand von $S$ zur Grundebene.`,
+  sol:`<div class="step">Schritt 1: Normalenvektor und Koordinatenform</div>
+       $$\\vec{AB} = \\begin{pmatrix} -6 \\\\ 4 \\\\ 0 \\end{pmatrix}, \\qquad \\vec{AC} = \\begin{pmatrix} -6 \\\\ 0 \\\\ 2 \\end{pmatrix}$$
+       $$\\vec{AB} \\times \\vec{AC} = \\begin{pmatrix} 4 \\cdot 2 - 0 \\cdot 0 \\\\ 0 \\cdot (-6) - (-6) \\cdot 2 \\\\ (-6) \\cdot 0 - 4 \\cdot (-6) \\end{pmatrix}
+         = \\begin{pmatrix} 8 \\\\ 12 \\\\ 24 \\end{pmatrix} \\quad \\Rightarrow \\quad \\vec{n} = \\begin{pmatrix} 2 \\\\ 3 \\\\ 6 \\end{pmatrix}$$
+       <p>Mit $A(6|0|0)$: $2 \\cdot 6 = 12$, also <span class="erg">$E: 2x_1 + 3x_2 + 6x_3 = 12$</span>.
+          Probe mit $B$: $12$ &#10003; und mit $C$: $12$ &#10003;</p>
+       <div class="step">Schritt 2: Abstand der Spitze</div>
+       $$|\\vec{n}| = \\sqrt{4 + 9 + 36} = 7$$
+       $$d(S) = \\frac{|2 \\cdot 3 + 3 \\cdot 3 + 6 \\cdot 3 - 12|}{7} = \\frac{|6 + 9 + 18 - 12|}{7} = \\frac{21}{7} = 3$$
+       <div class="step">Schritt 3: Grundfläche und Volumen</div>
+       $$G = \\frac{1}{2}|\\vec{AB} \\times \\vec{AC}| = \\frac{1}{2}\\sqrt{64 + 144 + 576} = \\frac{1}{2}\\sqrt{784} = \\frac{28}{2} = 14 \\ \\text{FE}$$
+       $$V = \\frac{1}{3} \\cdot G \\cdot d(S) = \\frac{1}{3} \\cdot 14 \\cdot 3 = 14 \\ \\text{VE}$$
+       <p>Ergebnis: <span class="erg">$V = 14$ VE</span>.</p>
+       <p><strong>Nicht verwechseln:</strong> Die Pyramide mit der Spitze im <em>Ursprung</em> hätte das Volumen
+          $\\frac{1}{6} \\cdot 6 \\cdot 4 \\cdot 2 = 8$ VE. Hier liegt die Spitze aber in $S$, also führt nur der Weg
+          über Grundfläche und Abstand zum Ziel.</p>`
+},
+{
+  id:'F3', block:'F', level:3, tags:['windschief','Vektorzug','gemeinsames Lot'],
+  q:`Gegeben sind
+     $$g: \\vec{x} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 1 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ 1 \\\\ 2 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 0 \\\\ 2 \\\\ 4 \\end{pmatrix} + s \\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\end{pmatrix}$$
+     <br>Untersuche die Lage, berechne den Abstand, bestimme beide Lotfußpunkte und gib
+     $\\vec{u} \\times \\vec{v}$ (in dieser Reihenfolge, ungekürzt) als Richtungsvektor des gemeinsamen Lots an.`,
+  inputs:[
+    { kind:'choice', label:'Lagebeziehung:', options:[
+        'echt parallel','windschief','sie schneiden sich','identisch'
+      ], correct:1 },
+    { kind:'num', label:'$d = $', answer:3 },
+    { kind:'vec', label:'$\\vec{f_g} = $', answer:[4,2,3] },
+    { kind:'vec', label:'$\\vec{f_h} = $', answer:[2,4,4] },
+    { kind:'vec', label:'$\\vec{u} \\times \\vec{v} = $', answer:[-2,2,1] }
+  ],
+  hint:`Erst Spatprodukt (Lage und Abstand in einem Rutsch), dann der Vektorzug für die Fußpunkte.
+        Am Ende muss $\\vec{f_h} - \\vec{f_g}$ ein Vielfaches von $\\vec{u} \\times \\vec{v}$ sein &ndash; das ist deine Kontrolle.`,
+  sol:`<div class="step">Schritt 1: Lage und Abstand über das Spatprodukt</div>
+       $$\\vec{u} \\times \\vec{v} = \\begin{pmatrix} 1 \\cdot 0 - 2 \\cdot 1 \\\\ 2 \\cdot 1 - 2 \\cdot 0 \\\\ 2 \\cdot 1 - 1 \\cdot 1 \\end{pmatrix}
+         = \\begin{pmatrix} -2 \\\\ 2 \\\\ 1 \\end{pmatrix}, \\qquad |\\vec{u} \\times \\vec{v}| = 3$$
+       $$\\vec{AB} = \\begin{pmatrix} -2 \\\\ 1 \\\\ 3 \\end{pmatrix} \\quad \\Rightarrow \\quad
+         \\vec{AB} \\cdot (\\vec{u} \\times \\vec{v}) = 4 + 2 + 3 = 9 \\neq 0$$
+       <p>&rArr; <span class="erg">windschief</span>, und $d = \\frac{9}{3} = 3$.</p>
+       <div class="step">Schritt 2: Vektorzug für die Fußpunkte</div>
+       $$\\vec{w} = \\vec{AB} + s\\,\\vec{v} - r\\,\\vec{u} = \\begin{pmatrix} -2 + s - 2r \\\\ 1 + s - r \\\\ 3 - 2r \\end{pmatrix}$$
+       <p><strong>I:</strong> $\\vec{w} \\cdot \\vec{u} = 2(-2+s-2r) + (1+s-r) + 2(3-2r) = 3 + 3s - 9r = 0 \\Rightarrow 3r - s = 1$</p>
+       <p><strong>II:</strong> $\\vec{w} \\cdot \\vec{v} = (-2+s-2r) + (1+s-r) = -1 + 2s - 3r = 0 \\Rightarrow 3r - 2s = -1$</p>
+       <p>I $-$ II: $s = 2$, eingesetzt in I: $3r - 2 = 1 \\Rightarrow r = 1$.</p>
+       <div class="step">Schritt 3: Die Lotfußpunkte</div>
+       $$\\vec{f_g} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 1 \\end{pmatrix} + \\begin{pmatrix} 2 \\\\ 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 2 \\\\ 3 \\end{pmatrix}, \\qquad
+         \\vec{f_h} = \\begin{pmatrix} 0 \\\\ 2 \\\\ 4 \\end{pmatrix} + 2 \\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 4 \\\\ 4 \\end{pmatrix}$$
+       <p><span class="erg">$F_g(4|2|3)$</span> und <span class="erg">$F_h(2|4|4)$</span></p>
+       <div class="step">Schritt 4: Kontrolle und gemeinsames Lot</div>
+       $$\\vec{w} = \\vec{f_h} - \\vec{f_g} = \\begin{pmatrix} -2 \\\\ 2 \\\\ 1 \\end{pmatrix} = \\vec{u} \\times \\vec{v} \\quad \\checkmark$$
+       <p>$|\\vec{w}| = 3$ bestätigt den Abstand aus Schritt 1. Das gemeinsame Lot ist die Gerade</p>
+       $$\\ell: \\vec{x} = \\begin{pmatrix} 4 \\\\ 2 \\\\ 3 \\end{pmatrix} + t \\begin{pmatrix} -2 \\\\ 2 \\\\ 1 \\end{pmatrix}$$
+       <p><strong>Warum beide Wege zusammenpassen:</strong> Das Spatprodukt projiziert $\\vec{AB}$ auf die Lotrichtung,
+          der Vektorzug konstruiert dieselbe Strecke explizit. Weichen die Ergebnisse ab, steckt in einem der beiden
+          Wege ein Rechenfehler.</p>`
+},
+{
+  id:'F4', block:'F', level:2, tags:['Gerade & Ebene','HNF'],
+  q:`Zeige, dass die Gerade $g: \\vec{x} = \\begin{pmatrix} 4 \\\\ 0 \\\\ 5 \\end{pmatrix} + r \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}$
+     parallel zur Ebene $E: 2x_1 - 2x_2 + x_3 = 4$ verläuft.
+     Berechne anschließend den Abstand der Geraden von der Ebene und den Lotfußpunkt des Stützpunkts $A(4|0|5)$.`,
+  inputs:[
+    { kind:'num', label:'$\\vec{u} \\cdot \\vec{n} = $', answer:0 },
+    { kind:'num', label:'$d = $', answer:3 },
+    { kind:'vec', label:'$\\vec{f} = $', answer:[2,2,4] }
+  ],
+  hint:`Eine Gerade ist genau dann parallel zu einer Ebene, wenn ihr Richtungsvektor senkrecht auf dem
+        Normalenvektor steht, also $\\vec{u} \\cdot \\vec{n} = 0$ &ndash; und der Stützpunkt nicht in $E$ liegt.
+        Dann hat jeder Punkt von $g$ denselben Abstand zu $E$.`,
+  sol:`<div class="step">Schritt 1: Parallelitätsnachweis</div>
+       $$\\vec{u} \\cdot \\vec{n} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix} \\cdot \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix}
+         = 2 - 4 + 2 = 0$$
+       <p>Der Richtungsvektor steht senkrecht auf dem Normalenvektor, $g$ verläuft also parallel zu $E$ &ndash; oder
+          liegt in $E$. Punktprobe mit $A(4|0|5)$: $8 - 0 + 5 = 13 \\neq 4$, also liegt $A$ <em>nicht</em> in $E$
+          &rArr; <span class="erg">$g$ ist echt parallel zu $E$</span>.</p>
+       <div class="step">Schritt 2: Abstand</div>
+       <p>Weil alle Punkte von $g$ denselben Abstand haben, genügt der Stützpunkt:</p>
+       $$d = \\frac{|2 \\cdot 4 - 2 \\cdot 0 + 5 - 4|}{3} = \\frac{|8 + 5 - 4|}{3} = \\frac{9}{3} = 3$$
+       <div class="step">Schritt 3: Lotfußpunkt von A</div>
+       $$h: \\vec{x} = \\begin{pmatrix} 4 \\\\ 0 \\\\ 5 \\end{pmatrix} + t \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix}$$
+       $$2(4+2t) - 2(-2t) + (5+t) = 4 \\quad \\Rightarrow \\quad 8 + 4t + 4t + 5 + t = 4 \\quad \\Rightarrow \\quad 13 + 9t = 4 \\quad \\Rightarrow \\quad t = -1$$
+       $$\\vec{f} = \\begin{pmatrix} 4 \\\\ 0 \\\\ 5 \\end{pmatrix} - \\begin{pmatrix} 2 \\\\ -2 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 2 \\\\ 4 \\end{pmatrix}$$
+       <p><span class="erg">$F(2|2|4)$</span>, Probe: $4 - 4 + 4 = 4$ &#10003;</p>
+       <p><strong>Der fünfte Fall:</strong> Abstand Gerade&ndash;Ebene steht nicht in der Liste der vier Fälle &ndash;
+          und braucht auch keinen eigenen Eintrag. Ist $\\vec{u} \\cdot \\vec{n} = 0$, reduziert sich alles auf Fall A;
+          andernfalls schneidet die Gerade die Ebene und der Abstand ist $0$.</p>`
+}
 ];
 
 /* =====================================================================
@@ -1104,7 +1670,6 @@ function setzeFeedback(aid, klasse, text){
 
 function pruefe(aid){
   const a = AUFGABEN.find(x => x.id === aid);
-  const tol = 1e-6;
   const falsch = [];
   let leer = false, keineZahl = false;
 
@@ -1117,6 +1682,8 @@ function pruefe(aid){
     }
     const n = inp.kind === 'vec' ? 3 : (inp.kind === 'multi' ? inp.fields.length : 1);
     const soll = Array.isArray(inp.answer) ? inp.answer : [inp.answer];
+    /* Aufgaben mit irrationalem Ergebnis erlauben gerundete Eingaben. */
+    const tol = inp.tol != null ? inp.tol : (a.tol != null ? a.tol : 1e-6);
     let teilFalsch = false;
     for (let j=0; j<n; j++){
       const el = document.getElementById(feldId(aid,i,j));
