@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kapitel 17 – Abstandsprobleme | Übungsaufgaben</title>
-<meta name="description" content="39 Übungsaufgaben mit Sofortkorrektur, Tipps und ausführlichen Musterlösungen zu Kapitel 17 (Abstandsprobleme) der Vektorrechnung-Zusammenfassung.">
+<meta name="description" content="44 Übungsaufgaben mit Sofortkorrektur, Tipps und ausführlichen Musterlösungen zu Kapitel 17 (Abstandsprobleme) der Vektorrechnung-Zusammenfassung.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -291,7 +291,7 @@
   <div class="head-inner">
     <div class="crumb">Vektorgeometrie &middot; Kapitel 17 von 17</div>
     <h1>Abstandsprobleme &ndash; Übungsaufgaben</h1>
-    <p class="lead">39 Aufgaben zu allen vier Abstandsfällen &ndash; Punkt&ndash;Ebene, Punkt&ndash;Gerade, parallele und windschiefe Geraden &ndash;
+    <p class="lead">44 Aufgaben zu allen vier Abstandsfällen &ndash; Punkt&ndash;Ebene, Punkt&ndash;Gerade, parallele und windschiefe Geraden &ndash;
        dazu Anwendungen und mehrschrittige Prüfungsaufgaben.
        Trage deine Lösung ein, lass sie sofort prüfen und vergleiche anschließend mit der ausführlichen Musterlösung.</p>
     <div class="head-links">
@@ -302,7 +302,7 @@
     </div>
     <div class="progress-wrap">
       <div class="progress-top">
-        <span id="progress-text">0 von 39 Aufgaben gelöst</span>
+        <span id="progress-text">0 von 44 Aufgaben gelöst</span>
         <button class="btn-reset" type="button" id="btn-reset-progress">Alles zurücksetzen</button>
       </div>
       <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
@@ -391,7 +391,8 @@
       <h2>Das Hilfsebenen-Verfahren</h2>
       <p style="margin-top:.5rem">Eine Hilfsebene kommt in der Aufgabe gar nicht vor &ndash; man baut sie selbst, damit ein
          unhandlicher Abstand auf den einfachsten Fall zurückfällt: Punkt und Ebene. Das Verfahren tritt in zwei Varianten auf,
-         die derselben Idee folgen: <strong>erst eine Ebene konstruieren, die senkrecht steht bzw. parallel liegt, dann Fall A rechnen.</strong></p>
+         die derselben Idee folgen: <strong>erst eine Ebene konstruieren, die senkrecht steht bzw. parallel liegt, dann Fall A rechnen.</strong>
+         Zehn Aufgaben auf dieser Seite trainieren genau dieses Verfahren &ndash; die Verweise stehen bei den Kurzbeispielen.</p>
 
       <div class="variante-grid">
         <div class="variante">
@@ -437,7 +438,7 @@
             <div class="mini-titel">Kurzbeispiel</div>
             <p>$P(6|7|2)$ und $g: \vec{x} = \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix} + r \begin{pmatrix} 1 \\ 2 \\ 2 \end{pmatrix}$</p>
             <p>$E_H: x_1 + 2x_2 + 2x_3 = 6 + 14 + 4 = 24$, eingesetzt: $9r + 6 = 24 \Rightarrow r = 2$,
-               also $F(2|5|6)$ und $d = 6$. &nbsp;<span class="mini-ref">&rarr; Aufgaben B3, B8</span></p>
+               also $F(2|5|6)$ und $d = 6$. &nbsp;<span class="mini-ref">&rarr; Aufgaben B3, B8, B9, B10, C6</span></p>
           </div>
         </div>
 
@@ -483,7 +484,7 @@
                $h: \vec{x} = \begin{pmatrix} 5 \\ 2 \\ -1 \end{pmatrix} + s \begin{pmatrix} 2 \\ -2 \\ 1 \end{pmatrix}$</p>
             <p>$\vec{u} \times \vec{v} = \begin{pmatrix} 6 \\ 3 \\ -6 \end{pmatrix} \to \vec{n} = \begin{pmatrix} 2 \\ 1 \\ -2 \end{pmatrix}$,
                $E_H: 2x_1 + x_2 - 2x_3 = 2$, damit $d = \frac{12}{3} = 4$.
-               &nbsp;<span class="mini-ref">&rarr; Aufgaben D3, D5</span></p>
+               &nbsp;<span class="mini-ref">&rarr; Aufgaben D3, D5, D8, F5</span></p>
           </div>
         </div>
       </div>
@@ -498,7 +499,7 @@
           <tr><td>Normalenvektor</td><td class="v">$\vec{u}$</td><td class="v">$\vec{u} \times \vec{v}$</td></tr>
           <tr><td>danach</td><td>$g$ mit $E_H$ schneiden</td><td>HNF für $B$</td></tr>
           <tr><td>liefert den Fußpunkt?</td><td class="v">ja</td><td>nein</td></tr>
-          <tr><td>zum Üben</td><td>B3, B8</td><td>D3, D5</td></tr>
+          <tr><td>zum Üben</td><td>B3, B8, B9, B10, C6</td><td>D3, D5, D8, F5</td></tr>
         </tbody>
       </table>
       </div>
@@ -1279,6 +1280,77 @@ const AUFGABEN = [
           $\\vec{AP} = \\begin{pmatrix} 4 \\\\ -1 \\\\ -1 \\end{pmatrix}$, $|\\vec{AP} \\times \\vec{u}| = 9$, $|\\vec{u}| = 3$, also $d = 3$.</p>`
 },
 
+{
+  id:'B9', block:'B', level:2, tags:['Hilfsebene','Gerade durch zwei Punkte'],
+  q:`Die Gerade $g$ verläuft durch die Punkte $A(1|2|3)$ und $B(3|3|1)$.
+     Bestimme über eine Hilfsebene den Abstand des Punktes $P(9|0|1)$ von $g$.`,
+  inputs:[
+    { kind:'vec', label:'Richtungsvektor $\\vec{u} = $', answer:[2,1,-2] },
+    { kind:'num', label:'$E_H: 2x_1 + x_2 - 2x_3 = $', answer:16 },
+    { kind:'vec', label:'$\\vec{f} = $', answer:[5,4,-1] },
+    { kind:'num', label:'$d = $', answer:6 }
+  ],
+  hint:`Erst den Richtungsvektor aus den beiden Punkten bilden: $\\vec{u} = \\vec{AB}$.
+        Dieser Vektor ist gleichzeitig der Normalenvektor der Hilfsebene, die durch $P$ geht.`,
+  sol:`<div class="step">Schritt 1: Geradengleichung</div>
+       $$\\vec{u} = \\vec{AB} = \\begin{pmatrix} 3 \\\\ 3 \\\\ 1 \\end{pmatrix} - \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}
+         \\quad \\Rightarrow \\quad g: \\vec{x} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}$$
+       <div class="step">Schritt 2: Hilfsebene durch P</div>
+       <p>Normalenvektor $= \\vec{u}$, Aufpunkt $= P(9|0|1)$:</p>
+       $$E_H: 2x_1 + x_2 - 2x_3 = 2 \\cdot 9 + 0 - 2 \\cdot 1 = 16$$
+       <div class="step">Schritt 3: Gerade einsetzen</div>
+       $$2(1+2r) + (2+r) - 2(3-2r) = 16$$
+       $$2 + 4r + 2 + r - 6 + 4r = 16 \\quad \\Rightarrow \\quad -2 + 9r = 16 \\quad \\Rightarrow \\quad r = 2$$
+       <div class="step">Schritt 4: Lotfußpunkt und Abstand</div>
+       $$\\vec{f} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix} + 2 \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 4 \\\\ -1 \\end{pmatrix}
+         \\quad \\Rightarrow \\quad$$
+       <p><span class="erg">$F(5|4|-1)$</span></p>
+       $$\\vec{PF} = \\begin{pmatrix} -4 \\\\ 4 \\\\ -2 \\end{pmatrix} \\quad \\Rightarrow \\quad d = \\sqrt{16+16+4} = 6$$
+       <p>Probe: $\\vec{PF} \\cdot \\vec{u} = -8 + 4 + 4 = 0$ &#10003;</p>
+       <p><strong>Achtung bei der Benennung:</strong> Hier heißt der zweite <em>Geradenpunkt</em> $B$ &ndash; er hat nichts mit dem
+          Stützpunkt einer zweiten Geraden zu tun. Die Hilfsebene geht trotzdem durch $P$, niemals durch $A$ oder $B$.</p>`
+},
+{
+  id:'B10', block:'B', level:2, tags:['Hilfsebene','Fehlersuche'],
+  q:`Ein Mitschüler berechnet den Abstand von $P(6|-1|0)$ zur Geraden
+     $g: \\vec{x} = \\begin{pmatrix} 2 \\\\ 0 \\\\ 1 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}$ so:
+     <br><br><em>&bdquo;Hilfsebene: $2x_1 + x_2 - 2x_3 = 2 \\cdot 2 + 0 - 2 \\cdot 1 = 2$. Gerade einsetzen: $2 + 9r = 2$, also $r = 0$.
+     Damit ist $F(2|0|1)$ und $d = |\\vec{PF}| = \\sqrt{18} \\approx 4{,}24$.&ldquo;</em>
+     <br><br>Wo steckt der Fehler, und wie lautet der richtige Abstand?`,
+  inputs:[
+    { kind:'choice', label:'Der Fehler:', options:[
+        'Er hat die Hilfsebene durch den Stützpunkt von $g$ gelegt statt durch $P$.',
+        'Er hätte den Normalenvektor der Hilfsebene normieren müssen.',
+        'Beim Einsetzen der Geraden ist ihm ein Vorzeichenfehler unterlaufen.',
+        'Für Punkt und Gerade ist das Hilfsebenen-Verfahren gar nicht zulässig.'
+      ], correct:0 },
+    { kind:'vec', label:'richtiger Lotfußpunkt $\\vec{f} = $', answer:[4,1,-1] },
+    { kind:'num', label:'richtiger Abstand $d = $', answer:3 }
+  ],
+  hint:`Schau dir an, welchen Punkt er in die Ebenengleichung eingesetzt hat &ndash; und vergleiche mit dem Ergebnis $r = 0$.
+        Welchen Punkt der Geraden liefert $r = 0$? Kann das je ein Lotfußpunkt sein?`,
+  sol:`<div class="step">Der Fehler</div>
+       <p>Er hat den <strong>Stützpunkt $A(2|0|1)$ der Geraden</strong> in die Ebenengleichung eingesetzt statt den Punkt $P$.
+          Damit geht seine Hilfsebene durch $A$ &ndash; und weil sie senkrecht auf $g$ steht, schneidet sie die Gerade
+          genau in $A$. Das Ergebnis $r = 0$ war also von vornherein festgelegt und hat mit $P$ nichts zu tun.</p>
+       <p>Sein &bdquo;Abstand&ldquo; $\\sqrt{18}$ ist einfach die Länge $|\\vec{PA}|$ &ndash; die Entfernung zu einem beliebigen
+          Geradenpunkt, nicht die kürzeste.</p>
+       <div class="step">Das Warnsignal</div>
+       <p>$r = 0$ bedeutet: Der Fußpunkt wäre ausgerechnet der Stützpunkt. Das kann vorkommen, ist aber selten &ndash;
+          und wenn die Ebenengleichung mit genau demselben Zahlenwert herauskommt, den der Stützpunkt liefert,
+          hat man sich fast immer im Aufpunkt vertan.</p>
+       <div class="step">Richtig gerechnet</div>
+       <p>Hilfsebene durch $P(6|-1|0)$ mit $\\vec{n} = \\vec{u}$:</p>
+       $$E_H: 2x_1 + x_2 - 2x_3 = 12 - 1 - 0 = 11$$
+       $$2(2+2r) + r - 2(1-2r) = 11 \\quad \\Rightarrow \\quad 2 + 9r = 11 \\quad \\Rightarrow \\quad r = 1$$
+       $$\\vec{f} = \\begin{pmatrix} 4 \\\\ 1 \\\\ -1 \\end{pmatrix}, \\qquad \\vec{PF} = \\begin{pmatrix} -2 \\\\ 2 \\\\ -1 \\end{pmatrix}
+         \\quad \\Rightarrow \\quad d = 3$$
+       <p><span class="erg">$F(4|1|-1)$ und $d = 3$</span> &ndash; deutlich kleiner als seine $4{,}24$, wie es sein muss:
+          Der Lotfußpunkt liefert immer den <em>kleinsten</em> Abstand.</p>
+       <p><strong>Zur Kontrolle im Kopf:</strong> Jeder berechnete Abstand zu einer Geraden muss kleiner oder gleich
+          der Entfernung zu jedem einzelnen Geradenpunkt sein. Ist er größer, stimmt etwas nicht.</p>`
+},
+
 /* --------------------------- Block C (Nachschlag) --------------------------- */
 {
   id:'C4', block:'C', level:2, tags:['Skalarprodukt','Lotfußpunkt'],
@@ -1342,6 +1414,44 @@ const AUFGABEN = [
           entweder oder sind windschief &ndash; das entscheidet dann das Spatprodukt (Block D).</p>`
 }
 ,
+
+{
+  id:'C6', block:'C', level:2, tags:['Hilfsebene','Parallele Geraden'],
+  q:`Auch bei parallelen Geraden funktioniert die Hilfsebene. Gegeben sind
+     $$g: \\vec{x} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\end{pmatrix} + r \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 8 \\\\ 1 \\\\ 6 \\end{pmatrix} + s \\begin{pmatrix} 2 \\\\ 4 \\\\ 4 \\end{pmatrix}$$
+     Kläre die Lage und bestimme über eine Hilfsebene durch $B(8|1|6)$ den Lotfußpunkt auf $g$ und den Abstand.`,
+  inputs:[
+    { kind:'choice', label:'Lagebeziehung:', options:[
+        'identisch','echt parallel','windschief','sie schneiden sich'
+      ], correct:1 },
+    { kind:'num', label:'$E_H: x_1 + 2x_2 + 2x_3 = $', answer:22 },
+    { kind:'vec', label:'$\\vec{f} = $', answer:[4,5,4] },
+    { kind:'num', label:'$d = $', answer:6 }
+  ],
+  hint:`Parallele Geraden sind auf Fall B zurückgeführt: Nimm den Stützpunkt $B$ von $h$ und berechne seinen Abstand zu $g$.
+        Die Hilfsebene geht also durch $B$ und hat $\\vec{u}$ als Normalenvektor. Vorher aber die Punktprobe!`,
+  sol:`<div class="step">Schritt 1: Lage klären</div>
+       <p>$\\begin{pmatrix} 2 \\\\ 4 \\\\ 4 \\end{pmatrix} = 2 \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}$ &ndash; kollinear.
+          Punktprobe mit $B(8|1|6)$ auf $g$: Zeile I liefert $2 + r = 8 \\Rightarrow r = 6$, Zeile II aber
+          $1 + 2r = 1 \\Rightarrow r = 0$. Widerspruch &rArr; <span class="erg">echt parallel</span>.</p>
+       <div class="step">Schritt 2: Hilfsebene durch B</div>
+       <p>Normalenvektor $= \\vec{u} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}$, Aufpunkt $= B(8|1|6)$:</p>
+       $$E_H: x_1 + 2x_2 + 2x_3 = 8 + 2 + 12 = 22$$
+       <div class="step">Schritt 3: g mit der Hilfsebene schneiden</div>
+       $$(2+r) + 2(1+2r) + 2(2r) = 22$$
+       $$2 + r + 2 + 4r + 4r = 22 \\quad \\Rightarrow \\quad 4 + 9r = 22 \\quad \\Rightarrow \\quad r = 2$$
+       $$\\vec{f} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\end{pmatrix} + 2 \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 5 \\\\ 4 \\end{pmatrix}
+         \\quad \\Rightarrow \\quad$$
+       <p><span class="erg">$F(4|5|4)$</span></p>
+       <div class="step">Schritt 4: Abstand</div>
+       $$\\vec{BF} = \\begin{pmatrix} -4 \\\\ 4 \\\\ -2 \\end{pmatrix} \\quad \\Rightarrow \\quad d = \\sqrt{16+16+4} = 6$$
+       <p><strong>Kontrolle mit der Flächenformel:</strong> $\\vec{AB} = \\begin{pmatrix} 6 \\\\ 0 \\\\ 6 \\end{pmatrix}$,
+          $|\\vec{AB} \\times \\vec{u}| = 18$, $|\\vec{u}| = 3$, also $d = 6$ &#10003;</p>
+       <p><strong>Warum das erlaubt ist:</strong> Parallele Geraden haben überall denselben Abstand. Sobald man sich einen
+          Punkt auf $h$ aussucht, ist es eine reine Punkt&ndash;Gerade-Aufgabe &ndash; und dort ist die Hilfsebene zu Hause.
+          Zusätzlich bekommt man hier sogar ein Lotfußpunkt-Paar: $B$ auf $h$ und $F$ auf $g$.</p>`
+},
 
 /* --------------------------- Block D (Nachschlag) --------------------------- */
 {
@@ -1439,6 +1549,39 @@ const AUFGABEN = [
        <p><strong>Zusammenhang mit D4:</strong> Das ist genau die Schar aus Aufgabe D4 für $a = -9$ &ndash; der Wert,
           bei dem das Spatprodukt $a + 9$ verschwindet. Die Probe in Zeile II ist Pflicht: Ohne sie hätte man
           bei windschiefen Geraden gar nicht gemerkt, dass es keine Lösung gibt.</p>`
+},
+
+{
+  id:'D8', block:'D', level:3, tags:['Hilfsebene','HNF'],
+  q:`Berechne über eine Hilfsebene den Abstand der windschiefen Geraden
+     $$g: \\vec{x} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 2 \\end{pmatrix} + r \\begin{pmatrix} 3 \\\\ 0 \\\\ 4 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 5 \\\\ 4 \\\\ -1 \\end{pmatrix} + s \\begin{pmatrix} 0 \\\\ 1 \\\\ 0 \\end{pmatrix}$$
+     Gib $\\vec{u} \\times \\vec{v}$ in dieser Reihenfolge an und die Hilfsebene in der Form $-4x_1 + 3x_3 = c$.`,
+  inputs:[
+    { kind:'vec', label:'$\\vec{u} \\times \\vec{v} = $', answer:[-4,0,3] },
+    { kind:'num', label:'$c = $', answer:2 },
+    { kind:'num', label:'$d = $', answer:5 }
+  ],
+  hint:`Das Kreuzprodukt hat hier eine Null als mittlere Komponente &ndash; das ist kein Fehler, sondern verrät etwas
+        über die Lage der Hilfsebene. Sein Betrag ist $5$ (ein 3-4-5-Tripel), die Ebene muss also nicht gekürzt werden.`,
+  sol:`<div class="step">Schritt 1: Normalenvektor der Hilfsebene</div>
+       $$\\vec{u} \\times \\vec{v} = \\begin{pmatrix} 3 \\\\ 0 \\\\ 4 \\end{pmatrix} \\times \\begin{pmatrix} 0 \\\\ 1 \\\\ 0 \\end{pmatrix}
+         = \\begin{pmatrix} 0 \\cdot 0 - 4 \\cdot 1 \\\\ 4 \\cdot 0 - 3 \\cdot 0 \\\\ 3 \\cdot 1 - 0 \\cdot 0 \\end{pmatrix}
+         = \\begin{pmatrix} -4 \\\\ 0 \\\\ 3 \\end{pmatrix}, \\qquad |\\vec{n}| = \\sqrt{16 + 0 + 9} = 5$$
+       <div class="step">Schritt 2: Hilfsebene durch den Stützpunkt von g</div>
+       <p>$A(1|0|2)$ einsetzen:</p>
+       $$-4 \\cdot 1 + 3 \\cdot 2 = 2 \\quad \\Rightarrow \\quad E_H: -4x_1 + 3x_3 = 2$$
+       <p>Kontrolle: $\\vec{v} \\cdot \\vec{n} = 0 \\cdot (-4) + 1 \\cdot 0 + 0 \\cdot 3 = 0$ &#10003; &ndash; $h$ ist parallel zu $E_H$.</p>
+       <div class="step">Schritt 3: HNF für den Stützpunkt von h</div>
+       $$d = \\frac{|-4 \\cdot 5 + 3 \\cdot (-1) - 2|}{5} = \\frac{|-20 - 3 - 2|}{5} = \\frac{25}{5} = 5$$
+       <p>Der Abstand beträgt <span class="erg">$d = 5$</span>.</p>
+       <div class="step">Was die fehlende Variable bedeutet</div>
+       <p>In $E_H: -4x_1 + 3x_3 = 2$ kommt $x_2$ nicht vor &ndash; die Ebene verläuft also parallel zur $x_2$-Achse.
+          Das muss auch so sein: $\\vec{v} = \\begin{pmatrix} 0 \\\\ 1 \\\\ 0 \\end{pmatrix}$ zeigt genau in diese Richtung,
+          und die Hilfsebene ist ja parallel zu $h$. Eine fehlende Variable ist hier also eine <em>Bestätigung</em>, kein Rechenfehler.</p>
+       <p><strong>Kontrolle mit dem Spatprodukt:</strong> $\\vec{AB} = \\begin{pmatrix} 4 \\\\ 4 \\\\ -3 \\end{pmatrix}$,
+          $\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v}) = -16 + 0 - 9 = -25$, also $d = \\frac{|-25|}{5} = 5$ &#10003;
+          Das Spatprodukt ist nicht null &ndash; die Geraden sind tatsächlich windschief.</p>`
 },
 
 /* --------------------------- Block E (Nachschlag) --------------------------- */
@@ -1677,6 +1820,55 @@ const AUFGABEN = [
        <p><strong>Der fünfte Fall:</strong> Abstand Gerade&ndash;Ebene steht nicht in der Liste der vier Fälle &ndash;
           und braucht auch keinen eigenen Eintrag. Ist $\\vec{u} \\cdot \\vec{n} = 0$, reduziert sich alles auf Fall A;
           andernfalls schneidet die Gerade die Ebene und der Abstand ist $0$.</p>`
+}
+,
+{
+  id:'F5', block:'F', level:3, tags:['Hilfsebene','Anwendung','beide Varianten'],
+  q:`In einem Technikschacht verlaufen zwei gerade Rohre (Angaben in Metern):
+     $$g: \\vec{x} = \\begin{pmatrix} 0 \\\\ 0 \\\\ 3 \\end{pmatrix} + r \\begin{pmatrix} 2 \\\\ 2 \\\\ 1 \\end{pmatrix}
+       \\qquad h: \\vec{x} = \\begin{pmatrix} 5 \\\\ 2 \\\\ 1 \\end{pmatrix} + s \\begin{pmatrix} 1 \\\\ -2 \\\\ 2 \\end{pmatrix}$$
+     <br><strong>a)</strong> Bestimme mit einer Hilfsebene den Abstand der beiden Rohre. Gib den gekürzten Normalenvektor,
+     die rechte Seite der Hilfsebene und den Abstand an.
+     <br><strong>b)</strong> Ein Sensor sitzt in $P(8|2|1)$. Bestimme mit einer Hilfsebene seinen Abstand zum Rohr $g$
+     und die Stelle am Rohr, die ihm am nächsten liegt.`,
+  inputs:[
+    { kind:'vec', label:'a) $\\vec{n} = $', answer:[2,-1,-2] },
+    { kind:'num', label:'a) $E_H: 2x_1 - x_2 - 2x_3 = $', answer:-6 },
+    { kind:'num', label:'a) Rohrabstand $d = $', unit:'m', answer:4 },
+    { kind:'num', label:'b) $E_H: 2x_1 + 2x_2 + x_3 = $', answer:21 },
+    { kind:'vec', label:'b) $\\vec{f} = $', answer:[4,4,5] },
+    { kind:'num', label:'b) $d = $', unit:'m', answer:6 }
+  ],
+  hint:`Beide Teilaufgaben nutzen dieselbe Idee, aber verschiedene Varianten:
+        In a) enthält die Hilfsebene $g$ und ist parallel zu $h$ (Normalenvektor $\\vec{u} \\times \\vec{v}$),
+        in b) geht sie durch $P$ und hat $\\vec{u}$ als Normalenvektor. Achte darauf, welchen Punkt du jeweils einsetzt.`,
+  sol:`<div class="step">a) Schritt 1: Normalenvektor</div>
+       $$\\vec{u} \\times \\vec{v} = \\begin{pmatrix} 2 \\\\ 2 \\\\ 1 \\end{pmatrix} \\times \\begin{pmatrix} 1 \\\\ -2 \\\\ 2 \\end{pmatrix}
+         = \\begin{pmatrix} 2 \\cdot 2 - 1 \\cdot (-2) \\\\ 1 \\cdot 1 - 2 \\cdot 2 \\\\ 2 \\cdot (-2) - 2 \\cdot 1 \\end{pmatrix}
+         = \\begin{pmatrix} 6 \\\\ -3 \\\\ -6 \\end{pmatrix} \\quad \\Rightarrow \\quad \\vec{n} = \\begin{pmatrix} 2 \\\\ -1 \\\\ -2 \\end{pmatrix}$$
+       <div class="step">a) Schritt 2: Hilfsebene durch den Stützpunkt von g</div>
+       $$2 \\cdot 0 - 0 - 2 \\cdot 3 = -6 \\quad \\Rightarrow \\quad E_H: 2x_1 - x_2 - 2x_3 = -6$$
+       <p>Kontrolle: $\\vec{v} \\cdot \\vec{n} = 2 + 2 - 4 = 0$ &#10003;</p>
+       <div class="step">a) Schritt 3: HNF für den Stützpunkt von h</div>
+       $$d = \\frac{|2 \\cdot 5 - 2 - 2 \\cdot 1 - (-6)|}{3} = \\frac{|10 - 2 - 2 + 6|}{3} = \\frac{12}{3} = 4 \\ \\text{m}$$
+       <p>Die Rohre kommen sich auf <span class="erg">$4$ m</span> nahe. (Spatprodukt-Kontrolle:
+          $\\vec{AB} \\cdot (\\vec{u} \\times \\vec{v}) = 30 - 6 + 12 = 36$ und $\\frac{36}{9} = 4$ &#10003;)</p>
+       <div class="step">b) Schritt 1: Hilfsebene durch den Sensor</div>
+       <p>Jetzt Variante 1 &ndash; Normalenvektor ist der Richtungsvektor von $g$:</p>
+       $$E_H: 2x_1 + 2x_2 + x_3 = 2 \\cdot 8 + 2 \\cdot 2 + 1 = 21$$
+       <div class="step">b) Schritt 2: Rohr einsetzen</div>
+       $$2(2r) + 2(2r) + (3 + r) = 21 \\quad \\Rightarrow \\quad 9r + 3 = 21 \\quad \\Rightarrow \\quad r = 2$$
+       $$\\vec{f} = \\begin{pmatrix} 0 \\\\ 0 \\\\ 3 \\end{pmatrix} + 2 \\begin{pmatrix} 2 \\\\ 2 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 4 \\\\ 5 \\end{pmatrix}$$
+       <p>Die nächstgelegene Stelle am Rohr ist <span class="erg">$F(4|4|5)$</span>.</p>
+       <div class="step">b) Schritt 3: Abstand</div>
+       $$\\vec{PF} = \\begin{pmatrix} -4 \\\\ 2 \\\\ 4 \\end{pmatrix} \\quad \\Rightarrow \\quad d = \\sqrt{16+4+16} = 6 \\ \\text{m}$$
+       <div class="step">Was der Vergleich zeigt</div>
+       <p>Beide Teile benutzen eine Hilfsebene, aber mit unterschiedlichem Zweck:</p>
+       <ul>
+         <li><strong>a)</strong> Die Ebene <em>umschließt</em> $g$ und legt $h$ parallel daneben &ndash; sie liefert nur die Zahl.
+             Wollte man auch wissen, <em>wo</em> sich die Rohre am nächsten kommen, bräuchte man den geschlossenen Vektorzug.</li>
+         <li><strong>b)</strong> Die Ebene steht <em>senkrecht</em> auf $g$ und fängt das Lot auf &ndash; sie liefert die Stelle gleich mit.</li>
+       </ul>`
 }
 ];
 
