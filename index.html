@@ -109,11 +109,43 @@
   .layout{ max-width:1180px; margin:0 auto; padding:26px 22px 70px; display:flex; gap:30px; align-items:flex-start; }
   @media (max-width:980px){ .layout{ display:block; padding:20px 16px 60px; } }
 
-  aside.toc{ width:250px; flex:none; position:sticky; top:20px; }
-  @media (max-width:980px){ aside.toc{ position:static; width:auto; margin-bottom:22px; } }
-  .toc-box{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:14px; }
+  aside.toc{ width:250px; flex:none; position:sticky; top:20px; align-self:flex-start;
+    max-height:calc(100vh - 40px); display:flex; }
+  .toc-box{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:14px; display:flex; flex-direction:column; min-height:0; width:100%; }
+  #toc-nav{ overflow-y:auto; overscroll-behavior:contain; min-height:0; }
+  #toc-nav::-webkit-scrollbar{ width:7px; }
+  #toc-nav::-webkit-scrollbar-thumb{ background:var(--line-2); border-radius:4px; }
   .toc-title{ font-family:system-ui,sans-serif; font-size:.7rem; font-weight:700; letter-spacing:.14em;
     text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+  .toc-gruppe{ font-family:system-ui,sans-serif; font-size:.64rem; font-weight:700; letter-spacing:.13em;
+    text-transform:uppercase; color:var(--muted); margin:12px 0 5px 9px; }
+  .toc-gruppe:first-child{ margin-top:0; }
+
+  /* Fortschritt am Fuß der Bereichsliste */
+  .toc-fuss{ border-top:1px solid var(--line); margin-top:12px; padding-top:10px;
+    font-family:system-ui,sans-serif; font-size:.74rem; color:var(--muted); }
+  .toc-fuss .zeile{ display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+  .toc-fuss .bar{ height:6px; background:#e6e0d2; border-radius:999px; overflow:hidden; margin-top:6px; }
+  .toc-fuss .fill{ height:100%; width:0%; background:var(--ok); border-radius:999px; transition:width .35s ease; }
+
+  /* Umschalter, nur auf schmalen Displays */
+  .toc-kopf{ display:none; width:100%; align-items:center; gap:10px; background:none; border:none; cursor:pointer;
+    color:var(--ink); font-size:.9rem; font-weight:600; padding:2px; }
+  .toc-kopf .stand{ margin-left:auto; font-size:.76rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .toc-kopf .chev{ transition:transform .2s; color:var(--accent); }
+  aside.toc.offen .toc-kopf .chev{ transform:rotate(180deg); }
+
+  @media (max-width:980px){
+    aside.toc{ position:sticky; top:env(safe-area-inset-top, 0px); width:auto; margin:0 0 18px;
+      max-height:none; z-index:40; padding-top:8px; background:var(--bg); }
+    .toc-box{ padding:11px 13px; }
+    .toc-title{ display:none; }
+    .toc-kopf{ display:flex; }
+    #toc-nav, .toc-fuss{ display:none; }
+    aside.toc.offen #toc-nav{ display:block; max-height:58vh; margin-top:10px; }
+    aside.toc.offen .toc-fuss{ display:block; }
+  }
   .toc a{
     display:flex; align-items:center; gap:9px; text-decoration:none; color:var(--ink);
     font-family:system-ui,sans-serif; font-size:.86rem; padding:7px 9px; border-radius:9px; border:1px solid transparent;
@@ -321,10 +353,19 @@
 </header>
 
 <div class="layout">
-  <aside class="toc">
+  <aside class="toc" id="bereiche">
     <div class="toc-box">
-      <div class="toc-title">Inhalt</div>
+      <button class="toc-kopf" type="button" id="toc-toggle" aria-expanded="false" aria-controls="toc-nav">
+        <span>Bereiche</span>
+        <span class="stand" id="toc-stand">0/44</span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="toc-title">Bereiche</div>
       <nav id="toc-nav"></nav>
+      <div class="toc-fuss">
+        <div class="zeile"><span>Gelöst</span><span id="toc-zahl">0 von 44</span></div>
+        <div class="bar"><div class="fill" id="toc-fill"></div></div>
+      </div>
     </div>
   </aside>
 
@@ -784,6 +825,15 @@ const BLOCKS = [
   { id:'D', titel:'Abstand windschiefer Geraden', kurz:'Windschiefe Geraden', unter:'Spatprodukt, Hilfsebene + HNF und der geschlossene Vektorzug mit den beiden Lotfußpunkten.' },
   { id:'E', titel:'Vermischtes &amp; Anwendungen', kurz:'Vermischtes &amp; Anwendungen', unter:'Sachaufgaben, die Spat-Deutung des Abstands und Fragen zur Verfahrenswahl.' },
   { id:'F', titel:'Prüfungsaufgaben', kurz:'Prüfungsaufgaben', unter:'Mehrschrittige Aufgaben im Abi-Stil: Ebene aufstellen, Abstand bestimmen, Volumen berechnen &ndash; alles in einer Aufgabe.' }
+];
+
+/* Die erklärenden Bereiche der Seite - sie stehen in der Seitenleiste über den
+   Aufgabenblöcken, damit man von überall direkt dorthin springen kann. */
+const LESEBEREICHE = [
+  { id:'start',      label:'Anleitung',        zeichen:'&#9432;' },
+  { id:'formeln',    label:'Formelsammlung',   zeichen:'&sum;'   },
+  { id:'verfahren',  label:'Verfahren im Bild', zeichen:'&#9723;' },
+  { id:'hilfsebene', label:'Hilfsebene',       zeichen:'&#8869;' }
 ];
 
 const AUFGABEN = [
@@ -2280,14 +2330,15 @@ function renderAlles(){
   });
   document.getElementById('aufgaben').innerHTML = html;
 
-  /* Inhaltsverzeichnis */
+  /* Bereichsliste: erklärende Abschnitte und Aufgabenblöcke */
   document.getElementById('toc-nav').innerHTML =
-    `<a href="#formeln"><span class="num">&sum;</span><span>Formelsammlung</span></a>` +
-    `<a href="#verfahren"><span class="num">&#9723;</span><span>Verfahren im Bild</span></a>` +
-    `<a href="#hilfsebene"><span class="num">&#8869;</span><span>Hilfsebene</span></a>` +
+    `<div class="toc-gruppe">Nachschlagen</div>` +
+    LESEBEREICHE.map(b => `<a href="#${b.id}" data-toc="${b.id}">
+         <span class="num">${b.zeichen}</span><span>${b.label}</span></a>`).join('') +
+    `<div class="toc-gruppe">Aufgaben</div>` +
     BLOCKS.map(b => {
       const n = AUFGABEN.filter(a => a.block === b.id).length;
-      return `<a href="#block-${b.id}" data-toc="${b.id}">
+      return `<a href="#block-${b.id}" data-toc="block-${b.id}">
                 <span class="num">${b.id}</span>
                 <span>${b.kurz}</span>
                 <span class="count" id="count-${b.id}">0/${n}</span>
@@ -2429,6 +2480,12 @@ function aktualisiereFortschritt(){
   if (text) text.textContent = `${n} von ${gesamt} Aufgaben gelöst`;
   const fill = document.getElementById('progress-fill');
   if (fill) fill.style.width = (gesamt ? (100*n/gesamt) : 0) + '%';
+  const stand = document.getElementById('toc-stand');
+  if (stand) stand.textContent = `${n}/${gesamt}`;
+  const zahl = document.getElementById('toc-zahl');
+  if (zahl) zahl.textContent = `${n} von ${gesamt}`;
+  const tocFill = document.getElementById('toc-fill');
+  if (tocFill) tocFill.style.width = (gesamt ? (100*n/gesamt) : 0) + '%';
   BLOCKS.forEach(b => {
     const liste = AUFGABEN.filter(a => a.block === b.id);
     const el = document.getElementById(`count-${b.id}`);
@@ -2458,7 +2515,7 @@ function setzeFilter(id){
   document.querySelectorAll('[data-chip]').forEach(c => c.classList.toggle('on', c.dataset.chip === id));
   wendeFilterAn();
   const ziel = id === 'alle' ? null : document.getElementById(`block-${id}`);
-  if (ziel) ziel.scrollIntoView({ behavior:'smooth', block:'start' });
+  if (ziel){ ziel.scrollIntoView({ behavior:'smooth', block:'start' }); markiereBereich(`block-${id}`); }
 }
 
 function toggleOffene(){
@@ -2490,23 +2547,61 @@ function wendeFilterAn(){
   });
 }
 
-/* ---------- Aktiver Eintrag im Inhaltsverzeichnis ---------- */
-function beobachteBloecke(){
+/* ---------- Aktiver Eintrag in der Bereichsliste ---------- */
+function markiereBereich(id){
+  let treffer = null;
+  document.querySelectorAll('[data-toc]').forEach(a => {
+    const aktiv = a.dataset.toc === id;
+    a.classList.toggle('active', aktiv);
+    if (aktiv) treffer = a;
+  });
+  /* Bei vielen Bereichen kann der aktive Eintrag aus der Liste gescrollt sein. */
+  const nav = document.getElementById('toc-nav');
+  if (treffer && nav && nav.scrollHeight > nav.clientHeight){
+    const oben = treffer.offsetTop, unten = oben + treffer.offsetHeight;
+    if (oben < nav.scrollTop || unten > nav.scrollTop + nav.clientHeight){
+      nav.scrollTop = oben - nav.clientHeight / 2 + treffer.offsetHeight / 2;
+    }
+  }
+}
+
+function beobachteBereiche(){
   if (!('IntersectionObserver' in window)) return;
   const obs = new IntersectionObserver(eintraege => {
-    eintraege.forEach(e => {
-      if (!e.isIntersecting) return;
-      const id = e.target.dataset.block;
-      document.querySelectorAll('[data-toc]').forEach(a => a.classList.toggle('active', a.dataset.toc === id));
-    });
-  }, { rootMargin:'-20% 0px -70% 0px' });
-  document.querySelectorAll('section.block').forEach(s => obs.observe(s));
+    /* Bei mehreren sichtbaren Abschnitten gewinnt der oberste im Blickfeld. */
+    const sichtbar = eintraege.filter(e => e.isIntersecting)
+      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    if (sichtbar.length) markiereBereich(sichtbar[0].target.id);
+  }, { rootMargin:'-15% 0px -70% 0px' });
+  LESEBEREICHE.forEach(b => { const el = document.getElementById(b.id); if (el) obs.observe(el); });
+  document.querySelectorAll('section.block').forEach(el => obs.observe(el));
+}
+
+/* Auf schmalen Displays ist die Liste eingeklappt. */
+function bereicheUmschalten(auf){
+  const aside = document.getElementById('bereiche');
+  const btn = document.getElementById('toc-toggle');
+  if (!aside || !btn) return;
+  const offen = auf != null ? auf : !aside.classList.contains('offen');
+  aside.classList.toggle('offen', offen);
+  btn.setAttribute('aria-expanded', offen ? 'true' : 'false');
 }
 
 /* ---------- Start ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   renderAlles();
-  beobachteBloecke();
+  beobachteBereiche();
+
+  const toggle = document.getElementById('toc-toggle');
+  if (toggle) toggle.addEventListener('click', () => bereicheUmschalten());
+  /* Nach dem Sprung die Liste auf dem Handy wieder schließen und den Eintrag sofort markieren. */
+  const nav = document.getElementById('toc-nav');
+  if (nav) nav.addEventListener('click', e => {
+    const a = e.target.closest('a[data-toc]');
+    if (!a) return;
+    markiereBereich(a.dataset.toc);
+    if (window.matchMedia('(max-width: 980px)').matches) bereicheUmschalten(false);
+  });
   if (geaendert) speichere();   // übernommenen Altstand ins neue Format schreiben
 
   /* Jede Eingabe sichern - ein Listener für alle Felder, gebündelt gespeichert. */

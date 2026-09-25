@@ -42,6 +42,10 @@ Punktabstand sowie die Fehlvorstellung, windschiefe Geraden könnten den Abstand
   Der Fortschritt einer älteren Fassung wird übernommen; jeder Speicherzugriff ist abgesichert, sodass die Seite auch
   im privaten Modus oder bei blockierten Seitendaten vollständig funktioniert
 - **Fortschrittsanzeige** gesamt und pro Block, dazu „Alles zurücksetzen“
+- **Bereichsleiste an der Seite:** alle Bereiche der Seite auf einen Blick – die erklärenden Abschnitte
+  (Anleitung, Formelsammlung, Verfahren im Bild, Hilfsebene) und die sechs Aufgabenblöcke mit ihrem Stand.
+  Sie bleibt beim Scrollen stehen, hebt den gerade sichtbaren Bereich hervor und zeigt unten den Gesamtfortschritt;
+  auf schmalen Displays klebt sie als aufklappbare Leiste am oberen Rand
 - **Filter** nach Block und nach ungelösten Aufgaben
 - **Druckansicht:** Bedienelemente werden beim Drucken ausgeblendet
 
