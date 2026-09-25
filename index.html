@@ -285,7 +285,7 @@
     <div class="progress-wrap">
       <div class="progress-top">
         <span id="progress-text">0 von 38 Aufgaben gelöst</span>
-        <button class="btn-reset" type="button" id="btn-reset-progress">Fortschritt zurücksetzen</button>
+        <button class="btn-reset" type="button" id="btn-reset-progress">Alles zurücksetzen</button>
       </div>
       <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
     </div>
@@ -305,8 +305,10 @@
       <h2>So arbeitest du mit dieser Seite</h2>
       <p>Jede Aufgabe hat drei Stufen: erst selbst rechnen und die Lösung eintragen, bei Bedarf den <strong>Tipp</strong> aufklappen,
          und erst danach die <strong>Musterlösung</strong>. Die Eingabefelder akzeptieren Komma und Punkt als Dezimaltrennzeichen
-         sowie Brüche wie <code>9/2</code>. Gelöste Aufgaben werden lokal in deinem Browser gespeichert.
-         Nur bei Aufgaben mit Wurzeln im Ergebnis (gekennzeichnet) genügt eine auf zwei Nachkommastellen gerundete Eingabe.</p>
+         sowie Brüche wie <code>9/2</code>. Bei Aufgaben mit Wurzeln im Ergebnis genügt eine auf zwei Nachkommastellen gerundete Eingabe.</p>
+      <p><strong>Du kannst jederzeit unterbrechen:</strong> Gelöste Aufgaben, alle eingetippten Werte und die gewählte Ansicht
+         werden automatisch in deinem Browser gespeichert und beim nächsten Aufruf wiederhergestellt &ndash; ohne Konto und ohne Server.
+         Die Daten liegen nur auf diesem Gerät und in diesem Browser; über <em>Alles zurücksetzen</em> oben wirst du sie wieder los.</p>
       <div class="hinweis" style="margin-top:14px">
         <strong>Die eine Leitidee:</strong> Der Abstand ist immer der kürzeste Weg &ndash; und der steht immer <em>senkrecht</em>.
         Die Verfahren unterscheiden sich nur darin, wie sie diese Senkrechte finden: über den Normalenvektor (Ebene),
@@ -375,7 +377,8 @@
   <div class="foot-inner">
     Übungsaufgaben zu Kapitel 17 &bdquo;Abstandsprobleme&ldquo; der
     <a href="https://erikdahlmann.github.io/Vektorrechnung-Zusammenfassung/" target="_blank" rel="noopener">Vektorrechnung-Zusammenfassung</a>.
-    Formelsatz mit MathJax. Der Lernfortschritt wird ausschließlich lokal im Browser (localStorage) gespeichert.
+    Formelsatz mit MathJax. Fortschritt und Eingaben werden ausschließlich lokal im Browser (localStorage) gespeichert &ndash;
+    sie verlassen dieses Gerät nicht.
   </div>
 </footer>
 
@@ -1502,22 +1505,58 @@ const AUFGABEN = [
    Aufbau der Seite, Auto-Korrektur und Fortschritt
    ===================================================================== */
 
-const STORE_KEY = 'k17-abstandsprobleme-fortschritt';
+const STORE_KEY = 'k17-abstandsprobleme-v2';
+const ALT_KEY   = 'k17-abstandsprobleme-fortschritt';   // Fortschritt der ersten Fassung
 const CHEVRON = '<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"/></svg>';
 
-const state = { filter:'alle', nurOffene:false, auswahl:{} };
+const state = { filter:'alle', nurOffene:false, auswahl:{}, ebenGeloest:new Set() };
 
-/* ---------- Fortschritt (localStorage, defensiv) ---------- */
-function ladeGeloest(){
+/* ---------- Gespeicherter Stand ----------
+   Gesichert werden: gelöste Aufgaben, alle Eingaben (Zahlenfelder und
+   Multiple-Choice) sowie die gewählte Ansicht. Alles liegt ausschließlich
+   im localStorage dieses Browsers. Jeder Zugriff ist abgesichert, weil
+   localStorage im privaten Modus oder bei blockierten Seitendaten
+   fehlschlagen kann - die Seite muss auch dann vollständig funktionieren. */
+let geloest = new Set();
+let felder = {};   // { 'f_A1_0_0': '2', ... }
+let geaendert = false;   // erst schreiben, wenn wirklich etwas passiert ist
+
+function ladeStand(){
   try {
-    const raw = localStorage.getItem(STORE_KEY);
-    return new Set(raw ? JSON.parse(raw) : []);
-  } catch(e){ return new Set(); }
+    const roh = localStorage.getItem(STORE_KEY);
+    if (roh){
+      const d = JSON.parse(roh) || {};
+      geloest = new Set(Array.isArray(d.geloest) ? d.geloest : []);
+      felder = (d.felder && typeof d.felder === 'object') ? d.felder : {};
+      state.auswahl = (d.auswahl && typeof d.auswahl === 'object') ? d.auswahl : {};
+      if (d.ansicht && typeof d.ansicht === 'object'){
+        if (typeof d.ansicht.filter === 'string') state.filter = d.ansicht.filter;
+        state.nurOffene = !!d.ansicht.nurOffene;
+      }
+      return;
+    }
+    const alt = localStorage.getItem(ALT_KEY);   // einmalige Übernahme
+    if (alt){ geloest = new Set(JSON.parse(alt) || []); geaendert = true; }
+  } catch(e){ /* unlesbarer oder gesperrter Speicher: mit leerem Stand starten */ }
 }
-function speichereGeloest(){
-  try { localStorage.setItem(STORE_KEY, JSON.stringify([...geloest])); } catch(e){ /* z.B. privater Modus */ }
+
+function speichere(){
+  geaendert = true;
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify({
+      geloest: [...geloest],
+      felder: felder,
+      auswahl: state.auswahl,
+      ansicht: { filter: state.filter, nurOffene: state.nurOffene },
+      stand: new Date().toISOString()
+    }));
+  } catch(e){ /* privater Modus oder Speicher voll: Seite läuft ohne Sicherung weiter */ }
 }
-let geloest = ladeGeloest();
+
+let speicherTimer = null;
+function speichereGleich(){ geaendert = true; clearTimeout(speicherTimer); speicherTimer = setTimeout(speichere, 400); }
+
+ladeStand();
 
 /* ---------- Eingaben lesen ---------- */
 function parseZahl(roh){
@@ -1609,7 +1648,7 @@ function renderAlles(){
   document.getElementById('filterbar').innerHTML =
     chips.map(c => `<button type="button" class="chip${state.filter===c.id?' on':''}" data-chip="${c.id}"
                      onclick="setzeFilter('${c.id}')">${c.t}</button>`).join('') +
-    `<button type="button" class="chip" id="chip-offen" onclick="toggleOffene()">Nur ungelöste</button>`;
+    `<button type="button" class="chip${state.nurOffene ? ' on' : ''}" id="chip-offen" onclick="toggleOffene()">Nur ungelöste</button>`;
 
   /* Aufgabenblöcke */
   let html = '';
@@ -1639,8 +1678,27 @@ function renderAlles(){
     }).join('');
 
   AUFGABEN.forEach(a => { if (geloest.has(a.id)) markiereGeloest(a.id); });
+  stellStandWiederHer();
   aktualisiereFortschritt();
+  wendeFilterAn();
   typeset();
+}
+
+/* Gespeicherte Eingaben zurück in die Felder schreiben. */
+function stellStandWiederHer(){
+  Object.keys(felder).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = felder[id];
+    else delete felder[id];        // Feld gibt es nicht mehr (ältere Fassung)
+  });
+  AUFGABEN.forEach(a => {
+    a.inputs.forEach((inp, i) => {
+      if (inp.kind !== 'choice') return;
+      const sel = state.auswahl[`${a.id}_${i}`];
+      if (sel != null && inp.options[sel] !== undefined) waehle(a.id, i, sel, true);
+      else delete state.auswahl[`${a.id}_${i}`];
+    });
+  });
 }
 
 function typeset(el){
@@ -1650,9 +1708,10 @@ function typeset(el){
 }
 
 /* ---------- Auswahl bei Multiple Choice ---------- */
-function waehle(aid, i, j){
+function waehle(aid, i, j, stillLaden){
   const a = AUFGABEN.find(x => x.id === aid);
   state.auswahl[`${aid}_${i}`] = j;
+  if (!stillLaden) speichereGleich();
   a.inputs[i].options.forEach((_, k) => {
     const el = document.getElementById(feldId(aid, i, k));
     if (el) el.classList.toggle('selected', k === j);
@@ -1707,7 +1766,8 @@ function pruefe(aid){
     setzeFeedback(aid, 'ok', 'Richtig! &#10003; Vergleiche gern noch den Rechenweg mit der Musterlösung.');
     markiereGeloest(aid);
     geloest.add(aid);
-    speichereGeloest();
+    state.ebenGeloest.add(aid);
+    speichere();
     aktualisiereFortschritt();
   } else {
     const wo = a.inputs.length > 1
@@ -1737,9 +1797,11 @@ function zuruecksetzen(aid){
     for (let j=0; j<n; j++){
       const el = document.getElementById(feldId(aid,i,j));
       if (el){ el.value = ''; el.classList.remove('right','wrong'); }
+      delete felder[feldId(aid,i,j)];
     }
   });
   setzeFeedback(aid, '', '');
+  speichere();
 }
 
 /* ---------- Fortschritt ---------- */
@@ -1760,7 +1822,9 @@ function aktualisiereFortschritt(){
 
 function fortschrittZuruecksetzen(){
   geloest = new Set();
-  speichereGeloest();
+  felder = {};
+  state.auswahl = {};
+  speichere();
   AUFGABEN.forEach(a => {
     const el = document.getElementById(`aufgabe-${a.id}`);
     if (el) el.classList.remove('solved');
@@ -1772,6 +1836,8 @@ function fortschrittZuruecksetzen(){
 /* ---------- Filter ---------- */
 function setzeFilter(id){
   state.filter = id;
+  state.ebenGeloest.clear();
+  speichereGleich();
   document.querySelectorAll('[data-chip]').forEach(c => c.classList.toggle('on', c.dataset.chip === id));
   wendeFilterAn();
   const ziel = id === 'alle' ? null : document.getElementById(`block-${id}`);
@@ -1780,6 +1846,8 @@ function setzeFilter(id){
 
 function toggleOffene(){
   state.nurOffene = !state.nurOffene;
+  state.ebenGeloest.clear();
+  speichereGleich();
   const chip = document.getElementById('chip-offen');
   if (chip) chip.classList.toggle('on', state.nurOffene);
   wendeFilterAn();
@@ -1790,7 +1858,9 @@ function wendeFilterAn(){
     const el = document.getElementById(`aufgabe-${a.id}`);
     if (!el) return;
     const passtBlock = state.filter === 'alle' || state.filter === a.block;
-    const passtOffen = !state.nurOffene || !geloest.has(a.id);
+    /* Eine soeben gelöste Aufgabe bleibt sichtbar, damit Rückmeldung und
+       Musterlösung nicht unter den Händen verschwinden. */
+    const passtOffen = !state.nurOffene || !geloest.has(a.id) || state.ebenGeloest.has(a.id);
     el.style.display = (passtBlock && passtOffen) ? '' : 'none';
   });
   BLOCKS.forEach(b => {
@@ -1820,9 +1890,24 @@ function beobachteBloecke(){
 document.addEventListener('DOMContentLoaded', () => {
   renderAlles();
   beobachteBloecke();
+  if (geaendert) speichere();   // übernommenen Altstand ins neue Format schreiben
+
+  /* Jede Eingabe sichern - ein Listener für alle Felder, gebündelt gespeichert. */
+  const liste = document.getElementById('aufgaben');
+  if (liste) liste.addEventListener('input', e => {
+    const el = e.target;
+    if (!el.id || el.id.indexOf('f_') !== 0) return;
+    if (el.value === '') delete felder[el.id]; else felder[el.id] = el.value;
+    speichereGleich();
+  });
+  /* Beim Verlassen der Seite nicht auf den Timer warten -
+     aber nur, wenn es etwas zu sichern gibt, sonst würde ein bloßer
+     Seitenaufruf einen älteren Stand mit einem leeren überschreiben. */
+  window.addEventListener('pagehide', () => { if (geaendert) speichere(); });
+
   const btn = document.getElementById('btn-reset-progress');
   if (btn) btn.addEventListener('click', () => {
-    if (confirm('Wirklich den gesamten Lernfortschritt löschen?')) fortschrittZuruecksetzen();
+    if (confirm('Wirklich alles zurücksetzen? Gelöste Aufgaben und alle Eingaben werden gelöscht.')) fortschrittZuruecksetzen();
   });
 });
 </script>

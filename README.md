@@ -30,7 +30,11 @@ Punktabstand sowie die Fehlvorstellung, windschiefe Geraden könnten den Abstand
 - **Eingabekomfort:** Komma- und Punktschreibweise sowie Brüche wie `9/2` werden akzeptiert; bei Aufgaben mit
   irrationalem Ergebnis genügt eine auf zwei Nachkommastellen gerundete Eingabe
 - **Dreistufiges Lernen:** erst selbst rechnen, dann Tipp, dann ausführliche Musterlösung mit allen Zwischenschritten
-- **Fortschrittsanzeige** gesamt und pro Block, lokal im Browser gespeichert (localStorage)
+- **Automatisches Speichern (localStorage):** gelöste Aufgaben, alle eingetippten Werte, die Multiple-Choice-Auswahl
+  und die gewählte Ansicht werden gesichert und beim nächsten Aufruf wiederhergestellt – ohne Konto und ohne Server.
+  Der Fortschritt einer älteren Fassung wird übernommen; jeder Speicherzugriff ist abgesichert, sodass die Seite auch
+  im privaten Modus oder bei blockierten Seitendaten vollständig funktioniert
+- **Fortschrittsanzeige** gesamt und pro Block, dazu „Alles zurücksetzen“
 - **Filter** nach Block und nach ungelösten Aufgaben
 - **Druckansicht:** Bedienelemente werden beim Drucken ausgeblendet
 
