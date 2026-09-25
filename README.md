@@ -30,6 +30,10 @@ Punktabstand sowie die Fehlvorstellung, windschiefe Geraden könnten den Abstand
 - **Eingabekomfort:** Komma- und Punktschreibweise sowie Brüche wie `9/2` werden akzeptiert; bei Aufgaben mit
   irrationalem Ergebnis genügt eine auf zwei Nachkommastellen gerundete Eingabe
 - **Dreistufiges Lernen:** erst selbst rechnen, dann Tipp, dann ausführliche Musterlösung mit allen Zwischenschritten
+- **Alle Verfahren visualisiert:** neun handgezeichnete SVG-Skizzen – Hesse'sche Normalenform als Projektion,
+  Lotfußpunkt mit Spiegelpunkt, Laufpunkt-Bedingung, Flächenformel am Parallelogramm, konstanter Abstand paralleler
+  Geraden, geschlossener Vektorzug, Spatprodukt als Volumen durch Grundfläche und beide Hilfsebenen-Varianten;
+  jede mit Bildunterschrift, Formel und Verweis auf die passenden Aufgaben
 - **Verfahrensteil zur Hilfsebene:** beide Varianten (Punkt–Gerade und windschiefe Geraden) mit handgezeichneten
   SVG-Skizzen, Schrittfolge, Begründung, Vergleichstabelle und dem häufigsten Fehler – dazu zehn Aufgaben,
   die genau dieses Verfahren trainieren (B3, B8, B9, B10, C6 sowie D3, D5, D8, F5)
