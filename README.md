@@ -2,7 +2,7 @@
 
 Interaktive Übungswebsite zu **Kapitel 17 (Abstandsprobleme)** der
 [Vektorrechnung-Zusammenfassung](https://erikdahlmann.github.io/Vektorrechnung-Zusammenfassung/).
-Die Seite greift Stoff, Notation und Gestaltung der Zusammenfassung auf und ergänzt sie um 38 Aufgaben
+Die Seite greift Stoff, Notation und Gestaltung der Zusammenfassung auf und ergänzt sie um 39 Aufgaben
 mit Sofortkorrektur, Tipps und ausführlichen Musterlösungen.
 
 ## Inhalt
@@ -30,6 +30,8 @@ Punktabstand sowie die Fehlvorstellung, windschiefe Geraden könnten den Abstand
 - **Eingabekomfort:** Komma- und Punktschreibweise sowie Brüche wie `9/2` werden akzeptiert; bei Aufgaben mit
   irrationalem Ergebnis genügt eine auf zwei Nachkommastellen gerundete Eingabe
 - **Dreistufiges Lernen:** erst selbst rechnen, dann Tipp, dann ausführliche Musterlösung mit allen Zwischenschritten
+- **Verfahrensteil zur Hilfsebene:** beide Varianten (Punkt–Gerade und windschiefe Geraden) mit handgezeichneten
+  SVG-Skizzen, Schrittfolge, Begründung, Vergleichstabelle und dem häufigsten Fehler
 - **Automatisches Speichern (localStorage):** gelöste Aufgaben, alle eingetippten Werte, die Multiple-Choice-Auswahl
   und die gewählte Ansicht werden gesichert und beim nächsten Aufruf wiederhergestellt – ohne Konto und ohne Server.
   Der Fortschritt einer älteren Fassung wird übernommen; jeder Speicherzugriff ist abgesichert, sodass die Seite auch
