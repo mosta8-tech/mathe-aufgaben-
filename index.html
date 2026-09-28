@@ -289,6 +289,13 @@
   .venn figcaption{ font-size:.9rem; color:var(--ink); margin-top:.3rem; line-height:1.45; }
   .venn figcaption span{ font-family:system-ui,sans-serif; font-size:.78rem; color:var(--muted); }
   table.schreib-tab td:first-child{ white-space:nowrap; }
+  table.bsp-tab td:first-child, table.bsp-tab td:last-child{ white-space:nowrap; }
+  table.bsp-tab td:last-child{ font-weight:600; font-variant-numeric:tabular-nums; }
+  .bsp-proben{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-top:16px; }
+  .bsp-probe{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+  .bsp-probe strong{ font-family:system-ui,sans-serif; font-size:.82rem; color:var(--accent);
+    text-transform:uppercase; letter-spacing:.06em; }
+  .bsp-probe p{ margin:.4rem 0 0; font-size:.9rem; }
   table.schreib-tab td.v{ font-weight:400; }
 
   /* Ausführlicher Kenngrößen-Block */
@@ -1065,6 +1072,95 @@
             <tr><td class="v">$F \subseteq G$</td><td>&bdquo;aus F folgt G&ldquo;, &bdquo;immer wenn F, dann auch G&ldquo;</td><td>$F \cap G = F$</td></tr>
           </tbody>
         </table>
+        </div>
+
+        <div class="step" style="margin-top:22px">Beispielrechnung 1 &ndash; abzählen</div>
+        <p>Aus zwölf Karten mit den Zahlen 1 bis 12 wird eine gezogen, jede gleich wahrscheinlich.
+           $F$: &bdquo;durch 3 teilbar&ldquo;, $G$: &bdquo;größer als 8&ldquo;. Weil alle Ergebnisse gleich wahrscheinlich sind,
+           genügt Abzählen: $P(A) = \frac{|A|}{12}$.</p>
+        <div style="overflow-x:auto">
+        <table class="entscheid bsp-tab">
+          <thead><tr><th>Term</th><th>Menge</th><th>Anzahl</th><th>Wahrscheinlichkeit</th></tr></thead>
+          <tbody>
+            <tr><td class="v">$F$</td><td>$\{3;6;9;12\}$</td><td>4</td><td>$\frac{4}{12} = \frac13$</td></tr>
+            <tr><td class="v">$G$</td><td>$\{9;10;11;12\}$</td><td>4</td><td>$\frac{4}{12} = \frac13$</td></tr>
+            <tr><td class="v">$F \cap G$</td><td>$\{9;12\}$</td><td>2</td><td>$\frac{2}{12} = \frac16$</td></tr>
+            <tr><td class="v">$F \cup G$</td><td>$\{3;6;9;10;11;12\}$</td><td>6</td><td>$\frac{6}{12} = \frac12$</td></tr>
+            <tr><td class="v">$F \setminus G$</td><td>$\{3;6\}$</td><td>2</td><td>$\frac{2}{12} = \frac16$</td></tr>
+            <tr><td class="v">$\bar F \cap \bar G$</td><td>$\{1;2;4;5;7;8\}$</td><td>6</td><td>$\frac{6}{12} = \frac12$</td></tr>
+            <tr><td class="v">$(F \setminus G) \cup (G \setminus F)$</td><td>$\{3;6;10;11\}$</td><td>4</td><td>$\frac{4}{12} = \frac13$</td></tr>
+          </tbody>
+        </table>
+        </div>
+
+        <div class="bsp-proben">
+          <div class="bsp-probe">
+            <strong>Probe: Additionssatz</strong>
+            $$P(F \cup G) = \frac13 + \frac13 - \frac16 = \frac{4+4-2}{12} = \frac12 \quad \checkmark$$
+            <p>Ohne den Abzug käme $\frac23$ heraus &ndash; die 9 und die 12 wären doppelt gezählt.</p>
+          </div>
+          <div class="bsp-probe">
+            <strong>Probe: De Morgan</strong>
+            $$P(\bar F \cap \bar G) = 1 - P(F \cup G) = 1 - \frac12 = \frac12 \quad \checkmark$$
+            <p>Das abgezählte $\{1;2;4;5;7;8\}$ hat genau 6 der 12 Karten.</p>
+          </div>
+          <div class="bsp-probe">
+            <strong>Unabhängig?</strong>
+            $$P(F) \cdot P(G) = \frac13 \cdot \frac13 = \frac19 \neq \frac16 = P(F \cap G)$$
+            <p>Also <strong>abhängig</strong>: Unter den Zahlen über 8 sind anteilig mehr durch 3 teilbar als insgesamt.</p>
+          </div>
+        </div>
+
+        <div class="step" style="margin-top:22px">Beispielrechnung 2 &ndash; nur mit den Regeln</div>
+        <p>Jetzt ist keine Ergebnismenge gegeben, nur drei Zahlen:
+           $$P(F) = 0{,}6, \qquad P(G) = 0{,}5, \qquad P(F \cap G) = 0{,}3$$
+           Hier lässt sich nichts abzählen &ndash; alles folgt aus den Regeln. Genau so kommt es in der Klausur vor.</p>
+
+        <div class="kg-grid">
+          <div>
+            <table class="entscheid bsp-tab">
+              <thead><tr><th>Gesucht</th><th>Rechnung</th><th>Wert</th></tr></thead>
+              <tbody>
+                <tr><td class="v">$P(F \cup G)$</td><td>$0{,}6 + 0{,}5 - 0{,}3$</td><td>0,8</td></tr>
+                <tr><td class="v">$P(F \setminus G)$</td><td>$P(F) - P(F \cap G) = 0{,}6 - 0{,}3$</td><td>0,3</td></tr>
+                <tr><td class="v">$P(G \setminus F)$</td><td>$0{,}5 - 0{,}3$</td><td>0,2</td></tr>
+                <tr><td class="v">$P(\bar F)$</td><td>$1 - 0{,}6$</td><td>0,4</td></tr>
+                <tr><td class="v">$P(\bar F \cap \bar G)$</td><td>$1 - P(F \cup G) = 1 - 0{,}8$</td><td>0,2</td></tr>
+                <tr><td class="v">genau eines</td><td>$0{,}3 + 0{,}2$ oder $0{,}8 - 0{,}3$</td><td>0,5</td></tr>
+                <tr><td class="v">höchstens eines</td><td>$1 - P(F \cap G) = 1 - 0{,}3$</td><td>0,7</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <p><strong>Dieselben Zahlen als Vierfeldertafel.</strong> Sie entsteht allein durch Ergänzen auf die Ränder
+               und macht jede Zeile der Tabelle links sichtbar:</p>
+            <div style="overflow-x:auto">
+            <table class="entscheid vft">
+              <thead><tr><th></th><th>$G$</th><th>$\bar G$</th><th>Summe</th></tr></thead>
+              <tbody>
+                <tr><th>$F$</th><td>0,3</td><td>0,3</td><td>0,6</td></tr>
+                <tr><th>$\bar F$</th><td>0,2</td><td>0,2</td><td>0,4</td></tr>
+                <tr><th>Summe</th><td>0,5</td><td>0,5</td><td>1,0</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <p>$F \setminus G$ ist das Feld rechts oben, $\bar F \cap \bar G$ das rechts unten,
+               &bdquo;genau eines&ldquo; die beiden Felder der Nebendiagonale ($0{,}3 + 0{,}2$).</p>
+            <p><strong>Unabhängigkeit:</strong> $P(F) \cdot P(G) = 0{,}6 \cdot 0{,}5 = 0{,}3 = P(F \cap G)$
+               &ndash; hier sind $F$ und $G$ also <span class="erg">unabhängig</span>, anders als in Beispiel 1.</p>
+            <p><strong>Und die beiden Bedingungen:</strong></p>
+            $$P_G(F) = \frac{0{,}3}{0{,}5} = 0{,}6 = P(F), \qquad P_F(G) = \frac{0{,}3}{0{,}6} = 0{,}5 = P(G)$$
+            <p>Beide Male ändert die Bedingung nichts &ndash; genau das <em>ist</em> Unabhängigkeit.
+               Beachte trotzdem: $0{,}6 \neq 0{,}5$, die beiden bedingten Wahrscheinlichkeiten bleiben verschiedene Zahlen.</p>
+          </div>
+        </div>
+
+        <div class="hinweis" style="margin-top:16px">
+          <strong>Rechentrick bei &bdquo;mindestens eines&ldquo;:</strong> Über das Gegenereignis geht es fast immer schneller.
+          Sind etwa drei Bauteile unabhängig und jedes mit $0{,}1$ defekt, so ist
+          $P(\text{mindestens eines defekt}) = 1 - 0{,}9^3 = 1 - 0{,}729 = 0{,}271$.
+          <span class="warnung">Falsch wäre $3 \cdot 0{,}1 = 0{,}3$</span> &ndash; dabei würden die Fälle mit zwei oder drei
+          defekten Teilen mehrfach gezählt. Genau dieselbe Doppelzählung korrigiert der Additionssatz mit seinem Abzug.
         </div>
 
         <div class="kg-fragen" style="margin-top:18px">
