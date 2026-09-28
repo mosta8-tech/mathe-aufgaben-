@@ -25,6 +25,14 @@ die typischen Stolperstellen ab: Vorzeichenfehler in der HNF, identische statt e
 das Mischen von Zähler- und Nennervektor in der Flächenformel, die Verwechslung von Pyramidenhöhe und
 Punktabstand sowie die Fehlvorstellung, windschiefe Geraden könnten den Abstand 0 haben.
 
+### Klausurvorbereitung
+
+Ganz unten fasst ein eigener Abschnitt die ganze Seite zusammen: ein zweispaltiger **Spickzettel** mit allen
+Formeln beider Gebiete, die Entscheidungstabelle **„welche Frage verlangt welches Verfahren?“** über beide
+Themen hinweg, die **14 häufigsten Fehler** aus allen Musterlösungen gesammelt, ein **Stand** mit Kachel je
+Block (offen / angefangen / vollständig, aus dem Lernfortschritt erzeugt) und ein kurzer Plan für die letzten
+Tage vor der Klausur.
+
 ## Funktionen
 
 - **Sofortkorrektur** für Zahlen-, Vektor-, Mehrfeld- und Multiple-Choice-Eingaben; bei mehrteiligen

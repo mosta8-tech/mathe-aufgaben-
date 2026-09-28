@@ -282,6 +282,40 @@
   .erg{ color:var(--ok); font-weight:700; }
   .warnung{ color:var(--bad); font-weight:600; }
 
+  /* Klausurteil */
+  .spick-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; margin-top:12px; }
+  .spick{ background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:15px 17px; }
+  .spick .tag{ font-family:system-ui,sans-serif; font-size:.66rem; font-weight:700; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); margin-bottom:.4rem; }
+  .spick dl{ margin:0; }
+  .spick dt{ font-weight:600; font-size:.93rem; margin-top:.75rem; color:var(--ink); }
+  .spick dd{ margin:.15rem 0 0; font-size:.93rem; color:var(--ink-2); }
+  .spick dd mjx-container[display="true"]{ margin:.3rem 0 !important; }
+
+  .fehler-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:4px 26px; margin-top:10px; }
+  .fehlerliste{ margin:.3rem 0; padding-left:1.4rem; }
+  .fehlerliste li{ margin:.45rem 0; font-size:.94rem; }
+
+  .stand-box{ background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:15px 17px; margin-top:10px; }
+  .stand-kopf{ display:flex; flex-wrap:wrap; gap:4px 14px; align-items:baseline;
+    font-family:system-ui,sans-serif; font-size:.9rem; }
+  .stand-kopf span{ color:var(--muted); font-size:.86rem; }
+  .stand-box .bar{ height:8px; background:#e6e0d2; border-radius:999px; overflow:hidden; margin:10px 0 14px; }
+  .stand-box .fill{ height:100%; background:var(--ok); border-radius:999px; transition:width .35s ease; }
+  .stand-raster{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:8px; }
+  .stand-zeile{ display:flex; align-items:center; gap:9px; text-decoration:none; color:var(--ink);
+    font-family:system-ui,sans-serif; font-size:.85rem; background:var(--surface);
+    border:1px solid var(--line); border-radius:9px; padding:7px 10px; }
+  .stand-zeile:hover{ border-color:var(--accent); }
+  .stand-zeile .num{ width:22px; height:22px; border-radius:50%; background:#ded7c8; color:var(--muted);
+    display:grid; place-items:center; font-size:.7rem; font-weight:700; flex:none; }
+  .stand-titel{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .stand-zahl{ font-variant-numeric:tabular-nums; color:var(--muted); font-size:.8rem; }
+  .stand-zeile.voll{ border-color:var(--ok-line); background:var(--ok-bg); }
+  .stand-zeile.voll .num{ background:var(--ok); color:#fff; }
+  .stand-zeile.voll .stand-zahl{ color:var(--ok); font-weight:700; }
+  .stand-zeile.teil .num{ background:var(--accent); color:#fff; }
+
   /* Venn-Reihe im Schreibweisen-Block */
   .venn-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin:16px 0 20px; }
   .venn{ margin:0; text-align:center; }
@@ -383,6 +417,7 @@
       <a href="#formeln">Formelsammlung</a>
       <a href="#verfahren">Verfahren im Bild</a>
       <a href="#stochastik">Stochastik</a>
+      <a href="#klausur">Klausurvorbereitung</a>
       <a href="#block-A">Direkt zu den Aufgaben</a>
     </div>
     <div class="progress-wrap">
@@ -1349,6 +1384,125 @@
 
     <div class="filterbar" id="filterbar"></div>
     <div id="aufgaben"></div>
+
+    <section class="card" id="klausur">
+      <h2>Klausurvorbereitung &ndash; alles auf einen Blick</h2>
+      <p style="margin-top:.5rem">Die Kurzfassung der ganzen Seite: alle Formeln auf einem Blatt, die Entscheidungshilfe
+         &bdquo;welche Frage verlangt was&ldquo;, die Fehler, die am häufigsten Punkte kosten &ndash; und dein aktueller Stand.</p>
+
+      <div class="step" style="margin-top:20px">Der Spickzettel</div>
+      <div class="spick-grid">
+        <div class="spick">
+          <div class="tag">Vektorgeometrie</div>
+          <dl>
+            <dt>Abstand Punkt &ndash; Ebene</dt>
+            <dd>$$d = \frac{|n_1p_1 + n_2p_2 + n_3p_3 - c|}{|\vec{n}|}$$</dd>
+            <dt>Lotfußpunkt und Spiegelpunkt</dt>
+            <dd>$h: \vec{x} = \vec{p} + t\,\vec{n}$ mit $E$ schneiden $\rightarrow F$; &nbsp; $\vec{p\,}' = \vec{p} + 2\vec{PF}$</dd>
+            <dt>Abstand Punkt &ndash; Gerade</dt>
+            <dd>mit Fußpunkt: $\left(\vec{f}(r) - \vec{p}\right) \cdot \vec{u} = 0$<br>
+                nur die Zahl: $d = \dfrac{|\vec{AP} \times \vec{u}|}{|\vec{u}|}$</dd>
+            <dt>Parallele Geraden</dt>
+            <dd>Stützpunkt $B$ von $h$ nehmen &rarr; Fall Punkt&ndash;Gerade</dd>
+            <dt>Windschiefe Geraden</dt>
+            <dd>$$d = \frac{|\vec{AB} \cdot (\vec{u} \times \vec{v})|}{|\vec{u} \times \vec{v}|}$$
+                Fußpunkte: $\vec{w} = \vec{AB} + s\vec{v} - r\vec{u}$ mit $\vec{w}\cdot\vec{u} = \vec{w}\cdot\vec{v} = 0$</dd>
+            <dt>Hilfsebene</dt>
+            <dd>Punkt&ndash;Gerade: durch $P$ mit $\vec{n} = \vec{u}$<br>
+                windschief: durch $A$ mit $\vec{n} = \vec{u} \times \vec{v}$</dd>
+            <dt>Lage zweier Geraden</dt>
+            <dd>Richtungen kollinear? &rarr; Punktprobe entscheidet <em>identisch</em> oder <em>echt parallel</em>.<br>
+                Sonst Spatprodukt: $= 0$ &rarr; Schnittpunkt, $\neq 0$ &rarr; windschief.</dd>
+            <dt>Flächen und Volumen</dt>
+            <dd>Dreieck $\frac12|\vec{a} \times \vec{b}|$ &nbsp;·&nbsp; Pyramide $\frac13 G h$ &nbsp;·&nbsp;
+                Spat $|\vec{a} \cdot (\vec{b} \times \vec{c})|$</dd>
+          </dl>
+        </div>
+
+        <div class="spick">
+          <div class="tag">Stochastik</div>
+          <dl>
+            <dt>Laplace und Additionssatz</dt>
+            <dd>$P(A) = \dfrac{|A|}{|\Omega|}$ &nbsp;·&nbsp; $P(F \cup G) = P(F) + P(G) - P(F \cap G)$</dd>
+            <dt>De Morgan</dt>
+            <dd>$\overline{F \cup G} = \bar F \cap \bar G$ &nbsp;·&nbsp; $\overline{F \cap G} = \bar F \cup \bar G$</dd>
+            <dt>Bedingte Wahrscheinlichkeit</dt>
+            <dd>$$P_B(A) = \frac{P(A \cap B)}{P(B)} \quad\text{bzw.}\quad P(A \cap B) = P(B) \cdot P_B(A)$$</dd>
+            <dt>Totale Wahrscheinlichkeit und Umkehrung</dt>
+            <dd>$P(D) = P(A)P_A(D) + P(\bar A)P_{\bar A}(D)$ &nbsp;·&nbsp; $P_D(A) = \dfrac{P(A \cap D)}{P(D)}$</dd>
+            <dt>Unabhängigkeit</dt>
+            <dd>$P(A \cap B) = P(A) \cdot P(B)$ &nbsp;&hArr;&nbsp; $P_B(A) = P(A)$</dd>
+            <dt>Mehrstufig</dt>
+            <dd>mindestens eines: $1 - P(\text{keines})$ &nbsp;·&nbsp;
+                ohne Zurücklegen: Nenner sinkt nach jeder Ziehung</dd>
+            <dt>Empirische Kenngrößen</dt>
+            <dd>$\bar x = \frac1n \sum x_i$ &nbsp;·&nbsp; $v = \frac1n \sum (x_i - \bar x)^2$ &nbsp;·&nbsp; $s = \sqrt v$</dd>
+            <dt>Lineare Umrechnung</dt>
+            <dd>$y = mx + b$: &nbsp; $\bar y = m\bar x + b$, &nbsp; $s_y = |m| \cdot s_x$</dd>
+            <dt>Simulation</dt>
+            <dd>Zufallsgerät &rarr; Zuordnung &rarr; ein Durchgang &rarr; Auswertung
+                $\hat p = \frac{\text{Treffer}}{\text{Durchgänge}}$</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="step" style="margin-top:22px">Welche Frage verlangt welches Verfahren?</div>
+      <div style="overflow-x:auto">
+      <table class="entscheid">
+        <thead><tr><th>Das steht in der Aufgabe</th><th>Das brauchst du</th></tr></thead>
+        <tbody>
+          <tr><td>&bdquo;Berechne den Abstand von $P$ zu $E$.&ldquo;</td><td class="v">HNF</td></tr>
+          <tr><td>&bdquo;Spiegle $P$ an $E$&ldquo; / &bdquo;bestimme den Lotfußpunkt&ldquo;</td><td class="v">Lotgerade schneiden</td></tr>
+          <tr><td>&bdquo;Liegen $P$ und $Q$ auf derselben Seite?&ldquo;</td><td class="v">HNF ohne Betrag, Vorzeichen vergleichen</td></tr>
+          <tr><td>&bdquo;Wie nah kommt … der Geraden?&ldquo; &ndash; ohne Ortsangabe</td><td class="v">Flächenformel</td></tr>
+          <tr><td>&bdquo;An welcher Stelle …?&ldquo;</td><td class="v">Laufpunkt oder Hilfsebene</td></tr>
+          <tr><td>&bdquo;Abstand zweier windschiefer Geraden&ldquo;</td><td class="v">Spatprodukt</td></tr>
+          <tr><td>&bdquo;Wo kommen sich die Geraden am nächsten?&ldquo;</td><td class="v">Vektorzug mit $2\times2$-LGS</td></tr>
+          <tr><td>&bdquo;Untersuche die Lage der Geraden.&ldquo;</td><td class="v">Kollinear? Punktprobe, sonst Spatprodukt</td></tr>
+          <tr><td>&bdquo;Von den … haben 10 % …&ldquo;</td><td class="v">bedingte Wahrscheinlichkeit, nicht Innenfeld</td></tr>
+          <tr><td>&bdquo;Wie viel Prozent der Defekten sind …?&ldquo;</td><td class="v">$P_D(A)$ &ndash; Bedingung umdrehen</td></tr>
+          <tr><td>&bdquo;Mindestens eines …&ldquo;</td><td class="v">Gegenereignis</td></tr>
+          <tr><td>&bdquo;Beschreibe eine Simulation.&ldquo;</td><td class="v">Vier-Zeilen-Schema</td></tr>
+          <tr><td>&bdquo;Beurteile die Aussage.&ldquo;</td><td class="v">Zahlen nennen <em>und</em> sagen, was sie nicht belegen</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="step" style="margin-top:22px">Die Fehler, die am häufigsten Punkte kosten</div>
+      <div class="fehler-grid">
+        <ol class="fehlerliste">
+          <li><strong>Betrag in der HNF vergessen</strong> &ndash; ein negativer &bdquo;Abstand&ldquo; ist immer falsch.</li>
+          <li><strong>Hilfsebene durch den Stützpunkt statt durch $P$</strong> &ndash; man erhält $r = 0$ und den falschen Punkt.</li>
+          <li><strong>Flächenformel gemischt</strong> &ndash; Zähler und Nenner müssen zum selben Richtungsvektor gehören.</li>
+          <li><strong>Punktprobe übersprungen</strong> &ndash; identische Geraden sehen wie echt parallele aus, haben aber Abstand 0.</li>
+          <li><strong>&bdquo;Windschief mit Abstand 0&ldquo;</strong> &ndash; gibt es nicht; dann schneiden sie sich.</li>
+          <li><strong>Spatprodukt $= 0$ falsch gedeutet</strong> &ndash; das heißt Schnittpunkt, nicht windschief.</li>
+          <li><strong>Pyramidenhöhe geraten</strong> &ndash; sie ist der <em>senkrechte</em> Abstand der Spitze zur Grundebene.</li>
+        </ol>
+        <ol class="fehlerliste" start="8">
+          <li><strong>$P_D(E)$ und $P_E(D)$ vertauscht</strong> &ndash; zwei verschiedene Fragen, zwei verschiedene Zahlen.</li>
+          <li><strong>&bdquo;Von den …&ldquo; als Innenfeld gelesen</strong> &ndash; das ist eine Bedingung, erst die Pfadregel liefert das Feld.</li>
+          <li><strong>Wurzel vergessen</strong> &ndash; $v$ ist die Varianz, gefragt ist meist $s$.</li>
+          <li><strong>Standardabweichung negativ</strong> &ndash; bei $y = mx+b$ steht der Betrag $|m|$ in der Formel.</li>
+          <li><strong>Durchgang und Wiederholung verwechselt</strong> &ndash; ein Durchgang ist das ganze Experiment einmal.</li>
+          <li><strong>$3 \cdot 0{,}1$ statt $1 - 0{,}9^3$</strong> &ndash; Doppelzählung bei &bdquo;mindestens eines&ldquo;.</li>
+          <li><strong>Divisor verwechselt</strong> &ndash; hier gilt durchgehend $n$, der WTR rechnet oft mit $n-1$.</li>
+        </ol>
+      </div>
+
+      <div class="step" style="margin-top:22px">Dein Stand</div>
+      <div id="klausur-stand" class="stand-box"></div>
+
+      <div class="hinweis" style="margin-top:20px">
+        <strong>Die letzten Tage vor der Klausur:</strong>
+        Zuerst die Abschnitte <a href="#verfahren">Verfahren im Bild</a> und
+        <a href="#stochastik">Formeln und Definitionen</a> durchsehen &ndash; dort steht das Gerüst.
+        Dann pro Block zwei bis drei Aufgaben rechnen, und zwar <em>ohne</em> vorher die Musterlösung zu öffnen.
+        Zum Schluss die Prüfungsaufgaben in <a href="#block-F">Block F</a> und <a href="#block-P">Block P</a>
+        am Stück und auf Zeit &ndash; sie sind so lang wie echte Klausuraufgaben.
+        Was dann noch hakt, findest du oben in der Fehlerliste wieder.
+      </div>
+    </section>
   </main>
 </div>
 
@@ -1372,7 +1526,8 @@
 const GRUPPEN = [
   { id:'ueber', titel:'Überblick' },
   { id:'v',     titel:'Vektorgeometrie' },
-  { id:'s',     titel:'Stochastik' }
+  { id:'s',     titel:'Stochastik' },
+  { id:'ende',  titel:'Abschluss' }
 ];
 
 const BLOCKS = [
@@ -1396,7 +1551,8 @@ const LESEBEREICHE = [
   { id:'formeln',    gruppe:'v',     label:'Formelsammlung',       zeichen:'&sum;'   },
   { id:'verfahren',  gruppe:'v',     label:'Verfahren im Bild',    zeichen:'&#9723;' },
   { id:'hilfsebene', gruppe:'v',     label:'Hilfsebene',           zeichen:'&#8869;' },
-  { id:'stochastik', gruppe:'s',     label:'Formeln &amp; Definitionen', zeichen:'&#8721;' }
+  { id:'stochastik', gruppe:'s',     label:'Formeln &amp; Definitionen', zeichen:'&#8721;' },
+  { id:'klausur',    gruppe:'ende',  label:'Klausurvorbereitung',        zeichen:'&#9873;' }
 ];
 
 const AUFGABEN = [
@@ -3608,6 +3764,37 @@ function zuruecksetzen(aid){
   speichere();
 }
 
+/* ---------- Stand-Übersicht im Klausurteil ---------- */
+function renderStand(){
+  const el = document.getElementById('klausur-stand');
+  if (!el) return;
+  const gesamt = AUFGABEN.length;
+  const fertig = AUFGABEN.filter(a => geloest.has(a.id)).length;
+  const offen = BLOCKS.filter(b => AUFGABEN.some(a => a.block === b.id && !geloest.has(a.id)));
+  const zeilen = BLOCKS.map(b => {
+    const liste = AUFGABEN.filter(a => a.block === b.id);
+    const n = liste.filter(a => geloest.has(a.id)).length;
+    const zustand = n === 0 ? 'leer' : (n === liste.length ? 'voll' : 'teil');
+    return `<a class="stand-zeile ${zustand}" href="#block-${b.id}">
+              <span class="num">${b.id}</span>
+              <span class="stand-titel">${b.kurz}</span>
+              <span class="stand-zahl">${n}/${liste.length}</span>
+            </a>`;
+  }).join('');
+  /* Die Liste der offenen Blöcke hilft nur, solange sie kurz ist. */
+  let satz;
+  if (fertig === 0) satz = 'Noch nichts gelöst &ndash; fang mit einem Block an, der dir liegt.';
+  else if (offen.length === 0) satz = 'Alle Blöcke vollständig. Jetzt lohnt der zweite Durchgang: ohne Tipp und auf Zeit.';
+  else if (offen.length <= 4) satz = `Noch offen: ${offen.map(b => b.id).join(', ')}.`;
+  else satz = `Noch ${offen.length} von ${BLOCKS.length} Blöcken offen &ndash; die Kacheln zeigen, welche.`;
+  el.innerHTML = `<div class="stand-kopf">
+      <strong>${fertig} von ${gesamt} Aufgaben gelöst</strong>
+      <span>${satz}</span>
+    </div>
+    <div class="bar"><div class="fill" style="width:${gesamt ? 100*fertig/gesamt : 0}%"></div></div>
+    <div class="stand-raster">${zeilen}</div>`;
+}
+
 /* ---------- Fortschritt ---------- */
 function aktualisiereFortschritt(){
   const gesamt = AUFGABEN.length;
@@ -3628,6 +3815,7 @@ function aktualisiereFortschritt(){
     if (el) el.textContent = `${liste.filter(a => geloest.has(a.id)).length}/${liste.length}`;
   });
   if (state.nurOffene) wendeFilterAn();
+  renderStand();
 }
 
 function fortschrittZuruecksetzen(){
