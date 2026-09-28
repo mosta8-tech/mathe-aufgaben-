@@ -282,6 +282,15 @@
   .erg{ color:var(--ok); font-weight:700; }
   .warnung{ color:var(--bad); font-weight:600; }
 
+  /* Venn-Reihe im Schreibweisen-Block */
+  .venn-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin:16px 0 20px; }
+  .venn{ margin:0; text-align:center; }
+  .venn svg{ display:block; width:100%; max-width:100%; height:auto; color:var(--ink); }
+  .venn figcaption{ font-size:.9rem; color:var(--ink); margin-top:.3rem; line-height:1.45; }
+  .venn figcaption span{ font-family:system-ui,sans-serif; font-size:.78rem; color:var(--muted); }
+  table.schreib-tab td:first-child{ white-space:nowrap; }
+  table.schreib-tab td.v{ font-weight:400; }
+
   /* Ausführlicher Kenngrößen-Block */
   .kg-block{ background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-top:18px; }
   .kg-block h3{ font-size:1.12rem; margin:.15rem 0 .5rem; }
@@ -838,8 +847,9 @@
           <div class="tag">Definitionen</div>
           <h4>Ereignisse als Mengen</h4>
           <p>Der <strong>Ergebnisraum</strong> $\Omega$ enthält alle möglichen Ergebnisse, ein <strong>Ereignis</strong> ist eine Teilmenge davon.</p>
-          <p>$A \cap B$ &ndash; <em>A und B</em> &nbsp;·&nbsp; $A \cup B$ &ndash; <em>A oder B</em> (auch beide)</p>
-          <p>$A \setminus B$ &ndash; <em>A ohne B</em> &nbsp;·&nbsp; $\bar A$ &ndash; <em>nicht A</em></p>
+          <p>Ereignisse werden mit $\cap$ (und), $\cup$ (oder), $\setminus$ (ohne) und dem Querstrich (nicht)
+             verknüpft &ndash; alle Schreibweisen mit Venn-Bildern stehen <a href="#schreibweisen">unten</a>.</p>
+          <p>$|A|$ ist die Anzahl der Ergebnisse in $A$, $\emptyset$ das unmögliche und $\Omega$ das sichere Ereignis.</p>
           <p>Bei einem <strong>Laplace-Experiment</strong> sind alle Ergebnisse gleich wahrscheinlich:</p>
           <p>$$P(A) = \frac{|A|}{|\Omega|}$$</p>
           <p class="weg">Additionssatz: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$. Der Abzug entfällt nur bei
@@ -944,6 +954,155 @@
              wird sie verworfen und neu gezogen.</p>
           <p class="weg">Mehr Durchgänge machen die typische Schwankung des Schätzwerts kleiner &ndash; sie garantieren aber
              nicht, dass eine einzelne Schätzung näher am wahren Wert liegt.</p>
+        </div>
+      </div>
+
+      <div class="kg-block" id="schreibweisen">
+        <div class="tag">Ausführlich</div>
+        <h3>Ereignisse verknüpfen &ndash; alle Schreibweisen</h3>
+        <p>Dieselbe Sache heißt in der Aufgabe, im Tafelbild und in der Lösung oft anders.
+           Hier stehen alle Formen nebeneinander: das Mengenzeichen, die Wortform aus dem Aufgabentext
+           und die gleichwertige Umformung.</p>
+
+        <div class="venn-grid">
+          <figure class="venn">
+            <svg viewBox="0 0 150 100" role="img" aria-label="Venn-Diagramm: die Schnittmenge beider Kreise ist gefärbt.">
+              <defs><clipPath id="vnA"><circle cx="92" cy="50" r="34"/></clipPath></defs>
+              <rect x="4" y="6" width="142" height="88" rx="6" fill="none" stroke="var(--line-2)" stroke-width="1.2"/>
+              <circle cx="58" cy="50" r="34" fill="var(--accent)" opacity="0.3" clip-path="url(#vnA)"/>
+              <circle cx="58" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="92" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <text x="16" y="22" font-size="13" font-style="italic" fill="currentColor">F</text>
+              <text x="134" y="22" font-size="13" font-style="italic" fill="currentColor" text-anchor="end">G</text>
+            </svg>
+            <figcaption>$F \cap G$<br><span>&bdquo;F <strong>und</strong> G&ldquo;</span></figcaption>
+          </figure>
+
+          <figure class="venn">
+            <svg viewBox="0 0 150 100" role="img" aria-label="Venn-Diagramm: beide Kreise sind vollständig gefärbt.">
+              <rect x="4" y="6" width="142" height="88" rx="6" fill="none" stroke="var(--line-2)" stroke-width="1.2"/>
+              <g fill="var(--accent)" opacity="0.3"><circle cx="58" cy="50" r="34"/><circle cx="92" cy="50" r="34"/></g>
+              <circle cx="58" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="92" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <text x="16" y="22" font-size="13" font-style="italic" fill="currentColor">F</text>
+              <text x="134" y="22" font-size="13" font-style="italic" fill="currentColor" text-anchor="end">G</text>
+            </svg>
+            <figcaption>$F \cup G$<br><span>&bdquo;F <strong>oder</strong> G&ldquo;</span></figcaption>
+          </figure>
+
+          <figure class="venn">
+            <svg viewBox="0 0 150 100" role="img" aria-label="Venn-Diagramm: der Teil des linken Kreises außerhalb des rechten ist gefärbt.">
+              <defs><mask id="vnC"><rect x="0" y="0" width="150" height="100" fill="white"/><circle cx="92" cy="50" r="34" fill="black"/></mask></defs>
+              <rect x="4" y="6" width="142" height="88" rx="6" fill="none" stroke="var(--line-2)" stroke-width="1.2"/>
+              <circle cx="58" cy="50" r="34" fill="var(--accent)" opacity="0.3" mask="url(#vnC)"/>
+              <circle cx="58" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="92" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <text x="16" y="22" font-size="13" font-style="italic" fill="currentColor">F</text>
+              <text x="134" y="22" font-size="13" font-style="italic" fill="currentColor" text-anchor="end">G</text>
+            </svg>
+            <figcaption>$F \setminus G$<br><span>&bdquo;F, <strong>aber nicht</strong> G&ldquo;</span></figcaption>
+          </figure>
+
+          <figure class="venn">
+            <svg viewBox="0 0 150 100" role="img" aria-label="Venn-Diagramm: alles außerhalb des Kreises F ist gefärbt.">
+              <defs><mask id="vnD"><rect x="0" y="0" width="150" height="100" fill="white"/><circle cx="75" cy="50" r="34" fill="black"/></mask></defs>
+              <rect x="4" y="6" width="142" height="88" rx="6" fill="var(--accent)" opacity="0.3" mask="url(#vnD)"/>
+              <rect x="4" y="6" width="142" height="88" rx="6" fill="none" stroke="var(--line-2)" stroke-width="1.2"/>
+              <circle cx="75" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <text x="75" y="55" font-size="13" font-style="italic" fill="currentColor" text-anchor="middle">F</text>
+              <text x="14" y="22" font-size="12" fill="var(--muted)">Ω</text>
+            </svg>
+            <figcaption>$\bar F$<br><span>&bdquo;<strong>nicht</strong> F&ldquo;</span></figcaption>
+          </figure>
+
+          <figure class="venn">
+            <svg viewBox="0 0 150 100" role="img" aria-label="Venn-Diagramm: nur der Bereich außerhalb beider Kreise ist gefärbt.">
+              <defs><mask id="vnE"><rect x="0" y="0" width="150" height="100" fill="white"/>
+                <circle cx="58" cy="50" r="34" fill="black"/><circle cx="92" cy="50" r="34" fill="black"/></mask></defs>
+              <rect x="4" y="6" width="142" height="88" rx="6" fill="var(--accent)" opacity="0.3" mask="url(#vnE)"/>
+              <rect x="4" y="6" width="142" height="88" rx="6" fill="none" stroke="var(--line-2)" stroke-width="1.2"/>
+              <circle cx="58" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="92" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <text x="16" y="22" font-size="13" font-style="italic" fill="currentColor">F</text>
+              <text x="134" y="22" font-size="13" font-style="italic" fill="currentColor" text-anchor="end">G</text>
+            </svg>
+            <figcaption>$\bar F \cap \bar G$<br><span>&bdquo;<strong>weder</strong> F <strong>noch</strong> G&ldquo;</span></figcaption>
+          </figure>
+
+          <figure class="venn">
+            <svg viewBox="0 0 150 100" role="img" aria-label="Venn-Diagramm: beide Kreise ohne ihre Schnittmenge sind gefärbt.">
+              <defs>
+                <mask id="vnF1"><rect x="0" y="0" width="150" height="100" fill="white"/><circle cx="92" cy="50" r="34" fill="black"/></mask>
+                <mask id="vnF2"><rect x="0" y="0" width="150" height="100" fill="white"/><circle cx="58" cy="50" r="34" fill="black"/></mask>
+              </defs>
+              <rect x="4" y="6" width="142" height="88" rx="6" fill="none" stroke="var(--line-2)" stroke-width="1.2"/>
+              <g fill="var(--accent)" opacity="0.3">
+                <circle cx="58" cy="50" r="34" mask="url(#vnF1)"/>
+                <circle cx="92" cy="50" r="34" mask="url(#vnF2)"/>
+              </g>
+              <circle cx="58" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="92" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              <text x="16" y="22" font-size="13" font-style="italic" fill="currentColor">F</text>
+              <text x="134" y="22" font-size="13" font-style="italic" fill="currentColor" text-anchor="end">G</text>
+            </svg>
+            <figcaption>$(F \setminus G) \cup (G \setminus F)$<br><span>&bdquo;<strong>genau eines</strong> von beiden&ldquo;</span></figcaption>
+          </figure>
+        </div>
+
+        <div class="step">Die Tabelle der Schreibweisen</div>
+        <div style="overflow-x:auto">
+        <table class="entscheid schreib-tab">
+          <thead><tr><th>Mengenschreibweise</th><th>So steht es in der Aufgabe</th><th>Gleichwertig dazu</th></tr></thead>
+          <tbody>
+            <tr><td class="v">$F \cap G$</td><td>&bdquo;F und G&ldquo;, &bdquo;sowohl F als auch G&ldquo;, &bdquo;beide&ldquo;</td><td>$G \cap F$</td></tr>
+            <tr><td class="v">$F \cup G$</td><td>&bdquo;F oder G&ldquo;, &bdquo;mindestens eines von beiden&ldquo;</td><td>$G \cup F$</td></tr>
+            <tr><td class="v">$\bar F$</td><td>&bdquo;nicht F&ldquo;, &bdquo;F tritt nicht ein&ldquo;</td><td>$\Omega \setminus F$</td></tr>
+            <tr><td class="v">$F \setminus G$</td><td>&bdquo;F, aber nicht G&ldquo;, &bdquo;nur F&ldquo;</td><td>$F \cap \bar G$</td></tr>
+            <tr><td class="v">$\bar F \cap \bar G$</td><td>&bdquo;weder F noch G&ldquo;, &bdquo;keines von beiden&ldquo;</td><td>$\overline{F \cup G}$</td></tr>
+            <tr><td class="v">$\bar F \cup \bar G$</td><td>&bdquo;nicht beide&ldquo;, &bdquo;höchstens eines&ldquo;</td><td>$\overline{F \cap G}$</td></tr>
+            <tr><td class="v">$(F \setminus G) \cup (G \setminus F)$</td><td>&bdquo;genau eines von beiden&ldquo;, &bdquo;entweder F oder G&ldquo;</td><td>$(F \cup G) \setminus (F \cap G)$</td></tr>
+            <tr><td class="v">$F \cap G = \emptyset$</td><td>&bdquo;F und G schließen sich aus&ldquo;</td><td>disjunkt, unvereinbar</td></tr>
+            <tr><td class="v">$F \subseteq G$</td><td>&bdquo;aus F folgt G&ldquo;, &bdquo;immer wenn F, dann auch G&ldquo;</td><td>$F \cap G = F$</td></tr>
+          </tbody>
+        </table>
+        </div>
+
+        <div class="kg-fragen" style="margin-top:18px">
+          <div class="kg-frage">
+            <h4>Das &bdquo;oder&ldquo; ist nie ausschließend</h4>
+            <p>$F \cup G$ heißt &bdquo;F oder G <em>oder beide</em>&ldquo;. Im Alltag meint &bdquo;oder&ldquo; oft
+               &bdquo;entweder … oder&ldquo; &ndash; in der Mathematik nie.</p>
+            <p>Ist wirklich &bdquo;entweder … oder&ldquo; gemeint, steht in der Aufgabe <strong>genau eines</strong>,
+               und der Term lautet $(F \setminus G) \cup (G \setminus F)$ &ndash; das letzte Venn-Bild oben.</p>
+            <p>An dieser Stelle hängt auch der Additionssatz: Bei $P(F \cup G) = P(F) + P(G) - P(F \cap G)$
+               wird der Schnitt abgezogen, weil er in beiden Summanden steckt.</p>
+          </div>
+          <div class="kg-frage">
+            <h4>De Morgan: das Nicht nach innen ziehen</h4>
+            <p>$$\overline{F \cup G} = \bar F \cap \bar G$$</p>
+            <p>$$\overline{F \cap G} = \bar F \cup \bar G$$</p>
+            <p>Beim Hineinziehen des Querstrichs <strong>kippt das Zeichen</strong>: aus $\cup$ wird $\cap$ und umgekehrt.</p>
+            <p>In Worten sofort einleuchtend: &bdquo;nicht (F oder G)&ldquo; ist dasselbe wie &bdquo;weder F noch G&ldquo;.
+               Und &bdquo;nicht beide&ldquo; heißt: mindestens eines der beiden fehlt.</p>
+          </div>
+          <div class="kg-frage">
+            <h4>Wendungen mit &bdquo;mindestens&ldquo; und &bdquo;höchstens&ldquo;</h4>
+            <p><strong>mindestens eines</strong> $= F \cup G$ &nbsp;&ndash;&nbsp; eines reicht, beide sind erlaubt</p>
+            <p><strong>genau eines</strong> $= (F \setminus G) \cup (G \setminus F)$</p>
+            <p><strong>höchstens eines</strong> $= \overline{F \cap G}$ &nbsp;&ndash;&nbsp; alles außer &bdquo;beide&ldquo;</p>
+            <p><strong>keines</strong> $= \bar F \cap \bar G$</p>
+            <p class="warnung">Bei &bdquo;mindestens&ldquo; lohnt sich fast immer das Gegenereignis:
+               $P(\text{mindestens eines}) = 1 - P(\text{keines})$.</p>
+          </div>
+          <div class="kg-frage">
+            <h4>Auch die Wahrscheinlichkeiten haben zwei Schreibweisen</h4>
+            <p>Für die bedingte Wahrscheinlichkeit sind beide Formen üblich und bedeuten dasselbe:</p>
+            <p>$$P_G(F) \quad = \quad P(F \mid G)$$</p>
+            <p>Links die in Nordrhein-Westfalen übliche Schreibweise mit der Bedingung als Index, rechts die
+               internationale mit dem senkrechten Strich. <strong>In beiden steht die Bedingung an anderer Stelle</strong>
+               &ndash; links unten, rechts hinten. Genau deshalb wird so oft verwechselt, was gegeben und was gesucht ist.</p>
+            <p>Ebenso trifft man $P(F \cap G)$ gelegentlich als $P(F \text{ und } G)$ oder kurz $P(FG)$ an.</p>
+          </div>
         </div>
       </div>
 
