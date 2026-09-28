@@ -282,6 +282,24 @@
   .erg{ color:var(--ok); font-weight:700; }
   .warnung{ color:var(--bad); font-weight:600; }
 
+  /* Ausführlicher Kenngrößen-Block */
+  .kg-block{ background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-top:18px; }
+  .kg-block h3{ font-size:1.12rem; margin:.15rem 0 .5rem; }
+  .kg-block .tag{ font-family:system-ui,sans-serif; font-size:.66rem; font-weight:700; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); }
+  .kg-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:22px; margin-top:12px; }
+  .kg-schritte{ margin:.4rem 0; padding-left:1.2rem; }
+  .kg-schritte li{ margin:.55rem 0; }
+  table.kg-tab{ max-width:340px; }
+  table.kg-tab th{ text-transform:none; letter-spacing:0; font-size:.9rem; }
+  table.kg-tab td{ text-align:center; font-variant-numeric:tabular-nums; }
+  table.kg-tab tr.summe th{ color:var(--ink); font-size:.85rem; }
+  table.kg-tab tr.summe td{ font-weight:700; }
+  .kg-fragen{ display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:14px; margin-top:18px; }
+  .kg-frage{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:13px 15px; }
+  .kg-frage h4{ font-size:.97rem; margin:0 0 .4rem; color:var(--accent); }
+  .kg-frage p{ margin:.4rem 0; font-size:.93rem; }
+
   /* Verfahrensgalerie und Hilfsebenen-Abschnitt */
   .verfahren-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px; margin-top:16px; }
   .verfahren{ background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:15px 17px; }
@@ -907,24 +925,6 @@
         </div>
 
         <div class="variante">
-          <div class="tag">Definitionen</div>
-          <h3>Empirische Kenngrößen</h3>
-          <p>Für eine Messreihe $x_1, \dots, x_n$:</p>
-          <p><strong>Arithmetisches Mittel</strong></p>
-          <p>$$\bar x = \frac{1}{n} \sum_{i=1}^{n} x_i$$</p>
-          <p><strong>Empirische Varianz</strong> (hier durchgehend mit Divisor $n$)</p>
-          <p>$$v = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar x)^2$$</p>
-          <p><strong>Empirische Standardabweichung</strong></p>
-          <p>$$s = \sqrt{v}$$</p>
-          <p>Liegen die Werte als Häufigkeitsliste vor, wird mit den Häufigkeiten $h_i$ gewichtet:
-             $\bar x = \sum x_i h_i$ und $v = \sum (x_i - \bar x)^2 h_i$ bei relativen Häufigkeiten.</p>
-          <p><strong>Lineare Umrechnung</strong> $y = m \cdot x + b$:</p>
-          <p>$$\bar y = m \bar x + b, \qquad s_y = |m| \cdot s_x$$</p>
-          <p class="weg">Der Betrag ist Pflicht &ndash; eine Standardabweichung ist nie negativ. Und: Verschieben ($+b$)
-             ändert die Streuung nicht, weil alle Abweichungen $x_i - \bar x$ gleich bleiben.</p>
-        </div>
-
-        <div class="variante">
           <div class="tag">Schema</div>
           <h3>Simulationen beschreiben</h3>
           <p>Jede Simulationsbeschreibung besteht aus denselben vier Zeilen:</p>
@@ -944,6 +944,143 @@
              wird sie verworfen und neu gezogen.</p>
           <p class="weg">Mehr Durchgänge machen die typische Schwankung des Schätzwerts kleiner &ndash; sie garantieren aber
              nicht, dass eine einzelne Schätzung näher am wahren Wert liegt.</p>
+        </div>
+      </div>
+
+      <div class="kg-block" id="kenngroessen">
+        <div class="tag">Ausführlich</div>
+        <h3>Empirische Kenngrößen &ndash; Schritt für Schritt</h3>
+        <p>An eine Datenreihe stellt man zwei verschiedene Fragen:
+           <strong>Wo liegen die Werte?</strong> &ndash; das beantwortet der Mittelwert.
+           <strong>Wie weit streuen sie?</strong> &ndash; das beantworten Varianz und Standardabweichung.
+           Die beiden hängen nicht voneinander ab: Zwei Reihen können denselben Mittelwert haben und trotzdem
+           völlig verschieden streuen.</p>
+
+        <div class="kg-grid">
+          <div>
+            <div class="step">Das Rezept in vier Schritten</div>
+            <ol class="kg-schritte">
+              <li><strong>Mittelwert bilden.</strong> Alle Werte addieren und durch ihre Anzahl teilen:
+                  $$\bar x = \frac{1}{n}\sum_{i=1}^{n} x_i$$</li>
+              <li><strong>Abweichungen berechnen.</strong> Von jedem Wert den Mittelwert abziehen: $x_i - \bar x$.
+                  Diese Zahlen sagen, wie weit jeder Wert vom Zentrum entfernt liegt &ndash; mit Vorzeichen.</li>
+              <li><strong>Quadrieren und mitteln.</strong> Das ist die <strong>empirische Varianz</strong>:
+                  $$v = \frac{1}{n}\sum_{i=1}^{n} (x_i - \bar x)^2$$</li>
+              <li><strong>Wurzel ziehen.</strong> Das ist die <strong>empirische Standardabweichung</strong>:
+                  $$s = \sqrt{v}$$</li>
+            </ol>
+          </div>
+
+          <div>
+            <div class="step">Am Beispiel $2;\ 4;\ 5;\ 6;\ 8$</div>
+            <p>Schritt 1: $\bar x = \dfrac{2+4+5+6+8}{5} = \dfrac{25}{5} = 5$</p>
+            <div style="overflow-x:auto">
+            <table class="entscheid kg-tab">
+              <thead><tr><th>$x_i$</th><th>$x_i - \bar x$</th><th>$(x_i - \bar x)^2$</th></tr></thead>
+              <tbody>
+                <tr><td>2</td><td>&minus;3</td><td>9</td></tr>
+                <tr><td>4</td><td>&minus;1</td><td>1</td></tr>
+                <tr><td>5</td><td>0</td><td>0</td></tr>
+                <tr><td>6</td><td>+1</td><td>1</td></tr>
+                <tr><td>8</td><td>+3</td><td>9</td></tr>
+                <tr class="summe"><th>Summe</th><td>0</td><td>20</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <p>Schritt 3: $v = \dfrac{20}{5} = 4$ &nbsp;&nbsp;·&nbsp;&nbsp; Schritt 4: $s = \sqrt4 = 2$</p>
+          </div>
+        </div>
+
+        <figure class="figur" style="margin-top:6px">
+          <svg viewBox="0 0 460 190" role="img" font-family="system-ui, -apple-system, sans-serif"
+               aria-label="Zahlenstrahl mit den Werten 2, 4, 5, 6 und 8. Der Mittelwert 5 ist als Linie eingezeichnet, die Abweichungen minus 3 und plus 3 als Pfeile. Das Band von 3 bis 7 ist der Bereich Mittelwert plus minus eine Standardabweichung; darin liegen drei der fünf Werte.">
+            <rect x="154" y="58" width="152" height="84" fill="var(--ok-bg)" stroke="var(--ok-line)" stroke-width="1.2"/>
+            <line x1="40" y1="142" x2="425" y2="142" stroke="currentColor" stroke-width="1.6"/>
+            <line x1="230" y1="48" x2="230" y2="158" stroke="var(--accent)" stroke-width="2"/>
+            <defs>
+              <marker id="kgA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker>
+              <marker id="kgB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--ok)"/></marker>
+            </defs>
+            <line x1="230" y1="116" x2="121" y2="116" stroke="currentColor" stroke-width="1.6" marker-end="url(#kgA)"/>
+            <line x1="230" y1="116" x2="339" y2="116" stroke="currentColor" stroke-width="1.6" marker-end="url(#kgA)"/>
+            <line x1="232" y1="76" x2="304" y2="76" stroke="var(--ok)" stroke-width="2" marker-end="url(#kgB)"/>
+            <g fill="currentColor">
+              <circle cx="116" cy="142" r="5"/><circle cx="192" cy="142" r="5"/><circle cx="230" cy="142" r="5"/>
+              <circle cx="268" cy="142" r="5"/><circle cx="344" cy="142" r="5"/>
+            </g>
+            <g font-size="12.5" fill="currentColor" text-anchor="middle">
+              <text x="116" y="162">2</text><text x="192" y="162">4</text><text x="230" y="162">5</text>
+              <text x="268" y="162">6</text><text x="344" y="162">8</text>
+            </g>
+            <text x="174" y="110" font-size="12.5" fill="currentColor" text-anchor="middle">−3</text>
+            <text x="286" y="110" font-size="12.5" fill="currentColor" text-anchor="middle">+3</text>
+            <text x="268" y="70" font-size="12.5" fill="var(--ok)" text-anchor="middle">s = 2</text>
+            <text x="230" y="42" font-size="13" fill="var(--accent)" text-anchor="middle" font-style="italic">x̄ = 5</text>
+            <text x="154" y="180" font-size="12" fill="var(--ok)" text-anchor="middle">3</text>
+            <text x="306" y="180" font-size="12" fill="var(--ok)" text-anchor="middle">7</text>
+            <text x="230" y="180" font-size="12" fill="var(--ok)" text-anchor="middle">Band [x̄−s ; x̄+s]</text>
+          </svg>
+          <figcaption>Der Mittelwert ist die Stelle, an der sich die Abweichungen ausgleichen: $-3-1+0+1+3 = 0$.
+            Die Standardabweichung ist die halbe Breite des grünen Bandes &ndash; hier liegen 3 der 5 Werte darin.</figcaption>
+        </figure>
+
+        <div class="kg-fragen">
+          <div class="kg-frage">
+            <h4>Warum wird quadriert?</h4>
+            <p>Weil sich die Abweichungen sonst gegenseitig auslöschen. Ihre Summe ist <em>immer</em> null
+               &ndash; im Beispiel $-3-1+0+1+3 = 0$ &ndash; denn genau dort liegt der Mittelwert.
+               Ein Durchschnitt der Abweichungen wäre also für jede Datenreihe 0 und damit wertlos.</p>
+            <p>Durch das Quadrieren werden alle Beiträge positiv, und große Abweichungen zählen überproportional:
+               Der Wert 8 liegt dreimal so weit weg wie der Wert 6, sein Beitrag zur Varianz ist aber neunmal so groß.</p>
+          </div>
+          <div class="kg-frage">
+            <h4>Warum am Ende die Wurzel?</h4>
+            <p>Wegen der Einheiten. Beim Quadrieren werden aus Millimetern Quadratmillimeter:
+               $v = 1{,}2\ \text{mm}^2$ lässt sich mit den Messwerten nicht vergleichen.</p>
+            <p>Die Wurzel bringt zurück in die Einheit der Daten: $s = 1{,}1\ \text{mm}$ steht neben
+               &bdquo;100 mm&ldquo; und ist sofort lesbar. <strong>Deshalb ist $s$ die Größe, die man interpretiert
+               &ndash; $v$ ist nur die Zwischenstation.</strong></p>
+          </div>
+          <div class="kg-frage">
+            <h4>Divisor $n$ oder $n-1$?</h4>
+            <p>Beides gibt es, und beides ist richtig &ndash; für verschiedene Zwecke:</p>
+            <p><strong>$n$</strong> &ndash; die <em>empirische</em> Varianz. Sie beschreibt genau die vorliegenden Daten.
+               Das ist die Variante in dieser Sammlung und im Unterricht.</p>
+            <p><strong>$n-1$</strong> &ndash; die <em>Stichproben</em>varianz. Sie schätzt die Streuung einer größeren
+               Grundgesamtheit, aus der die Daten nur eine Stichprobe sind.</p>
+            <p>Der Unterschied ist spürbar: Im Beispiel oben wäre $\frac{20}{4} = 5$ statt $\frac{20}{5} = 4$.
+               Der WTR bietet oft beides an (meist $\sigma_x$ für $n$ und $s_x$ für $n-1$) &ndash;
+               <strong>vor dem Tippen prüfen, welche Taste gemeint ist.</strong></p>
+          </div>
+          <div class="kg-frage">
+            <h4>Was sagt $s$ eigentlich aus?</h4>
+            <p>Eine <strong>typische</strong> Entfernung vom Mittelwert &ndash; keine Höchstgrenze.
+               Im Beispiel ist $s = 2$, der Wert 8 liegt trotzdem 3 vom Mittelwert entfernt.</p>
+            <p>Das Band $[\bar x - s;\ \bar x + s]$ ist der Bereich der &bdquo;unauffälligen&ldquo; Werte.
+               Hier enthält es 3 von 5 Werten, also 60 %.</p>
+            <p class="warnung">Die oft genannten 68 % gelten nur für <em>normalverteilte</em> Daten.
+               Bei fünf Messwerten ist ein Vergleich damit ohne Aussagekraft &ndash; eine beliebte Falle in Teilaufgaben,
+               die nach einer Beurteilung fragen.</p>
+          </div>
+          <div class="kg-frage">
+            <h4>Daten als Häufigkeitsliste</h4>
+            <p>Liegen die Werte nicht einzeln, sondern mit Häufigkeiten vor, wird gewichtet statt aufgelistet.
+               Mit den absoluten Häufigkeiten $H_i$:</p>
+            <p>$$\bar x = \frac{1}{n}\sum x_i H_i, \qquad v = \frac{1}{n}\sum (x_i - \bar x)^2 H_i$$</p>
+            <p>Mit relativen Häufigkeiten $h_i$ entfällt das $\frac1n$:
+               $\bar x = \sum x_i h_i$ und $v = \sum (x_i - \bar x)^2 h_i$.</p>
+            <p>Das spart bei 20 Messwerten mit fünf verschiedenen Ausprägungen die Hälfte der Schreibarbeit
+               &ndash; siehe die Aufgaben P1 und P2.</p>
+          </div>
+          <div class="kg-frage">
+            <h4>Lineare Umrechnung $y = m x + b$</h4>
+            <p>$$\bar y = m \bar x + b, \qquad s_y = |m| \cdot s_x$$</p>
+            <p><strong>Das $+b$ verschiebt nur.</strong> Alle Werte <em>und</em> der Mittelwert wandern gleich weit;
+               jede Abweichung $x_i - \bar x$ bleibt exakt gleich. Deshalb ändert sich die Streuung nicht.</p>
+            <p><strong>Das $\cdot\, m$ streckt.</strong> Jede Abweichung wird $m$-mal so groß, also auch $s$.</p>
+            <p>Der <strong>Betrag</strong> ist Pflicht: Bei $y = 1 - 2x$ ist $s_y = 2 s_x = 4$, nicht $-4$.
+               Ein negatives $m$ spiegelt die Daten nur &ndash; eine Standardabweichung ist nie negativ.</p>
+          </div>
         </div>
       </div>
 
