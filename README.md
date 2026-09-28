@@ -1,9 +1,11 @@
-# Kapitel 17 – Abstandsprobleme: Übungsaufgaben
+# Abstände und Stochastik: Übungsaufgaben
 
-Interaktive Übungswebsite zu **Kapitel 17 (Abstandsprobleme)** der
-[Vektorrechnung-Zusammenfassung](https://erikdahlmann.github.io/Vektorrechnung-Zusammenfassung/).
-Die Seite greift Stoff, Notation und Gestaltung der Zusammenfassung auf und ergänzt sie um 44 Aufgaben
-mit Sofortkorrektur, Tipps und ausführlichen Musterlösungen.
+Interaktive Übungswebsite zur Klausurvorbereitung mit **59 Aufgaben** aus zwei Gebieten:
+**Kapitel 17 (Abstandsprobleme)** der
+[Vektorrechnung-Zusammenfassung](https://erikdahlmann.github.io/Vektorrechnung-Zusammenfassung/)
+und die **Stochastik** nach den
+[Übungen zur 1. Klausur](https://erikdahlmann.github.io/Uebungen-Klausur1/).
+Alle Aufgaben haben Sofortkorrektur, Tipps und ausführliche Musterlösungen.
 
 ## Inhalt
 
@@ -42,11 +44,12 @@ Punktabstand sowie die Fehlvorstellung, windschiefe Geraden könnten den Abstand
   Der Fortschritt einer älteren Fassung wird übernommen; jeder Speicherzugriff ist abgesichert, sodass die Seite auch
   im privaten Modus oder bei blockierten Seitendaten vollständig funktioniert
 - **Fortschrittsanzeige** gesamt und pro Block, dazu „Alles zurücksetzen“
-- **Bereichsleiste an der Seite:** alle Bereiche der Seite auf einen Blick – die erklärenden Abschnitte
-  (Anleitung, Formelsammlung, Verfahren im Bild, Hilfsebene) und die sechs Aufgabenblöcke mit ihrem Stand.
+- **Bereichsleiste an der Seite:** alle Bereiche auf einen Blick, nach Themengebieten gruppiert – die erklärenden
+  Abschnitte (Anleitung, Formelsammlung, Verfahren im Bild, Hilfsebene, Stochastik-Formeln) und die elf
+  Aufgabenblöcke mit ihrem Stand.
   Sie bleibt beim Scrollen stehen, hebt den gerade sichtbaren Bereich hervor und zeigt unten den Gesamtfortschritt;
   auf schmalen Displays klebt sie als aufklappbare Leiste am oberen Rand
-- **Filter** nach Block und nach ungelösten Aufgaben
+- **Filter** nach Themengebiet (Vektorgeometrie / Stochastik), nach Block und nach ungelösten Aufgaben
 - **Druckansicht:** Bedienelemente werden beim Drucken ausgeblendet
 
 ## Technik

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kapitel 17 – Abstandsprobleme | Übungsaufgaben</title>
-<meta name="description" content="44 Übungsaufgaben mit Sofortkorrektur, Tipps und ausführlichen Musterlösungen zu Kapitel 17 (Abstandsprobleme) der Vektorrechnung-Zusammenfassung.">
+<title>Abstände und Stochastik | Übungsaufgaben</title>
+<meta name="description" content="59 Übungsaufgaben mit Sofortkorrektur zu Abstandsproblemen der Vektorgeometrie und zur Stochastik – mit Formelsammlungen, Definitionen und Verfahrensskizzen.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -308,12 +308,21 @@
     text-transform:uppercase; color:var(--muted); margin-bottom:.3rem; }
   .mini-ref{ font-family:system-ui,sans-serif; font-size:.8rem; color:var(--accent); font-weight:600; white-space:nowrap; }
 
+  /* Vierfeldertafeln in Lösungen und Formelteil */
+  table.vft{ max-width:420px; }
+  table.vft th{ text-transform:none; letter-spacing:0; font-size:.9rem; color:var(--ink); font-weight:600; }
+  table.vft thead th{ color:var(--muted); font-size:.8rem; }
+  table.vft td{ text-align:center; font-variant-numeric:tabular-nums; }
+  table.vft tbody tr:last-child{ font-weight:600; }
+
   /* Filterleiste */
   .filterbar{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:6px; }
   .chip{ font-family:system-ui,sans-serif; font-size:.82rem; background:#fff; border:1.5px solid var(--line);
     color:var(--ink); border-radius:999px; padding:.35rem .9rem; cursor:pointer; transition:.12s; }
   .chip:hover{ border-color:var(--accent); }
   .chip.on{ background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
+  .chip-thema{ font-weight:600; background:var(--paper); }
+  .chip-thema.on{ background:var(--accent); }
 
   footer.site-foot{ border-top:1px solid var(--line); background:#efeae0; padding:26px 22px; }
   .foot-inner{ max-width:1180px; margin:0 auto; font-family:system-ui,sans-serif; font-size:.85rem; color:var(--muted); }
@@ -330,21 +339,21 @@
 
 <header class="site-head">
   <div class="head-inner">
-    <div class="crumb">Vektorgeometrie &middot; Kapitel 17 von 17</div>
-    <h1>Abstandsprobleme &ndash; Übungsaufgaben</h1>
-    <p class="lead">44 Aufgaben zu allen vier Abstandsfällen &ndash; Punkt&ndash;Ebene, Punkt&ndash;Gerade, parallele und windschiefe Geraden &ndash;
-       dazu Anwendungen und mehrschrittige Prüfungsaufgaben.
-       Trage deine Lösung ein, lass sie sofort prüfen und vergleiche anschließend mit der ausführlichen Musterlösung.</p>
+    <div class="crumb">Klausurvorbereitung &middot; Vektorgeometrie und Stochastik</div>
+    <h1>Abstände und Stochastik &ndash; Übungsaufgaben</h1>
+    <p class="lead">59 Aufgaben aus zwei Gebieten: alle vier Abstandsfälle der Vektorgeometrie &ndash; Punkt&ndash;Ebene, Punkt&ndash;Gerade,
+       parallele und windschiefe Geraden &ndash; sowie die Stochastik mit Ereignismengen, Vierfeldertafel, Kenngrößen und Simulationen.
+       Zu jedem Gebiet gibt es Formeln, Definitionen und Skizzen; jede Aufgabe wird sofort geprüft und ausführlich vorgerechnet.</p>
     <div class="head-links">
       <a href="https://erikdahlmann.github.io/Vektorrechnung-Zusammenfassung/" target="_blank" rel="noopener">&larr; Zur Zusammenfassung (Kapitel 17)</a>
       <a href="#formeln">Formelsammlung</a>
       <a href="#verfahren">Verfahren im Bild</a>
-      <a href="#hilfsebene">Hilfsebene</a>
+      <a href="#stochastik">Stochastik</a>
       <a href="#block-A">Direkt zu den Aufgaben</a>
     </div>
     <div class="progress-wrap">
       <div class="progress-top">
-        <span id="progress-text">0 von 44 Aufgaben gelöst</span>
+        <span id="progress-text">0 von 59 Aufgaben gelöst</span>
         <button class="btn-reset" type="button" id="btn-reset-progress">Alles zurücksetzen</button>
       </div>
       <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
@@ -357,13 +366,13 @@
     <div class="toc-box">
       <button class="toc-kopf" type="button" id="toc-toggle" aria-expanded="false" aria-controls="toc-nav">
         <span>Bereiche</span>
-        <span class="stand" id="toc-stand">0/44</span>
+        <span class="stand" id="toc-stand">0/59</span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"/></svg>
       </button>
       <div class="toc-title">Bereiche</div>
       <nav id="toc-nav"></nav>
       <div class="toc-fuss">
-        <div class="zeile"><span>Gelöst</span><span id="toc-zahl">0 von 44</span></div>
+        <div class="zeile"><span>Gelöst</span><span id="toc-zahl">0 von 59</span></div>
         <div class="bar"><div class="fill" id="toc-fill"></div></div>
       </div>
     </div>
@@ -378,8 +387,11 @@
       <p><strong>Du kannst jederzeit unterbrechen:</strong> Gelöste Aufgaben, alle eingetippten Werte und die gewählte Ansicht
          werden automatisch in deinem Browser gespeichert und beim nächsten Aufruf wiederhergestellt &ndash; ohne Konto und ohne Server.
          Die Daten liegen nur auf diesem Gerät und in diesem Browser; über <em>Alles zurücksetzen</em> oben wirst du sie wieder los.</p>
+      <p style="margin-top:.8rem">Die Seite deckt zwei Gebiete ab: <strong>Vektorgeometrie</strong> (Abstandsprobleme, Kapitel 17)
+         und <strong>Stochastik</strong>. Über die Leiste links springst du direkt in jeden Bereich, mit den Filterknöpfen
+         blendest du ein Gebiet oder einen einzelnen Block aus.</p>
       <div class="hinweis" style="margin-top:14px">
-        <strong>Die eine Leitidee:</strong> Der Abstand ist immer der kürzeste Weg &ndash; und der steht immer <em>senkrecht</em>.
+        <strong>Die Leitidee der Abstandsaufgaben:</strong> Der Abstand ist immer der kürzeste Weg &ndash; und der steht immer <em>senkrecht</em>.
         Die Verfahren unterscheiden sich nur darin, wie sie diese Senkrechte finden: über den Normalenvektor (Ebene),
         über eine Orthogonalitätsbedingung (Gerade) oder über das Kreuzprodukt (zwei Richtungen gleichzeitig).
       </div>
@@ -797,6 +809,152 @@
       </div>
     </section>
 
+    <section class="card" id="stochastik">
+      <h2>Stochastik &ndash; Formeln und Definitionen</h2>
+      <p style="margin-top:.5rem">Alles, was für die Aufgaben unten gebraucht wird: die Sprache der Ereignisse, die bedingte
+         Wahrscheinlichkeit mit Vierfeldertafel und Baumdiagramm, die Unabhängigkeit, die empirischen Kenngrößen
+         und das Schema für Simulationsbeschreibungen.</p>
+
+      <div class="fall-grid">
+        <div class="fall">
+          <div class="tag">Definitionen</div>
+          <h4>Ereignisse als Mengen</h4>
+          <p>Der <strong>Ergebnisraum</strong> $\Omega$ enthält alle möglichen Ergebnisse, ein <strong>Ereignis</strong> ist eine Teilmenge davon.</p>
+          <p>$A \cap B$ &ndash; <em>A und B</em> &nbsp;·&nbsp; $A \cup B$ &ndash; <em>A oder B</em> (auch beide)</p>
+          <p>$A \setminus B$ &ndash; <em>A ohne B</em> &nbsp;·&nbsp; $\bar A$ &ndash; <em>nicht A</em></p>
+          <p>Bei einem <strong>Laplace-Experiment</strong> sind alle Ergebnisse gleich wahrscheinlich:</p>
+          <p>$$P(A) = \frac{|A|}{|\Omega|}$$</p>
+          <p class="weg">Additionssatz: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$. Der Abzug entfällt nur bei
+             <strong>disjunkten</strong> Ereignissen ($A \cap B = \emptyset$).</p>
+        </div>
+
+        <div class="fall">
+          <div class="tag">Definition</div>
+          <h4>Bedingte Wahrscheinlichkeit</h4>
+          <p>$P_B(A)$ ist die Wahrscheinlichkeit von $A$ <em>unter der Bedingung</em>, dass $B$ eingetreten ist:</p>
+          <p>$$P_B(A) = \frac{P(A \cap B)}{P(B)}, \qquad P(B) > 0$$</p>
+          <p>Umgestellt ist das die <strong>Pfadregel</strong> (Produktregel):</p>
+          <p>$$P(A \cap B) = P(B) \cdot P_B(A)$$</p>
+          <p class="weg">$P_B(A)$ und $P_A(B)$ sind verschiedene Fragen und meist verschiedene Zahlen &ndash;
+             das ist die häufigste Verwechslung im ganzen Kapitel.</p>
+        </div>
+
+        <div class="fall">
+          <div class="tag">Definition</div>
+          <h4>Stochastische Unabhängigkeit</h4>
+          <p>$A$ und $B$ heißen unabhängig, wenn</p>
+          <p>$$P(A \cap B) = P(A) \cdot P(B)$$</p>
+          <p>Gleichwertig (für $P(A), P(B) > 0$):</p>
+          <p>$$P_B(A) = P(A) \qquad \Longleftrightarrow \qquad P_A(B) = P(B)$$</p>
+          <p>In Worten: Die Information über $B$ ändert nichts an der Wahrscheinlichkeit von $A$.</p>
+          <p class="weg"><strong>Nicht verwechseln:</strong> <em>disjunkt</em> heißt &bdquo;schließen sich aus&ldquo; &ndash;
+             das ist das Gegenteil von unabhängig. Zwei disjunkte Ereignisse mit $P > 0$ sind immer abhängig.</p>
+        </div>
+
+      </div>
+
+      <div class="variante-grid" style="margin-top:18px">
+        <div class="variante">
+          <div class="tag">Werkzeug</div>
+          <h3>Vierfeldertafel</h3>
+          <p>Die vier Innenfelder sind die Schnittwahrscheinlichkeiten, der Rand enthält die Einzelwahrscheinlichkeiten:</p>
+          <div style="overflow-x:auto"><table class="entscheid vft">
+            <thead><tr><th></th><th>$B$</th><th>$\bar B$</th><th>Summe</th></tr></thead>
+            <tbody>
+              <tr><th>$A$</th><td>$P(A \cap B)$</td><td>$P(A \cap \bar B)$</td><td>$P(A)$</td></tr>
+              <tr><th>$\bar A$</th><td>$P(\bar A \cap B)$</td><td>$P(\bar A \cap \bar B)$</td><td>$P(\bar A)$</td></tr>
+              <tr><th>Summe</th><td>$P(B)$</td><td>$P(\bar B)$</td><td>$1$</td></tr>
+            </tbody>
+          </table></div>
+          <p class="weg" style="margin-top:.7rem">Vorgehen: ein Innenfeld über die Pfadregel berechnen, den Rest durch Ergänzen auf die Randsummen.
+             Jede Zeile und jede Spalte muss aufgehen.</p>
+        </div>
+        <div class="variante">
+          <div class="tag">Zusammenhang</div>
+          <h3>Baumdiagramm und Tafel</h3>
+          <figure class="figur">
+            <svg viewBox="0 0 460 250" role="img" font-family="system-ui, -apple-system, sans-serif"
+                 aria-label="Zweistufiges Baumdiagramm: erste Stufe verzweigt nach A und nicht A, zweite Stufe jeweils nach D und nicht D. Das Produkt der Wahrscheinlichkeiten entlang eines Pfades ergibt das zugehörige Innenfeld der Vierfeldertafel.">
+              <line x1="55" y1="125" x2="185" y2="65" stroke="currentColor" stroke-width="1.8"/>
+              <line x1="55" y1="125" x2="185" y2="185" stroke="currentColor" stroke-width="1.8"/>
+              <line x1="205" y1="60" x2="330" y2="28" stroke="var(--accent)" stroke-width="2.4"/>
+              <line x1="205" y1="70" x2="330" y2="100" stroke="currentColor" stroke-width="1.6"/>
+              <line x1="205" y1="180" x2="330" y2="150" stroke="currentColor" stroke-width="1.6"/>
+              <line x1="205" y1="190" x2="330" y2="222" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="55" cy="125" r="4" fill="currentColor"/>
+              <text x="195" y="70" font-size="14" font-style="italic" text-anchor="middle" fill="currentColor">A</text>
+              <text x="195" y="190" font-size="14" font-style="italic" text-anchor="middle" fill="currentColor">A̅</text>
+              <text x="118" y="83" font-size="12" text-anchor="middle" fill="var(--muted)">P(A)</text>
+              <text x="118" y="170" font-size="12" text-anchor="middle" fill="var(--muted)">P(A̅)</text>
+              <text x="262" y="32" font-size="12" text-anchor="middle" fill="var(--accent)">P<tspan dy="3" font-size="9">A</tspan><tspan dy="-3">(D)</tspan></text>
+              <text x="266" y="96" font-size="12" text-anchor="middle" fill="var(--muted)">P<tspan dy="3" font-size="9">A</tspan><tspan dy="-3">(D̅)</tspan></text>
+              <text x="266" y="152" font-size="12" text-anchor="middle" fill="var(--muted)">P<tspan dy="3" font-size="9">A̅</tspan><tspan dy="-3">(D)</tspan></text>
+              <text x="262" y="218" font-size="12" text-anchor="middle" fill="var(--muted)">P<tspan dy="3" font-size="9">A̅</tspan><tspan dy="-3">(D̅)</tspan></text>
+              <text x="340" y="32" font-size="13" font-style="italic" fill="var(--accent)">A ∩ D</text>
+              <text x="340" y="105" font-size="13" font-style="italic" fill="currentColor">A ∩ D̅</text>
+              <text x="340" y="155" font-size="13" font-style="italic" fill="currentColor">A̅ ∩ D</text>
+              <text x="340" y="227" font-size="13" font-style="italic" fill="currentColor">A̅ ∩ D̅</text>
+            </svg>
+            <figcaption>Ein Pfad entspricht einem Innenfeld der Tafel. Entlang des Pfades wird <strong>multipliziert</strong>
+              (hier $P(A \cap D) = P(A) \cdot P_A(D)$), über Pfade hinweg wird <strong>addiert</strong>.</figcaption>
+          </figure>
+          <p>Damit ergibt sich die <strong>totale Wahrscheinlichkeit</strong> als Spaltensumme:</p>
+          <p>$$P(D) = P(A) \cdot P_A(D) + P(\bar A) \cdot P_{\bar A}(D)$$</p>
+          <p>Und umgekehrt die Bedingung in der anderen Richtung:</p>
+          <p>$$P_D(A) = \frac{P(A \cap D)}{P(D)}$$</p>
+          <p class="weg">Die zweite Formel ist der Satz von Bayes in der Form, die in der Klausur gebraucht wird:
+             aus &bdquo;Anteil der Defekten unter den A-Teilen&ldquo; wird &bdquo;Anteil der A-Teile unter den Defekten&ldquo;.</p>
+        </div>
+
+        <div class="variante">
+          <div class="tag">Definitionen</div>
+          <h3>Empirische Kenngrößen</h3>
+          <p>Für eine Messreihe $x_1, \dots, x_n$:</p>
+          <p><strong>Arithmetisches Mittel</strong></p>
+          <p>$$\bar x = \frac{1}{n} \sum_{i=1}^{n} x_i$$</p>
+          <p><strong>Empirische Varianz</strong> (hier durchgehend mit Divisor $n$)</p>
+          <p>$$v = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar x)^2$$</p>
+          <p><strong>Empirische Standardabweichung</strong></p>
+          <p>$$s = \sqrt{v}$$</p>
+          <p>Liegen die Werte als Häufigkeitsliste vor, wird mit den Häufigkeiten $h_i$ gewichtet:
+             $\bar x = \sum x_i h_i$ und $v = \sum (x_i - \bar x)^2 h_i$ bei relativen Häufigkeiten.</p>
+          <p><strong>Lineare Umrechnung</strong> $y = m \cdot x + b$:</p>
+          <p>$$\bar y = m \bar x + b, \qquad s_y = |m| \cdot s_x$$</p>
+          <p class="weg">Der Betrag ist Pflicht &ndash; eine Standardabweichung ist nie negativ. Und: Verschieben ($+b$)
+             ändert die Streuung nicht, weil alle Abweichungen $x_i - \bar x$ gleich bleiben.</p>
+        </div>
+
+        <div class="variante">
+          <div class="tag">Schema</div>
+          <h3>Simulationen beschreiben</h3>
+          <p>Jede Simulationsbeschreibung besteht aus denselben vier Zeilen:</p>
+          <ol>
+            <li><strong>Zufallsgerät:</strong> Was wird benutzt? Meist gleichverteilte ganze Zufallszahlen von 1 bis $N$.</li>
+            <li><strong>Zuordnung:</strong> Welche Zahlen bedeuten welches Ergebnis? Der Anteil muss die geforderte
+                Wahrscheinlichkeit exakt treffen.</li>
+            <li><strong>Ein Durchgang:</strong> Was ist <em>eine</em> Wiederholung des ganzen Experiments?
+                Und wann gilt der Durchgang als Treffer?</li>
+            <li><strong>Wiederholung und Auswertung:</strong> Viele Durchgänge, dann</li>
+          </ol>
+          <p>$$\hat p = \frac{\text{Anzahl der Treffer}}{\text{Anzahl der Durchgänge}}$$</p>
+          <p><strong>Passt die Wahrscheinlichkeit nicht?</strong> $N$ so wählen, dass der Anteil aufgeht
+             ($75\,\% \to$ Zahlen 1 bis 4), oder mit dem <strong>Verwerfungsverfahren</strong> arbeiten:
+             ungeeignete Zahlen werden weggeworfen und neu gezogen.</p>
+          <p><strong>Ohne Zurücklegen</strong> simuliert man ebenso: Kommt eine bereits gezogene Nummer erneut,
+             wird sie verworfen und neu gezogen.</p>
+          <p class="weg">Mehr Durchgänge machen die typische Schwankung des Schätzwerts kleiner &ndash; sie garantieren aber
+             nicht, dass eine einzelne Schätzung näher am wahren Wert liegt.</p>
+        </div>
+      </div>
+
+      <div class="hinweis" style="margin-top:20px">
+        <strong>Die drei Fragen, die alles entscheiden:</strong>
+        Steht in der Aufgabe &bdquo;von den …&ldquo; oder &bdquo;unter den …&ldquo;, ist eine <em>bedingte</em> Wahrscheinlichkeit gemeint &ndash;
+        kein Innenfeld der Tafel. Heißt es &bdquo;mindestens eines&ldquo;, lohnt fast immer das Gegenereignis.
+        Und bei &bdquo;ohne Zurücklegen&ldquo; ändert sich der Nenner nach jeder Ziehung.
+      </div>
+    </section>
+
     <div class="filterbar" id="filterbar"></div>
     <div id="aufgaben"></div>
   </main>
@@ -818,22 +976,35 @@
    Tipp und ausführliche Musterlösung.
    ===================================================================== */
 
+/* Die beiden Themengebiete der Seite. */
+const GRUPPEN = [
+  { id:'ueber', titel:'Überblick' },
+  { id:'v',     titel:'Vektorgeometrie' },
+  { id:'s',     titel:'Stochastik' }
+];
+
 const BLOCKS = [
-  { id:'A', titel:'Abstand Punkt &ndash; Ebene', kurz:'Punkt &ndash; Ebene', unter:'Hesse’sche Normalenform, Lotfußpunkt, Spiegelpunkt und die Frage nach der Seite.' },
-  { id:'B', titel:'Abstand Punkt &ndash; Gerade', kurz:'Punkt &ndash; Gerade', unter:'Laufpunkt-Bedingung, Hilfsebene und die Flächenformel mit dem Kreuzprodukt.' },
-  { id:'C', titel:'Abstand paralleler Geraden', kurz:'Parallele Geraden', unter:'Erst die Lage klären, dann auf Fall B zurückführen &ndash; inklusive der Falle &bdquo;identisch&ldquo;.' },
-  { id:'D', titel:'Abstand windschiefer Geraden', kurz:'Windschiefe Geraden', unter:'Spatprodukt, Hilfsebene + HNF und der geschlossene Vektorzug mit den beiden Lotfußpunkten.' },
-  { id:'E', titel:'Vermischtes &amp; Anwendungen', kurz:'Vermischtes &amp; Anwendungen', unter:'Sachaufgaben, die Spat-Deutung des Abstands und Fragen zur Verfahrenswahl.' },
-  { id:'F', titel:'Prüfungsaufgaben', kurz:'Prüfungsaufgaben', unter:'Mehrschrittige Aufgaben im Abi-Stil: Ebene aufstellen, Abstand bestimmen, Volumen berechnen &ndash; alles in einer Aufgabe.' }
+  { id:'A', gruppe:'v', titel:'Abstand Punkt &ndash; Ebene', kurz:'Punkt &ndash; Ebene', unter:'Hesse’sche Normalenform, Lotfußpunkt, Spiegelpunkt und die Frage nach der Seite.' },
+  { id:'B', gruppe:'v', titel:'Abstand Punkt &ndash; Gerade', kurz:'Punkt &ndash; Gerade', unter:'Laufpunkt-Bedingung, Hilfsebene und die Flächenformel mit dem Kreuzprodukt.' },
+  { id:'C', gruppe:'v', titel:'Abstand paralleler Geraden', kurz:'Parallele Geraden', unter:'Erst die Lage klären, dann auf Fall B zurückführen &ndash; inklusive der Falle &bdquo;identisch&ldquo;.' },
+  { id:'D', gruppe:'v', titel:'Abstand windschiefer Geraden', kurz:'Windschiefe Geraden', unter:'Spatprodukt, Hilfsebene + HNF und der geschlossene Vektorzug mit den beiden Lotfußpunkten.' },
+  { id:'E', gruppe:'v', titel:'Vermischtes &amp; Anwendungen', kurz:'Vermischtes &amp; Anwendungen', unter:'Sachaufgaben, die Spat-Deutung des Abstands und Fragen zur Verfahrenswahl.' },
+  { id:'F', gruppe:'v', titel:'Prüfungsaufgaben', kurz:'Prüfungsaufgaben', unter:'Mehrschrittige Aufgaben im Abi-Stil: Ebene aufstellen, Abstand bestimmen, Volumen berechnen &ndash; alles in einer Aufgabe.' },
+  { id:'M', gruppe:'s', titel:'Ereignisse als Mengen', kurz:'Ereignisse als Mengen', unter:'Schnitt, Vereinigung, Differenz und Gegenereignis &ndash; und der Additionssatz.' },
+  { id:'V', gruppe:'s', titel:'Vierfeldertafel &amp; bedingte Wahrscheinlichkeit', kurz:'Vierfeldertafel', unter:'Tafeln vervollständigen, Bedingungen umdrehen, Unabhängigkeit prüfen.' },
+  { id:'K', gruppe:'s', titel:'Empirische Kenngrößen', kurz:'Kenngrößen', unter:'Mittelwert, Varianz mit Divisor n, Standardabweichung und lineare Umrechnungen.' },
+  { id:'Z', gruppe:'s', titel:'Simulationen', kurz:'Simulationen', unter:'Das Vier-Zeilen-Schema, Verwerfungsverfahren und was mehr Durchgänge bringen &ndash; und was nicht.' },
+  { id:'P', gruppe:'s', titel:'Prüfungsaufgaben Stochastik', kurz:'Prüfungsaufgaben', unter:'Zwei vollständige Klausuraufgaben im Abi-Stil über alle Teilgebiete der Stochastik.' }
 ];
 
 /* Die erklärenden Bereiche der Seite - sie stehen in der Seitenleiste über den
    Aufgabenblöcken, damit man von überall direkt dorthin springen kann. */
 const LESEBEREICHE = [
-  { id:'start',      label:'Anleitung',        zeichen:'&#9432;' },
-  { id:'formeln',    label:'Formelsammlung',   zeichen:'&sum;'   },
-  { id:'verfahren',  label:'Verfahren im Bild', zeichen:'&#9723;' },
-  { id:'hilfsebene', label:'Hilfsebene',       zeichen:'&#8869;' }
+  { id:'start',      gruppe:'ueber', label:'Anleitung',            zeichen:'&#9432;' },
+  { id:'formeln',    gruppe:'v',     label:'Formelsammlung',       zeichen:'&sum;'   },
+  { id:'verfahren',  gruppe:'v',     label:'Verfahren im Bild',    zeichen:'&#9723;' },
+  { id:'hilfsebene', gruppe:'v',     label:'Hilfsebene',           zeichen:'&#8869;' },
+  { id:'stochastik', gruppe:'s',     label:'Formeln &amp; Definitionen', zeichen:'&#8721;' }
 ];
 
 const AUFGABEN = [
@@ -2164,6 +2335,574 @@ const AUFGABEN = [
          <li><strong>b)</strong> Die Ebene steht <em>senkrecht</em> auf $g$ und fängt das Lot auf &ndash; sie liefert die Stelle gleich mit.</li>
        </ul>`
 }
+,
+
+/* ======================= Stochastik: Ereignisse als Mengen ======================= */
+{
+  id:'M1', block:'M', level:1, tags:['Mengen','Additionssatz'],
+  q:`Ein fairer Würfel wird einmal geworfen, $\\Omega = \\{1;2;3;4;5;6\\}$. Betrachtet werden
+     <br>$E$: &bdquo;gerade Augenzahl&ldquo;, &nbsp; $F$: &bdquo;Augenzahl größer als 3&ldquo;, &nbsp; $G$: &bdquo;Primzahl&ldquo;.
+     <br><br>Gib die Anzahl der Elemente der angegebenen Mengen an und berechne die beiden Wahrscheinlichkeiten.`,
+  tol:0.005,
+  inputs:[
+    { kind:'multi', label:'Anzahl der Elemente:', fields:['|E∩F|','|E∪G|','|E\\F|'], answer:[2,5,1], tol:1e-6 },
+    { kind:'num', label:'$P(\\bar F \\cap G) = $', answer:1/3 },
+    { kind:'num', label:'$P(E \\cup F) = $', answer:2/3 }
+  ],
+  hint:`Schreibe die drei Mengen zuerst vollständig hin: $E = \\{2;4;6\\}$, $F = \\{4;5;6\\}$, $G = \\{2;3;5\\}$.
+        Danach ist alles Abzählen. Brüche wie <code>1/3</code> darfst du direkt eintragen.`,
+  sol:`<div class="step">Schritt 1: Die Mengen notieren</div>
+       $$E = \\{2;4;6\\}, \\qquad F = \\{4;5;6\\}, \\qquad G = \\{2;3;5\\}$$
+       <div class="step">Schritt 2: Verknüpfungen</div>
+       $$E \\cap F = \\{4;6\\} \\quad \\text{(gerade \\textit{und} größer als 3)}$$
+       $$E \\cup G = \\{2;3;4;5;6\\} \\quad \\text{(gerade \\textit{oder} prim)}$$
+       $$E \\setminus F = \\{2\\} \\quad \\text{(gerade, aber nicht größer als 3)}$$
+       <p>Also <span class="erg">2, 5 und 1 Elemente</span>.</p>
+       <div class="step">Schritt 3: Das Gegenereignis von F</div>
+       <p>$\\bar F = \\{1;2;3\\}$ sind die Augenzahlen höchstens 3, damit</p>
+       $$\\bar F \\cap G = \\{2;3\\} \\quad \\Rightarrow \\quad P(\\bar F \\cap G) = \\frac{2}{6} = \\frac13 \\approx 0{,}33$$
+       <div class="step">Schritt 4: Additionssatz</div>
+       $$P(E \\cup F) = P(E) + P(F) - P(E \\cap F) = \\frac36 + \\frac36 - \\frac26 = \\frac46 = \\frac23$$
+       <p>Der Abzug ist nötig, weil 4 und 6 sonst doppelt gezählt würden. Probe durch Abzählen:
+          $E \\cup F = \\{2;4;5;6\\}$, also $\\frac46$ &#10003;</p>`
+},
+{
+  id:'M2', block:'M', level:2, tags:['Mengen','Terme'],
+  q:`Aus acht Karten mit den Zahlen 1 bis 8 wird eine gezogen, jede mit derselben Wahrscheinlichkeit. Gegeben sind
+     $$E = \\{1;2;3;4\\}, \\qquad F = \\{2;4;6;8\\}, \\qquad G = \\{3;4;5\\}$$`,
+  tol:0.005,
+  inputs:[
+    { kind:'multi', label:'Anzahl der Elemente:', fields:['|E∪F|','|E∩(F∪G)|','|E\\(F∪G)|'], answer:[6,3,1], tol:1e-6 },
+    { kind:'num', label:'$P(E \\cup F) = $', answer:0.75 },
+    { kind:'choice', label:'Welcher Term beschreibt die Menge $\\{6;8\\}$?', options:[
+        '$E \\setminus F$', '$F \\setminus E$', '$F \\cap G$', '$\\overline{E \\cup F}$'
+      ], correct:1 }
+  ],
+  hint:`Bilde zuerst $F \\cup G$ &ndash; diese Menge brauchst du gleich zweimal.
+        Für den Term zu $\\{6;8\\}$: Welche Zahlen sind gerade, gehören aber nicht zu $E$?`,
+  sol:`<div class="step">Schritt 1: Hilfsmenge</div>
+       $$F \\cup G = \\{2;3;4;5;6;8\\}$$
+       <div class="step">Schritt 2: Die drei Verknüpfungen</div>
+       $$E \\cup F = \\{1;2;3;4;6;8\\} \\quad (6 \\text{ Elemente})$$
+       $$E \\cap (F \\cup G) = \\{2;3;4\\} \\quad (3 \\text{ Elemente})$$
+       $$E \\setminus (F \\cup G) = \\{1\\} \\quad (1 \\text{ Element})$$
+       <div class="step">Schritt 3: Wahrscheinlichkeit</div>
+       $$P(E \\cup F) = \\frac{6}{8} = \\frac34 = 0{,}75$$
+       <div class="step">Schritt 4: Die Menge als Term</div>
+       <p>$\\{6;8\\}$ sind die geraden Zahlen, die nicht zu $E$ gehören:</p>
+       $$\\{6;8\\} = F \\setminus E$$
+       <p>Zur Kontrolle die anderen Angebote: $E \\setminus F = \\{1;3\\}$, $F \\cap G = \\{4\\}$ und
+          $\\overline{E \\cup F} = \\{5;7\\}$.</p>
+       <p><strong>Nebenbei:</strong> $\\{4\\}$ ließe sich als $E \\cap F \\cap G$ schreiben &ndash; oder kürzer schon als
+          $F \\cap G$, denn die 4 ist die einzige gerade Zahl in $G$.</p>`
+},
+{
+  id:'M3', block:'M', level:2, tags:['Mengen','genau eines'],
+  q:`Aus zwölf Karten mit den Zahlen 1 bis 12 wird eine zufällig gezogen. Betrachtet werden
+     <br>$E$: &bdquo;gerade&ldquo;, &nbsp; $F$: &bdquo;durch 3 teilbar&ldquo;, &nbsp; $G$: &bdquo;größer als 8&ldquo;.
+     <br><br>Bestimme die Elementanzahlen und die Wahrscheinlichkeit, dass <em>genau eines</em> der Ereignisse
+     $E$ und $F$ eintritt.`,
+  tol:0.005,
+  inputs:[
+    { kind:'multi', label:'Anzahl der Elemente:', fields:['|E∩F|','|E\\(F∪G)|'], answer:[2,3], tol:1e-6 },
+    { kind:'num', label:'$P(\\text{genau eines von } E, F) = $', answer:0.5 },
+    { kind:'num', label:'$P(\\bar E \\cap \\bar F) = $', answer:1/3 }
+  ],
+  hint:`&bdquo;Genau eines&ldquo; heißt: in $E$, aber nicht in $F$ &ndash; oder umgekehrt. Als Term also
+        $(E \\setminus F) \\cup (F \\setminus E)$. Für $\\bar E \\cap \\bar F$ suchst du die Zahlen, die weder durch 2
+        noch durch 3 teilbar sind.`,
+  sol:`<div class="step">Schritt 1: Die Mengen</div>
+       $$E = \\{2;4;6;8;10;12\\}, \\qquad F = \\{3;6;9;12\\}, \\qquad G = \\{9;10;11;12\\}$$
+       <div class="step">Schritt 2: Verknüpfungen</div>
+       $$E \\cap F = \\{6;12\\} \\quad (2 \\text{ Elemente})$$
+       <p>Mit $F \\cup G = \\{3;6;9;10;11;12\\}$:</p>
+       $$E \\setminus (F \\cup G) = \\{2;4;8\\} \\quad (3 \\text{ Elemente})$$
+       <div class="step">Schritt 3: Genau eines von E und F</div>
+       $$E \\setminus F = \\{2;4;8;10\\}, \\qquad F \\setminus E = \\{3;9\\}$$
+       $$(E \\setminus F) \\cup (F \\setminus E) = \\{2;3;4;8;9;10\\} \\quad \\Rightarrow \\quad P = \\frac{6}{12} = \\frac12$$
+       <div class="step">Schritt 4: Weder noch</div>
+       <p>$\\bar E \\cap \\bar F$ heißt: weder gerade noch durch 3 teilbar, also $\\{1;5;7;11\\}$:</p>
+       $$P(\\bar E \\cap \\bar F) = \\frac{4}{12} = \\frac13$$
+       <p><strong>Regel von De Morgan:</strong> $\\bar E \\cap \\bar F = \\overline{E \\cup F}$ &ndash; &bdquo;weder noch&ldquo;
+          ist dasselbe wie &bdquo;nicht (das eine oder das andere)&ldquo;. Probe:
+          $E \\cup F$ hat 8 Elemente, also $1 - \\frac{8}{12} = \\frac13$ &#10003;</p>`
+},
+
+/* ============ Stochastik: Vierfeldertafel und bedingte Wahrscheinlichkeit ============ */
+{
+  id:'V1', block:'V', level:2, tags:['Vierfeldertafel','bedingte W.'],
+  q:`In einem Fahrradverleih sind 40 % der Räder E-Bikes (Ereignis $E$), 25 % aller Räder haben einen Bremsdefekt
+     (Ereignis $D$). Von den E-Bikes haben 10 % einen Bremsdefekt. Ein Rad wird zufällig ausgewählt.
+     <br><br>Vervollständige die Vierfeldertafel, berechne $P_D(E)$ und entscheide über die Unabhängigkeit.`,
+  tol:0.0005,
+  inputs:[
+    { kind:'multi', label:'Innenfelder:', fields:['P(E∩D)','P(E∩D̄)','P(Ē∩D)','P(Ē∩D̄)'], answer:[0.04,0.36,0.21,0.39] },
+    { kind:'num', label:'$P_D(E) = $', answer:0.16 },
+    { kind:'choice', label:'Sind $E$ und $D$ stochastisch unabhängig?', options:[
+        'Ja, denn $P(E) \\cdot P(D) = P(E \\cap D)$.',
+        'Nein, denn $P(E) \\cdot P(D) = 0{,}10 \\neq 0{,}04 = P(E \\cap D)$.',
+        'Das lässt sich aus den Angaben nicht entscheiden.'
+      ], correct:1 }
+  ],
+  hint:`&bdquo;Von den E-Bikes haben 10 % …&ldquo; ist eine <strong>bedingte</strong> Wahrscheinlichkeit $P_E(D) = 0{,}10$,
+        kein Feld der Tafel. Das Innenfeld bekommst du erst über die Pfadregel
+        $P(E \\cap D) = P(E) \\cdot P_E(D)$. Der Rest ergibt sich durch Ergänzen auf die Ränder.`,
+  sol:`<div class="step">Schritt 1: Das erste Innenfeld über die Pfadregel</div>
+       $$P(E \\cap D) = P(E) \\cdot P_E(D) = 0{,}4 \\cdot 0{,}10 = 0{,}04$$
+       <div class="step">Schritt 2: Ergänzen auf die Ränder</div>
+       <p>Die Ränder sind bekannt: $P(E) = 0{,}40$ und $P(D) = 0{,}25$.</p>
+       <table class="entscheid vft">
+         <thead><tr><th></th><th>$D$</th><th>$\\bar D$</th><th>Summe</th></tr></thead>
+         <tbody>
+           <tr><th>$E$</th><td>0,04</td><td>0,36</td><td>0,40</td></tr>
+           <tr><th>$\\bar E$</th><td>0,21</td><td>0,39</td><td>0,60</td></tr>
+           <tr><th>Summe</th><td>0,25</td><td>0,75</td><td>1,00</td></tr>
+         </tbody>
+       </table>
+       <div class="step">Schritt 3: Die umgekehrte Bedingung</div>
+       <p>Gefragt ist $P_D(E)$ &ndash; die Bedingung ist jetzt &bdquo;hat Bremsdefekt&ldquo;:</p>
+       $$P_D(E) = \\frac{P(E \\cap D)}{P(D)} = \\frac{0{,}04}{0{,}25} = 0{,}16$$
+       <p>In Worten: <span class="erg">16 % der defekten Räder sind E-Bikes.</span></p>
+       <div class="step">Schritt 4: Unabhängigkeit prüfen</div>
+       $$P(E) \\cdot P(D) = 0{,}4 \\cdot 0{,}25 = 0{,}10 \\neq 0{,}04 = P(E \\cap D)$$
+       <p>Die Ereignisse sind also <span class="erg">abhängig</span>. Gleichwertig:
+          $P_E(D) = 0{,}10 \\neq 0{,}25 = P(D)$ &ndash; zu wissen, dass es ein E-Bike ist, senkt die Defektwahrscheinlichkeit.</p>
+       <p><strong>Der häufigste Fehler:</strong> $P_D(E) = 0{,}16$ und $P_E(D) = 0{,}10$ verwechseln.
+          Das sind zwei verschiedene Fragen mit zwei verschiedenen Antworten.</p>`
+},
+{
+  id:'V2', block:'V', level:2, tags:['Unabhängigkeit','absolute Häufigkeiten'],
+  q:`Aus 100 Personen wird eine zufällig ausgewählt. 40 Personen nutzen den Bus ($B$), 30 besuchen die Musikschule ($M$).
+     Genau $a$ Personen gehören zu beiden Gruppen.
+     <br><br>Bestimme $a$ so, dass $B$ und $M$ unabhängig sind, und fülle die Tafel mit absoluten Häufigkeiten.
+     Berechne anschließend $P_M(B)$ für den tatsächlichen Wert $a = 18$.`,
+  tol:0.0005,
+  inputs:[
+    { kind:'num', label:'$a = $', answer:12, tol:1e-6 },
+    { kind:'multi', label:'übrige Felder (bei Unabhängigkeit):', fields:['B∩M̄','B̄∩M','B̄∩M̄'], answer:[28,18,42], tol:1e-6 },
+    { kind:'num', label:'$P_M(B)$ für $a = 18$:', answer:0.6 }
+  ],
+  hint:`Unabhängigkeit heißt $P(B \\cap M) = P(B) \\cdot P(M)$. Rechne mit Wahrscheinlichkeiten
+        ($0{,}4$ und $0{,}3$) und rechne das Ergebnis am Ende in Personen um.`,
+  sol:`<div class="step">Schritt 1: a aus der Unabhängigkeit</div>
+       $$\\frac{a}{100} = P(B) \\cdot P(M) = 0{,}4 \\cdot 0{,}3 = 0{,}12 \\quad \\Rightarrow \\quad a = 12$$
+       <div class="step">Schritt 2: Tafel mit absoluten Häufigkeiten</div>
+       <table class="entscheid vft">
+         <thead><tr><th></th><th>$M$</th><th>$\\bar M$</th><th>Summe</th></tr></thead>
+         <tbody>
+           <tr><th>$B$</th><td>12</td><td>28</td><td>40</td></tr>
+           <tr><th>$\\bar B$</th><td>18</td><td>42</td><td>60</td></tr>
+           <tr><th>Summe</th><td>30</td><td>70</td><td>100</td></tr>
+         </tbody>
+       </table>
+       <div class="step">Schritt 3: Der tatsächliche Fall a = 18</div>
+       $$P_M(B) = \\frac{18}{30} = 0{,}6$$
+       <p>Vergleich mit $P(B) = 0{,}4$: verschieden, also sind $B$ und $M$ <span class="erg">abhängig</span>.
+          Unter den Musikschülern ist der Busanteil deutlich höher als in der Gesamtgruppe.</p>
+       <p><strong>Warum das anschaulich passt:</strong> Bei Unabhängigkeit müsste sich die Gruppe der Musikschüler
+          genauso auf Bus und Nicht-Bus aufteilen wie alle 100 Personen &ndash; also 40 % zu 60 %, das wären
+          12 von 30. Tatsächlich sind es 18.</p>`
+},
+{
+  id:'V3', block:'V', level:3, tags:['totale Wahrscheinlichkeit','Bayes'],
+  q:`Ein Betrieb bezieht 60 % seiner Bauteile von Lieferant $A$, den Rest von Lieferant $B$.
+     Bei $A$ sind 2 % der Teile defekt, bei $B$ 7 %. Ein Teil wird zufällig ausgewählt;
+     $D$ steht für &bdquo;defekt&ldquo;.
+     <br><br>Berechne die beiden Innenfelder der Defekt-Spalte, die Gesamtdefektwahrscheinlichkeit $P(D)$
+     und den Anteil $P_D(A)$ der A-Teile unter den defekten.`,
+  tol:0.0005,
+  inputs:[
+    { kind:'multi', label:'Innenfelder:', fields:['P(A∩D)','P(Ā∩D)'], answer:[0.012,0.028] },
+    { kind:'num', label:'$P(D) = $', answer:0.04 },
+    { kind:'num', label:'$P_D(A) = $', answer:0.3 }
+  ],
+  hint:`Zwei Pfade führen zu &bdquo;defekt&ldquo;. Entlang eines Pfades wird multipliziert, über die Pfade hinweg addiert &ndash;
+        das ist die totale Wahrscheinlichkeit. Für $P_D(A)$ teilst du das eine Innenfeld durch diese Summe.`,
+  sol:`<div class="step">Schritt 1: Die beiden Pfade zu D</div>
+       $$P(A \\cap D) = P(A) \\cdot P_A(D) = 0{,}6 \\cdot 0{,}02 = 0{,}012$$
+       $$P(\\bar A \\cap D) = P(\\bar A) \\cdot P_{\\bar A}(D) = 0{,}4 \\cdot 0{,}07 = 0{,}028$$
+       <div class="step">Schritt 2: Totale Wahrscheinlichkeit</div>
+       $$P(D) = 0{,}012 + 0{,}028 = 0{,}04$$
+       <p>Insgesamt sind also 4 % aller Teile defekt.</p>
+       <div class="step">Schritt 3: Die Bedingung umdrehen</div>
+       $$P_D(A) = \\frac{P(A \\cap D)}{P(D)} = \\frac{0{,}012}{0{,}04} = 0{,}3$$
+       <div class="step">Was das bedeutet</div>
+       <p><span class="erg">30 % der defekten Teile stammen von $A$</span> &ndash; obwohl $A$ 60 % aller Teile liefert.
+          Unter den defekten Teilen ist $A$ also deutlich unterrepräsentiert, genau wie man es von der niedrigeren
+          Defektquote erwartet.</p>
+       <p><strong>Unabhängigkeit:</strong> $P_A(D) = 0{,}02 \\neq 0{,}04 = P(D)$, also sind Herkunft und Defekt
+          <strong>abhängig</strong>. Zu wissen, von wem ein Teil stammt, verändert die Defektwahrscheinlichkeit.</p>`
+},
+
+/* ======================= Stochastik: Empirische Kenngrößen ======================= */
+{
+  id:'K1', block:'K', level:1, tags:['Mittelwert','Varianz'],
+  q:`Gegeben ist die Urliste $2;\\ 4;\\ 5;\\ 6;\\ 8$. Für die empirische Varianz wird durch $n$ geteilt.
+     <br><br>Berechne Mittelwert, Varianz und Standardabweichung, bestimme den Anteil der Werte im Intervall
+     $[\\bar x - s;\\ \\bar x + s]$ und gib die Kenngrößen an, wenn alle Werte um 10 erhöht werden.`,
+  tol:0.005,
+  inputs:[
+    { kind:'multi', label:'Kenngrößen:', fields:['x̄','v','s'], answer:[5,4,2] },
+    { kind:'num', label:'Anteil im Intervall:', answer:0.6 },
+    { kind:'multi', label:'nach +10:', fields:['x̄ neu','s neu'], answer:[15,2] }
+  ],
+  hint:`Erst den Mittelwert, dann die Abweichungen $x_i - \\bar x$, dann deren Quadrate mitteln.
+        Für den letzten Teil musst du nichts neu rechnen &ndash; überlege, was eine Verschiebung mit den
+        Abweichungen macht.`,
+  sol:`<div class="step">Schritt 1: Mittelwert</div>
+       $$\\bar x = \\frac{2+4+5+6+8}{5} = \\frac{25}{5} = 5$$
+       <div class="step">Schritt 2: Varianz und Standardabweichung</div>
+       <p>Abweichungen: $-3,\\ -1,\\ 0,\\ 1,\\ 3$ &nbsp;&rarr;&nbsp; Quadrate: $9,\\ 1,\\ 0,\\ 1,\\ 9$</p>
+       $$v = \\frac{9+1+0+1+9}{5} = \\frac{20}{5} = 4, \\qquad s = \\sqrt{4} = 2$$
+       <div class="step">Schritt 3: Anteil im Intervall</div>
+       <p>$[\\bar x - s;\\ \\bar x + s] = [3;\\ 7]$. Darin liegen 4, 5 und 6:</p>
+       $$\\frac{3}{5} = 0{,}6 = 60\\,\\%$$
+       <div class="step">Schritt 4: Alle Werte um 10 erhöht</div>
+       $$\\bar x_{\\text{neu}} = 15, \\qquad s_{\\text{neu}} = 2$$
+       <p>Begründung: Wird jeder Wert um 10 größer, wandert der Mittelwert um 10 mit. Die Abstände
+          $x_i - \\bar x$ bleiben dabei unverändert &ndash; und nur die gehen in die Varianz ein.
+          <span class="erg">Verschieben ändert die Lage, nicht die Streuung.</span></p>
+       <p><strong>Der häufigste Fehler:</strong> am Schluss die Wurzel vergessen und $v$ und $s$ gleichsetzen.</p>`
+},
+{
+  id:'K2', block:'K', level:2, tags:['Streuung','Vergleich'],
+  q:`Gegeben sind die Messreihen
+     <br>$A:\\ 2;\\ 2;\\ 6;\\ 6$ &nbsp;&nbsp; und &nbsp;&nbsp; $B:\\ 0;\\ 4;\\ 4;\\ 8$ &nbsp;&nbsp; (Divisor $n$).
+     <br><br>Berechne die Kenngrößen beider Reihen und beurteile die Aussage:
+     &bdquo;Bei gleichem Mittelwert müssen auch die Standardabweichungen gleich sein.&ldquo;`,
+  tol:0.005,
+  inputs:[
+    { kind:'multi', label:'Reihe $A$:', fields:['x̄','v','s'], answer:[4,4,2] },
+    { kind:'multi', label:'Reihe $B$:', fields:['x̄','v'], answer:[4,8] },
+    { kind:'num', label:'$s_B = $ (zwei Nachkommastellen)', answer:2.8284271247461903, tol:0.01 },
+    { kind:'choice', label:'Die Aussage ist …', options:[
+        'richtig &ndash; der Mittelwert legt die Streuung fest.',
+        'falsch &ndash; diese beiden Reihen sind ein Gegenbeispiel.',
+        'nur für Reihen gleicher Länge richtig.'
+      ], correct:1 }
+  ],
+  hint:`Beide Reihen haben denselben Mittelwert. Rechne trotzdem beide Varianzen aus &ndash; genau darin liegt die Pointe.`,
+  sol:`<div class="step">Reihe A</div>
+       $$\\bar x_A = \\frac{2+2+6+6}{4} = 4$$
+       <p>Abweichungen: $-2,\\ -2,\\ 2,\\ 2$ &nbsp;&rarr;&nbsp; Quadrate je 4.</p>
+       $$v_A = \\frac{4+4+4+4}{4} = 4, \\qquad s_A = 2$$
+       <div class="step">Reihe B</div>
+       $$\\bar x_B = \\frac{0+4+4+8}{4} = 4$$
+       <p>Abweichungen: $-4,\\ 0,\\ 0,\\ 4$ &nbsp;&rarr;&nbsp; Quadrate: $16,\\ 0,\\ 0,\\ 16$.</p>
+       $$v_B = \\frac{32}{4} = 8, \\qquad s_B = \\sqrt{8} = 2\\sqrt{2} \\approx 2{,}83$$
+       <div class="step">Die Beurteilung</div>
+       <p>Die Aussage ist <span class="erg">falsch</span>. Beide Reihen haben den Mittelwert 4, aber verschiedene
+          Standardabweichungen (2 gegen $2\\sqrt2$). Reihe $B$ streut stärker: Ihre Werte liegen weiter vom
+          Mittelwert entfernt.</p>
+       <p>Mittelwert und Streuung beschreiben zwei verschiedene Eigenschaften einer Datenreihe &ndash;
+          die eine die <em>Lage</em>, die andere die <em>Breite</em>. Aus der einen folgt die andere nicht.</p>`
+},
+{
+  id:'K3', block:'K', level:3, tags:['fehlender Wert','lineare Umrechnung'],
+  q:`Die Messreihe $2;\\ 4;\\ 6;\\ k$ hat den Mittelwert 5 (Divisor $n$ für die Varianz).
+     <br><br>Bestimme $k$ und die Kenngrößen der vollständigen Reihe. Anschließend wird jeder Wert $x$ durch
+     $y = 1 - 2x$ ersetzt &ndash; gib Mittelwert und Standardabweichung der neuen Reihe an.`,
+  tol:0.005,
+  inputs:[
+    { kind:'num', label:'$k = $', answer:8, tol:1e-6 },
+    { kind:'multi', label:'Kenngrößen:', fields:['v','s'], answer:[5,2.23606797749979] },
+    { kind:'multi', label:'nach $y = 1-2x$:', fields:['ȳ','s_y'], answer:[-9,4.47213595499958] }
+  ],
+  hint:`Für $k$: Der Mittelwert mal Anzahl ergibt die Summe. Für den letzten Teil brauchst du keine neue
+        Abweichungsrechnung, sondern die Regel $\\bar y = m\\bar x + b$ und $s_y = |m| \\cdot s_x$.
+        Runde auf zwei Nachkommastellen.`,
+  sol:`<div class="step">Schritt 1: Den fehlenden Wert bestimmen</div>
+       $$\\bar x = \\frac{2+4+6+k}{4} = 5 \\quad \\Rightarrow \\quad 12 + k = 20 \\quad \\Rightarrow \\quad k = 8$$
+       <div class="step">Schritt 2: Varianz und Standardabweichung</div>
+       <p>Die Reihe lautet $2;\\ 4;\\ 6;\\ 8$ mit $\\bar x = 5$. Abweichungen: $-3,\\ -1,\\ 1,\\ 3$ &nbsp;&rarr;&nbsp;
+          Quadrate: $9,\\ 1,\\ 1,\\ 9$.</p>
+       $$v = \\frac{20}{4} = 5, \\qquad s = \\sqrt5 \\approx 2{,}24$$
+       <div class="step">Schritt 3: Lineare Umrechnung</div>
+       $$\\bar y = 1 - 2 \\cdot 5 = -9$$
+       $$s_y = |-2| \\cdot s_x = 2\\sqrt5 \\approx 4{,}47$$
+       <div class="step">Warum ohne Neuberechnung</div>
+       <p>Die Verschiebung um $+1$ bewegt alle Werte und den Mittelwert gleich weit &ndash; keine Abweichung ändert sich.
+          Der Faktor $-2$ verdoppelt jede Abweichung dem Betrag nach; das Minuszeichen spiegelt nur und fällt beim
+          Quadrieren weg.</p>
+       <p class="warnung">Deshalb steht in der Formel der Betrag: $s_y = -2\\sqrt5$ wäre falsch, eine Standardabweichung
+          ist nie negativ.</p>`
+},
+
+/* ======================= Stochastik: Simulationen ======================= */
+{
+  id:'Z1', block:'Z', level:1, tags:['Simulation','Zuordnung'],
+  q:`Eine Basketballspielerin trifft beim Freiwurf mit der Wahrscheinlichkeit 75 %. Zehn Würfe gelten als unabhängig.
+     Gesucht ist die Wahrscheinlichkeit, bei zehn Würfen mindestens acht Treffer zu erzielen.
+     <br><br>Eine Simulation soll diese Wahrscheinlichkeit schätzen.`,
+  tol:0.0005,
+  inputs:[
+    { kind:'choice', label:'Welche Zuordnung trifft die 75 % genau?', options:[
+        'Zahlen 1 bis 4; die 1, 2 und 3 bedeuten Treffer.',
+        'Ein Spielwürfel; die Augenzahlen 1 bis 4 bedeuten Treffer.',
+        'Zahlen 1 bis 10; die 1 bis 7 bedeuten Treffer.',
+        'Zahlen 1 bis 3; jede Zahl bedeutet Treffer.'
+      ], correct:0 },
+    { kind:'choice', label:'Was ist <em>ein Durchgang</em>?', options:[
+        'Eine einzelne Zufallszahl.',
+        'Zehn Zufallszahlen &ndash; eine Serie von zehn Freiwürfen.',
+        'Hundert Zufallszahlen.'
+      ], correct:1 },
+    { kind:'num', label:'200 Durchgänge, davon 52 mit mindestens 8 Treffern: $\\hat p = $', answer:0.26 }
+  ],
+  hint:`Die Zuordnung muss den Anteil <em>exakt</em> treffen: $\\frac34$ lässt sich mit vier gleich wahrscheinlichen
+        Zahlen darstellen, mit sechs Würfelaugen dagegen nicht. Und unterscheide sauber zwischen einem Durchgang
+        (das ganze Experiment einmal) und der Wiederholung vieler Durchgänge.`,
+  sol:`<div class="step">1. Zufallsgerät</div>
+       <p>Gleichverteilte ganze Zufallszahlen von 1 bis 4, unabhängig erzeugt (am WTR z.&nbsp;B. <code>RanInt#(1,4)</code>).</p>
+       <div class="step">2. Zuordnung</div>
+       <p>1, 2, 3 bedeuten &bdquo;Treffer&ldquo;, die 4 bedeutet &bdquo;daneben&ldquo;. Damit ist die Trefferwahrscheinlichkeit
+          exakt $\\tfrac34 = 75\\,\\%$.</p>
+       <div class="step">3. Ein Durchgang</div>
+       <p>Zehn Zufallszahlen erzeugen und die Treffer zählen &ndash; das entspricht einer Serie von zehn Freiwürfen.
+          Der Durchgang gilt als Treffer, wenn mindestens 8 der 10 Zahlen aus $\\{1;2;3\\}$ stammen.</p>
+       <div class="step">4. Wiederholung und Auswertung</div>
+       $$\\hat p = \\frac{\\text{Durchgänge mit mindestens 8 Treffern}}{\\text{Anzahl aller Durchgänge}}
+         = \\frac{52}{200} = 0{,}26$$
+       <div class="step">Warum der Würfel nicht direkt geht</div>
+       <p>Ein Würfel liefert sechs gleich wahrscheinliche Ergebnisse, darstellbar sind damit nur Anteile der Form
+          $\\tfrac k6$. Aber $\\tfrac34 \\cdot 6 = 4{,}5$ ist keine ganze Zahl.</p>
+       <p>Zwei Auswege: <strong>Verwerfen</strong> &ndash; bei 5 oder 6 neu würfeln, dann zählen 1, 2, 3 von 1 bis 4 als Treffer.
+          Oder <strong>zwei Würfe</strong> &ndash; nur gerade/ungerade beachten; die vier Kombinationen sind gleich wahrscheinlich,
+          drei davon erklärt man zum Treffer.</p>
+       <p class="warnung">Häufiger Fehler: einen Durchgang mit einer Wiederholung verwechseln &ndash;
+          &bdquo;10 Durchgänge&ldquo; statt &bdquo;ein Durchgang aus 10 Zahlen&ldquo;.</p>`
+},
+{
+  id:'Z2', block:'Z', level:2, tags:['Simulation','Schätzgenauigkeit'],
+  q:`In einem Kurs sind 25 Personen. Gesucht ist die Wahrscheinlichkeit, dass mindestens zwei am selben Tag Geburtstag
+     haben (365 Tage, alle gleich wahrscheinlich, unabhängig).
+     <br><br>Eine Simulation mit 100 Durchgängen ergab 54 Durchgänge mit mindestens einem doppelten Geburtstag.`,
+  tol:0.0005,
+  inputs:[
+    { kind:'choice', label:'Wie sieht ein Durchgang aus?', options:[
+        '365 Zufallszahlen von 1 bis 25.',
+        '25 Zufallszahlen von 1 bis 365; Treffer, wenn eine Zahl mindestens zweimal vorkommt.',
+        'Zwei Zufallszahlen von 1 bis 365; Treffer, wenn sie gleich sind.'
+      ], correct:1 },
+    { kind:'num', label:'$\\hat p = $', answer:0.54 },
+    { kind:'choice', label:'Was ändert sich mit 1000 statt 100 Durchgängen?', options:[
+        'Der Schätzwert liegt garantiert näher am wahren Wert.',
+        'Die typische Schwankung des Schätzwerts wird kleiner &ndash; garantiert ist aber nichts.',
+        'Nichts, die Simulation bleibt gleich genau.',
+        'Der wahre Wert verändert sich.'
+      ], correct:1 }
+  ],
+  hint:`Jede Person bekommt eine Zufallszahl &ndash; ihren Geburtstag. Und überlege beim letzten Teil genau:
+        Mehr Durchgänge machen die Streuung der Schätzwerte kleiner. Heißt das, dass eine <em>einzelne</em>
+        Schätzung besser sein muss?`,
+  sol:`<div class="step">1. Zufallsgerät und Zuordnung</div>
+       <p>Gleichverteilte ganze Zufallszahlen von 1 bis 365, unabhängig erzeugt. Jede Zahl steht für einen Kalendertag,
+          eine Zahl ist der Geburtstag einer Person.</p>
+       <div class="step">2. Ein Durchgang</div>
+       <p>25 Zufallszahlen erzeugen &ndash; das ist ein Kurs. Der Durchgang gilt als Treffer, wenn mindestens eine Zahl
+          mindestens zweimal vorkommt.</p>
+       <div class="step">3. Auswertung</div>
+       $$\\hat p = \\frac{54}{100} = 0{,}54$$
+       <div class="step">4. Mehr Durchgänge</div>
+       <p><strong>Was sich ändert:</strong> Mit 1000 Durchgängen wird die typische Schwankung des Schätzwerts kleiner.
+          Wiederholt man die ganze Simulation mehrfach, liegen die Ergebnisse enger beieinander.</p>
+       <p><strong>Was sich nicht ändert:</strong> Garantiert ist nichts. Eine einzelne Schätzung kann auch mit 1000
+          Durchgängen weiter danebenliegen als eine glückliche Schätzung mit 100 &ndash; eine Simulation bleibt zufällig.</p>
+       <p>Der exakte Wert beträgt übrigens
+          $p = 1 - \\frac{365}{365} \\cdot \\frac{364}{365} \\cdot \\ldots \\cdot \\frac{341}{365} \\approx 0{,}569$.
+          Die Schätzung 0,54 liegt also plausibel daneben.</p>
+       <p class="warnung">&bdquo;Doppelt&ldquo; nicht zu eng lesen: Auch drei gleiche Geburtstage sind ein Treffer &ndash;
+          deshalb &bdquo;mindestens zweimal&ldquo;.</p>`
+},
+{
+  id:'Z3', block:'Z', level:2, tags:['Simulation','Gegenereignis','Fehlersuche'],
+  q:`Ein elektronisches Bauteil ist mit Wahrscheinlichkeit 0,3 defekt; die Bauteile sind unabhängig.
+     Gesucht ist die Wahrscheinlichkeit, dass in einer Gruppe aus <em>vier</em> Bauteilen mindestens eines defekt ist.
+     <br><br>Ein Schüler simuliert 1000 einzelne Bauteile und gibt den Anteil defekter Bauteile als Antwort an.`,
+  tol:0.0005,
+  inputs:[
+    { kind:'num', label:'Zahlen 1 bis 10: Wie viele bedeuten &bdquo;defekt&ldquo;?', answer:3, tol:1e-6 },
+    { kind:'num', label:'exakter Wert $1 - 0{,}7^4 = $ (vier Nachkommastellen)', answer:0.7599, tol:0.0005 },
+    { kind:'choice', label:'Der Fehler des Schülers:', options:[
+        'Er hat zu wenige Durchgänge simuliert.',
+        'Er schätzt die Defektquote eines <em>einzelnen</em> Bauteils statt die Wahrscheinlichkeit für eine Vierergruppe.',
+        'Er hätte mit Zurücklegen simulieren müssen.',
+        'Die Zuordnung 1 bis 3 als defekt ist falsch.'
+      ], correct:1 }
+  ],
+  hint:`&bdquo;Mindestens eines&ldquo; ruft nach dem Gegenereignis: kein einziges defekt.
+        Und beim letzten Teil: Der Schüler bekommt am Ende ungefähr 0,3 heraus &ndash; eine richtige Zahl,
+        aber die Antwort auf welche Frage?`,
+  sol:`<div class="step">1. Zufallsgerät und Zuordnung</div>
+       <p>Zahlen 1 bis 10, unabhängig erzeugt. Die Zahlen 1, 2, 3 bedeuten &bdquo;defekt&ldquo; &ndash; das sind
+          $\\tfrac{3}{10} = 0{,}3$ &ndash; die Zahlen 4 bis 10 bedeuten &bdquo;in Ordnung&ldquo;.</p>
+       <div class="step">2. Ein Durchgang</div>
+       <p><strong>Vier</strong> Zufallszahlen, denn gefragt ist nach einer Vierergruppe.
+          Treffer, wenn mindestens eine Zahl aus $\\{1;2;3\\}$ dabei ist.</p>
+       <div class="step">3. Auswertung</div>
+       $$\\hat p = \\frac{\\text{Trefferzahl}}{\\text{Anzahl der Durchgänge}}$$
+       <div class="step">4. Der exakte Wert über das Gegenereignis</div>
+       <p>Das Gegenereignis ist &bdquo;kein Bauteil defekt&ldquo;, und jedes Bauteil ist mit 0,7 in Ordnung:</p>
+       $$P(\\text{mindestens eines defekt}) = 1 - 0{,}7^4 = 1 - 0{,}2401 = 0{,}7599$$
+       <div class="step">5. Der Fehler des Schülers</div>
+       <p>Er simuliert 1000 <em>einzelne</em> Bauteile und erhält damit einen Schätzwert für
+          $P(\\text{ein Bauteil defekt}) \\approx 0{,}3$. Das ist eine richtige Zahl &ndash;
+          <span class="erg">nur leider die Antwort auf eine andere Frage.</span></p>
+       <p><strong>Korrektur der Auswertung:</strong> Die 1000 Zahlen in 250 Vierergruppen einteilen und zählen,
+          in wie vielen Gruppen mindestens eine 1, 2 oder 3 vorkommt. Dieser Anteil schätzt die gesuchte
+          Wahrscheinlichkeit &ndash; er müsste bei rund 0,76 liegen.</p>`
+},
+{
+  id:'Z4', block:'Z', level:3, tags:['ohne Zurücklegen','Verwerfen'],
+  q:`Eine Urne enthält drei rote und zwei blaue Kugeln. Zwei Kugeln werden <strong>ohne Zurücklegen</strong> gezogen.
+     Gesucht ist die Wahrscheinlichkeit für zwei rote Kugeln.
+     <br><br>Ein Schüler erzeugt pro Durchgang zwei unabhängige Zahlen von 1 bis 5 und wertet 1, 2, 3 als rot.`,
+  tol:0.0005,
+  inputs:[
+    { kind:'choice', label:'Wie bildet man &bdquo;ohne Zurücklegen&ldquo; korrekt nach?', options:[
+        'Man zieht einfach zwei Zahlen von 1 bis 5.',
+        'Wiederholt sich die Nummer, wird sie verworfen und neu gezogen.',
+        'Man zieht die zweite Zahl aus 1 bis 4.',
+        'Man zieht zwei Zahlen und addiert sie.'
+      ], correct:1 },
+    { kind:'num', label:'korrekt (ohne Zurücklegen): $P = $', answer:0.3 },
+    { kind:'num', label:'was der Schüler simuliert: $P = $', answer:0.36 }
+  ],
+  hint:`Nummeriere die fünf Kugeln einzeln: 1, 2, 3 rot, 4 und 5 blau. Ohne Zurücklegen heißt, dass dieselbe Kugel
+        nicht zweimal kommen darf. Für die Rechnung: Nach der ersten roten Kugel sind noch 2 von 4 Kugeln rot.`,
+  sol:`<div class="step">1. Kennzeichnung</div>
+       <p>Die fünf Kugeln einzeln nummerieren: 1, 2, 3 sind die roten, 4 und 5 die blauen.</p>
+       <div class="step">2. Ein Durchgang mit Verwerfen</div>
+       <p>Erste Ziehung: eine Zufallszahl von 1 bis 5. Zweite Ziehung: wieder eine Zahl von 1 bis 5 &ndash;
+          ist es dieselbe Nummer wie eben, wird sie <strong>verworfen</strong> und neu gezogen, bis eine andere
+          Nummer erscheint. Damit ist die erste Kugel wirklich aus der Urne.</p>
+       <p>Treffer, wenn beide Nummern höchstens 3 sind. Auswertung wie immer über den Anteil der Treffer.</p>
+       <div class="step">3. Der exakte Wert</div>
+       <p>Nach der ersten roten Kugel sind noch 4 Kugeln da, davon 2 rote:</p>
+       $$P(\\text{zwei rote}) = \\frac35 \\cdot \\frac24 = \\frac{6}{20} = \\frac{3}{10} = 0{,}3$$
+       <div class="step">4. Was der Schüler stattdessen simuliert</div>
+       <p>Ohne den Ausschluss kann dieselbe Kugel zweimal kommen &ndash; er simuliert also
+          <span class="erg">Ziehen <em>mit</em> Zurücklegen</span>:</p>
+       $$\\left(\\frac35\\right)^2 = \\frac{9}{25} = 0{,}36$$
+       <p>Sein Wert liegt systematisch zu hoch, und zwar bei jeder noch so großen Zahl von Durchgängen.
+          Das ist kein Zufallsfehler, sondern ein Modellfehler &ndash; mehr Durchgänge helfen nicht.</p>`
+},
+
+/* ================= Stochastik: Prüfungsaufgaben ================= */
+{
+  id:'P1', block:'P', level:3, tags:['Vierfeldertafel','Gegenereignis','Kenngrößen'],
+  q:`<strong>Fahrradverleih.</strong> 40 % der Räder sind E-Bikes ($E$). Von den E-Bikes haben 10 % einen Bremsdefekt ($D$),
+     von den normalen Rädern 35 %.
+     <br><br><strong>a)</strong> Berechne $P(D)$ und $P_D(E)$.
+     <br><strong>b)</strong> Drei Räder werden zufällig <em>mit</em> Zurücklegen ausgewählt. Wie wahrscheinlich ist
+     mindestens ein Defekt? Und aus einem Bestand von 20 Rädern mit 5 defekten werden zwei <em>ohne</em> Zurücklegen
+     gezogen &ndash; wie wahrscheinlich sind beide defekt?
+     <br><strong>c)</strong> Für 20 Ausleihen wurde die Dauer notiert: 1 h zweimal, 2 h fünfmal, 3 h sechsmal,
+     4 h fünfmal, 5 h zweimal. Berechne Mittelwert, Varianz und Standardabweichung sowie den Anteil der Werte
+     in $[\\bar x - s;\\ \\bar x + s]$.`,
+  tol:0.005,
+  inputs:[
+    { kind:'multi', label:'a)', fields:['P(D)','P_D(E)'], answer:[0.25,0.16], tol:0.0005 },
+    { kind:'num', label:'b) mindestens ein Defekt (drei Räder):', answer:0.578125, tol:0.0005 },
+    { kind:'num', label:'b) beide defekt (ohne Zurücklegen):', answer:0.05263157894736842, tol:0.0005 },
+    { kind:'multi', label:'c)', fields:['x̄','v','s'], answer:[3,1.3,1.140175425099138] },
+    { kind:'num', label:'c) Anteil in $[\\bar x - s;\\ \\bar x + s]$:', answer:0.8, tol:0.0005 }
+  ],
+  hint:`a) Beide Pfade zu $D$ addieren. b) Zweimal lohnt das Gegenereignis bzw. der veränderte Nenner:
+        nach dem ersten defekten Rad sind nur noch 4 von 19 defekt. c) Rechne mit den Häufigkeiten,
+        nicht mit 20 Einzelwerten.`,
+  sol:`<div class="step">a) Vierfeldertafel</div>
+       $$P(E \\cap D) = 0{,}4 \\cdot 0{,}10 = 0{,}04, \\qquad P(\\bar E \\cap D) = 0{,}6 \\cdot 0{,}35 = 0{,}21$$
+       <table class="entscheid vft">
+         <thead><tr><th></th><th>$D$</th><th>$\\bar D$</th><th>Summe</th></tr></thead>
+         <tbody>
+           <tr><th>$E$</th><td>0,04</td><td>0,36</td><td>0,40</td></tr>
+           <tr><th>$\\bar E$</th><td>0,21</td><td>0,39</td><td>0,60</td></tr>
+           <tr><th>Summe</th><td>0,25</td><td>0,75</td><td>1,00</td></tr>
+         </tbody>
+       </table>
+       $$P(D) = 0{,}04 + 0{,}21 = 0{,}25, \\qquad P_D(E) = \\frac{0{,}04}{0{,}25} = 0{,}16$$
+       <div class="step">b) Drei Räder mit Zurücklegen</div>
+       <p>Über das Gegenereignis &bdquo;keines defekt&ldquo;:</p>
+       $$P = 1 - 0{,}75^3 = 1 - 0{,}421875 = 0{,}578125 \\approx 0{,}578$$
+       <div class="step">b) Zwei Räder ohne Zurücklegen</div>
+       <p>Nach dem ersten defekten Rad sind nur noch 4 von 19 defekt:</p>
+       $$P = \\frac{5}{20} \\cdot \\frac{4}{19} = \\frac{20}{380} = \\frac{1}{19} \\approx 0{,}053$$
+       <div class="step">c) Kenngrößen der Ausleihdauern</div>
+       <p>Relative Häufigkeiten: $0{,}10;\\ 0{,}25;\\ 0{,}30;\\ 0{,}25;\\ 0{,}10$.</p>
+       $$\\bar x = 1 \\cdot 0{,}1 + 2 \\cdot 0{,}25 + 3 \\cdot 0{,}3 + 4 \\cdot 0{,}25 + 5 \\cdot 0{,}1 = 3{,}0 \\ \\text{h}$$
+       <p>Abweichungen $-2,-1,0,1,2$ mit den Häufigkeiten $2,5,6,5,2$:</p>
+       $$v = \\frac{2 \\cdot 4 + 5 \\cdot 1 + 6 \\cdot 0 + 5 \\cdot 1 + 2 \\cdot 4}{20} = \\frac{26}{20} = 1{,}3\\ \\text{h}^2,
+         \\qquad s = \\sqrt{1{,}3} \\approx 1{,}14\\ \\text{h}$$
+       <div class="step">c) Anteil im Intervall</div>
+       <p>$[3 - 1{,}14;\\ 3 + 1{,}14] = [1{,}86;\\ 4{,}14]$ enthält die Dauern 2 h, 3 h und 4 h:</p>
+       $$\\frac{5 + 6 + 5}{20} = \\frac{16}{20} = 0{,}8 = 80\\,\\%$$
+       <p><strong>Zur Einordnung:</strong> 80 % liegen deutlich über der oft genannten Faustregel von 68 %.
+          Daraus folgt aber nichts &ndash; die 68 % gelten für <em>normalverteilte</em> Daten, und hier liegen
+          20 gerundete Stundenwerte vor.</p>
+       <p><strong>Und zur Werbeaussage &bdquo;E-Bikes sind sicherer&ldquo;:</strong> Zu vergleichen sind die Defektquoten
+          <em>innerhalb</em> der Radtypen, $P_E(D) = 0{,}10$ gegen $P_{\\bar E}(D) = \\frac{0{,}21}{0{,}60} = 0{,}35$.
+          E-Bikes haben also tatsächlich seltener einen Bremsdefekt &ndash; über Unfälle oder andere Mängel sagt das nichts.
+          Das Argument &bdquo;nur 16 % der defekten Räder sind E-Bikes&ldquo; taugt dagegen nicht: Diese Zahl hängt vor allem
+          davon ab, wie viele E-Bikes es überhaupt gibt.</p>`
+},
+{
+  id:'P2', block:'P', level:3, tags:['Bayes','Kenngrößen','lineare Umrechnung'],
+  q:`<strong>Qualitätskontrolle.</strong> 60 % der Bauteile kommen von Lieferant $A$, der Rest von $B$.
+     Bei $A$ sind 2 % defekt, bei $B$ 7 %.
+     <br><br><strong>a)</strong> Berechne $P(D)$ und $P_D(A)$.
+     <br><strong>b)</strong> Aus einer Kiste mit 100 Teilen, darunter 4 defekte, werden zwei ohne Zurücklegen gezogen:
+     Wie wahrscheinlich ist genau ein defektes? Und wie wahrscheinlich ist im ursprünglichen Modell bei drei
+     unabhängigen Teilen mindestens ein defektes?
+     <br><strong>c)</strong> 20 Längen wurden gemessen: 98 mm zweimal, 99 mm viermal, 100 mm achtmal, 101 mm viermal,
+     102 mm zweimal. Berechne die Kenngrößen &ndash; und die neuen Werte nach der Kalibrierung $y = 1{,}02x - 0{,}5$.
+     <br><strong>d)</strong> Wie groß muss der Anteil $q$ von Lieferant $A$ mindestens sein, damit höchstens 3 %
+     aller Teile defekt sind?`,
+  tol:0.005,
+  inputs:[
+    { kind:'multi', label:'a)', fields:['P(D)','P_D(A)'], answer:[0.04,0.3], tol:0.0005 },
+    { kind:'num', label:'b) genau ein defektes:', answer:0.07757575757575758, tol:0.0005 },
+    { kind:'num', label:'b) mindestens eines von drei:', answer:0.115264, tol:0.0005 },
+    { kind:'multi', label:'c)', fields:['x̄','v','s'], answer:[100,1.2,1.0954451150103321] },
+    { kind:'multi', label:'c) nach Kalibrierung:', fields:['ȳ','s_y'], answer:[101.5,1.1173540173105387] },
+    { kind:'num', label:'d) $q \\geq$', answer:0.8, tol:0.0005 }
+  ],
+  hint:`b) &bdquo;Genau ein defektes&ldquo; hat zwei Reihenfolgen. c) Die Werte liegen symmetrisch um 100 &ndash;
+        das spart Rechnerei. Für die Kalibrierung gilt $\\bar y = m\\bar x + b$ und $s_y = |m| s_x$.
+        d) Stelle $P(D)$ als Term in $q$ auf und löse die Ungleichung.`,
+  sol:`<div class="step">a) Tafel und umgekehrte Bedingung</div>
+       $$P(A \\cap D) = 0{,}6 \\cdot 0{,}02 = 0{,}012, \\qquad P(\\bar A \\cap D) = 0{,}4 \\cdot 0{,}07 = 0{,}028$$
+       $$P(D) = 0{,}04, \\qquad P_D(A) = \\frac{0{,}012}{0{,}04} = 0{,}3$$
+       <p>30 % der defekten Teile stammen von $A$ &ndash; obwohl $A$ 60 % aller Teile liefert.</p>
+       <div class="step">b) Genau ein defektes, ohne Zurücklegen</div>
+       <p>Zwei Reihenfolgen sind möglich (defekt&ndash;ganz und ganz&ndash;defekt):</p>
+       $$P = \\frac{4}{100} \\cdot \\frac{96}{99} + \\frac{96}{100} \\cdot \\frac{4}{99}
+         = 2 \\cdot \\frac{384}{9900} = \\frac{768}{9900} = \\frac{64}{825} \\approx 0{,}0776$$
+       <div class="step">b) Mindestens eines von drei</div>
+       $$P = 1 - 0{,}96^3 = 1 - 0{,}884736 = 0{,}115264 \\approx 0{,}115$$
+       <div class="step">c) Kenngrößen der Längen</div>
+       <p>Die Werte liegen symmetrisch um 100, also ist der Mittelwert sofort klar:</p>
+       $$\\bar x = \\frac{2 \\cdot 98 + 4 \\cdot 99 + 8 \\cdot 100 + 4 \\cdot 101 + 2 \\cdot 102}{20} = \\frac{2000}{20} = 100\\ \\text{mm}$$
+       <p>Abweichungen $-2,-1,0,1,2$ mit den Häufigkeiten $2,4,8,4,2$:</p>
+       $$v = \\frac{2 \\cdot 4 + 4 \\cdot 1 + 8 \\cdot 0 + 4 \\cdot 1 + 2 \\cdot 4}{20} = \\frac{24}{20} = 1{,}2\\ \\text{mm}^2,
+         \\qquad s = \\sqrt{1{,}2} \\approx 1{,}095\\ \\text{mm}$$
+       <p>Die Längen streuen also im Mittel um rund 1,1 mm um den Sollwert &ndash; das ist ein typisches Maß,
+          keine Höchstabweichung: Einzelne Teile weichen um 2 mm ab.</p>
+       <div class="step">c) Nach der Kalibrierung</div>
+       $$\\bar y = 1{,}02 \\cdot 100 - 0{,}5 = 101{,}5\\ \\text{mm}, \\qquad
+         s_y = |1{,}02| \\cdot \\sqrt{1{,}2} \\approx 1{,}117\\ \\text{mm}$$
+       <p>Der Summand $-0{,}5$ verschiebt alle Werte gleich weit und ändert die Streuung nicht;
+          der Faktor 1,02 streckt jede Abweichung um 2 % &ndash; genau um diese 2 % wächst auch $s$.</p>
+       <div class="step">d) Mindestanteil von Lieferant A</div>
+       $$P(D) = 0{,}02q + 0{,}07(1-q) = 0{,}07 - 0{,}05q \\stackrel{!}{\\leq} 0{,}03$$
+       $$0{,}04 \\leq 0{,}05q \\quad \\Longleftrightarrow \\quad q \\geq 0{,}8$$
+       <p><span class="erg">Mindestens 80 % der Teile müssten von $A$ kommen.</span> Wichtig ist dabei die Modellannahme,
+          dass die Defektquoten von 2 % und 7 % unverändert bleiben &ndash; bei stark erhöhter Abnahmemenge muss das
+          nicht so sein.</p>
+       <p><strong>Und beweisen die Daten, dass A besser produziert?</strong> Nein. Gemessen ist nur, dass die Defektquote
+          bei $A$ niedriger liegt. Denkbar sind andere Erklärungen: andere Teiletypen, andere Prüfung, anderer Transport.
+          Ein Zusammenhang ist keine Ursache.</p>`
+}
 ];
 
 /* =====================================================================
@@ -2308,11 +3047,13 @@ function renderAufgabe(a){
 
 function renderAlles(){
   /* Filterleiste */
-  const chips = [{id:'alle', t:'Alle Aufgaben'}]
+  const chips = [{ id:'alle', t:'Alle Aufgaben', stark:true }]
+    .concat(GRUPPEN.filter(g => BLOCKS.some(b => b.gruppe === g.id))
+                   .map(g => ({ id:'thema:'+g.id, t:g.titel, stark:true })))
     .concat(BLOCKS.map(b => ({ id:b.id, t:`${b.id} &middot; ${b.kurz}` })));
   document.getElementById('filterbar').innerHTML =
-    chips.map(c => `<button type="button" class="chip${state.filter===c.id?' on':''}" data-chip="${c.id}"
-                     onclick="setzeFilter('${c.id}')">${c.t}</button>`).join('') +
+    chips.map(c => `<button type="button" class="chip${c.stark?' chip-thema':''}${state.filter===c.id?' on':''}"
+                     data-chip="${c.id}" onclick="setzeFilter('${c.id}')">${c.t}</button>`).join('') +
     `<button type="button" class="chip${state.nurOffene ? ' on' : ''}" id="chip-offen" onclick="toggleOffene()">Nur ungelöste</button>`;
 
   /* Aufgabenblöcke */
@@ -2331,19 +3072,22 @@ function renderAlles(){
   document.getElementById('aufgaben').innerHTML = html;
 
   /* Bereichsliste: erklärende Abschnitte und Aufgabenblöcke */
-  document.getElementById('toc-nav').innerHTML =
-    `<div class="toc-gruppe">Nachschlagen</div>` +
-    LESEBEREICHE.map(b => `<a href="#${b.id}" data-toc="${b.id}">
-         <span class="num">${b.zeichen}</span><span>${b.label}</span></a>`).join('') +
-    `<div class="toc-gruppe">Aufgaben</div>` +
-    BLOCKS.map(b => {
-      const n = AUFGABEN.filter(a => a.block === b.id).length;
-      return `<a href="#block-${b.id}" data-toc="block-${b.id}">
-                <span class="num">${b.id}</span>
-                <span>${b.kurz}</span>
-                <span class="count" id="count-${b.id}">0/${n}</span>
-              </a>`;
-    }).join('');
+  document.getElementById('toc-nav').innerHTML = GRUPPEN.map(g => {
+    const lesen = LESEBEREICHE.filter(b => b.gruppe === g.id);
+    const bloecke = BLOCKS.filter(b => b.gruppe === g.id);
+    if (!lesen.length && !bloecke.length) return '';
+    return `<div class="toc-gruppe">${g.titel}</div>` +
+      lesen.map(b => `<a href="#${b.id}" data-toc="${b.id}">
+           <span class="num">${b.zeichen}</span><span>${b.label}</span></a>`).join('') +
+      bloecke.map(b => {
+        const n = AUFGABEN.filter(a => a.block === b.id).length;
+        return `<a href="#block-${b.id}" data-toc="block-${b.id}">
+                  <span class="num">${b.id}</span>
+                  <span>${b.kurz}</span>
+                  <span class="count" id="count-${b.id}">0/${n}</span>
+                </a>`;
+      }).join('');
+  }).join('');
 
   AUFGABEN.forEach(a => { if (geloest.has(a.id)) markiereGeloest(a.id); });
   stellStandWiederHer();
@@ -2514,8 +3258,13 @@ function setzeFilter(id){
   speichereGleich();
   document.querySelectorAll('[data-chip]').forEach(c => c.classList.toggle('on', c.dataset.chip === id));
   wendeFilterAn();
-  const ziel = id === 'alle' ? null : document.getElementById(`block-${id}`);
-  if (ziel){ ziel.scrollIntoView({ behavior:'smooth', block:'start' }); markiereBereich(`block-${id}`); }
+  let zielId = null;
+  if (id.indexOf('thema:') === 0){
+    const erster = BLOCKS.find(b => b.gruppe === id.slice(6));
+    if (erster) zielId = erster.id;
+  } else if (id !== 'alle') zielId = id;
+  const ziel = zielId ? document.getElementById(`block-${zielId}`) : null;
+  if (ziel){ ziel.scrollIntoView({ behavior:'smooth', block:'start' }); markiereBereich(`block-${zielId}`); }
 }
 
 function toggleOffene(){
@@ -2527,11 +3276,22 @@ function toggleOffene(){
   wendeFilterAn();
 }
 
+/* Der Filter kennt drei Stufen: alles, ein Themengebiet, ein einzelner Block. */
+function passtZumFilter(a){
+  const f = state.filter;
+  if (f === 'alle') return true;
+  if (f.indexOf('thema:') === 0){
+    const b = BLOCKS.find(x => x.id === a.block);
+    return !!b && b.gruppe === f.slice(6);
+  }
+  return f === a.block;
+}
+
 function wendeFilterAn(){
   AUFGABEN.forEach(a => {
     const el = document.getElementById(`aufgabe-${a.id}`);
     if (!el) return;
-    const passtBlock = state.filter === 'alle' || state.filter === a.block;
+    const passtBlock = passtZumFilter(a);
     /* Eine soeben gelöste Aufgabe bleibt sichtbar, damit Rückmeldung und
        Musterlösung nicht unter den Händen verschwinden. */
     const passtOffen = !state.nurOffene || !geloest.has(a.id) || state.ebenGeloest.has(a.id);
